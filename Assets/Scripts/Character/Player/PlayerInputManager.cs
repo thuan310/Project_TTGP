@@ -45,7 +45,26 @@ public class PlayerInputManager : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
 
-        //instance.enabled = false;
+        SceneManager.activeSceneChanged += OnSceneChange;
+
+        instance.enabled = false;
+    }
+    private void OnSceneChange(Scene oldScene, Scene newScene)
+    {
+        // If we are loading into our world scene, enable our players controls
+        if (newScene.buildIndex == WorldSaveGameManager.instance.GetWorldSceneIndex())
+        {
+            instance.enabled = true;
+            player.SetUpStammina();
+            PlayerCamera.instance.SetCameraToFollowPlayer();
+
+        }
+        //otherwise we must be at the main menu, diable our players controls
+        // this is so our player cant move around if we enter things like a character creation menu ect
+        else
+        {
+            instance.enabled = false;
+        }
     }
 
     private void OnEnable()

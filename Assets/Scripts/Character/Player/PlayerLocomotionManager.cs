@@ -150,7 +150,7 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         //het mana thi sao roll
         if (player.currentStamina.Value <= 0)
             return;
-
+        //print("Roll");
         // if we are moving when we attempt to dodge, we perform a roll
         if (PlayerInputManager.instance.moveAmount > 0)
         {
@@ -164,6 +164,8 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
             player.transform.rotation = playerRotation;
 
             //perform a roll animation
+            //print("Roll");
+            //print(player.playerAnimatorManager);
             player.playerAnimatorManager.PlayTargetActionAnimation("Male_Rolling_F", true, true);
 
         }

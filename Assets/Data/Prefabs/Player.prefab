@@ -10,9 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 459750457179687718}
   - component: {fileID: 5603242508840220076}
+  - component: {fileID: 5454389256761953488}
   - component: {fileID: 7909201120137120742}
+  - component: {fileID: 4076642273442627478}
   - component: {fileID: 5639964870545904923}
   - component: {fileID: 730134485460674027}
+  - component: {fileID: 4361518818712029005}
+  - component: {fileID: 9157488568303165678}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -54,13 +58,35 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 2
+  m_Height: 4
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 2.5, z: 0}
+--- !u!95 &5454389256761953488
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6906817555111550964}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: b99aa3769d1ef6746ab697cc88fa3c98, type: 3}
+  m_Controller: {fileID: 9100000, guid: 8b247493c7bc6694dba6cdb252821c70, type: 2}
+  m_CullingMode: 1
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &7909201120137120742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74,12 +100,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterController: {fileID: 0}
+  animator: {fileID: 0}
   isPerformingAction: 0
   applyRootMotion: 0
   canRotate: 1
   canMove: 1
+  isSprinting:
+    _value: 0
+  endurance:
+    _value: 10
+  currentStamina:
+    _value: 0
+  maxStamina:
+    _value: 0
+  playerName:
+    _value: 
   playerAnimatorManager: {fileID: 0}
   playerLocomotionManager: {fileID: 0}
+  playerStatsManager: {fileID: 0}
+--- !u!114 &4076642273442627478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6906817555111550964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62bba8e914619094eb47efc2244a9ce2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  staminaRegenarationAmount: 2
+  staminaRegenerationDelay: 2
 --- !u!114 &5639964870545904923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95,9 +147,12 @@ MonoBehaviour:
   verticalMovement: 0
   horizontalMovement: 0
   moveAmount: 0
+  sprintingSpeed: 10
   runningSpeed: 5
   walkingSpeed: 2.5
   rotationSpeed: 15
+  sprintingStaminaCost: 2
+  dodgeStaminaCost: 25
 --- !u!114 &730134485460674027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,6 +165,115 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a9aad522e443f948acba2aa2bba65b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4361518818712029005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6906817555111550964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e658d1e506adc874f9ca1d049a993016, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!82 &9157488568303165678
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6906817555111550964}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &5799539227665655881
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -162,7 +326,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Male_TPose
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5866666021909216657, guid: b99aa3769d1ef6746ab697cc88fa3c98, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
