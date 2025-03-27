@@ -1,6 +1,7 @@
 ﻿using System;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Rendering.VirtualTexturing;
 using UnityEngine.SceneManagement;
 public class PlayerInputManager : MonoBehaviour
@@ -54,6 +55,7 @@ public class PlayerInputManager : MonoBehaviour
         // If we are loading into our world scene, enable our players controls
         if (newScene.buildIndex == WorldSaveGameManager.instance.GetWorldSceneIndex())
         {
+            PositionGuilding.instance.agent = player.GetComponentInChildren<NavMeshAgent>();
             instance.enabled = true;
             player.SetUpStammina();
             PlayerCamera.instance.SetCameraToFollowPlayer();

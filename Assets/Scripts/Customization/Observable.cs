@@ -1,10 +1,102 @@
-using System;
+﻿using System;
+using Unity.Burst.Intrinsics;
+using UnityEditor.PackageManager.UI;
 using UnityEngine;
+using UnityEngine.DedicatedServer;
 
 [System.Serializable]
 public class Observable<T>
 {
-    // Event to notify when the value changes
+    #region Action vs EventHandler
+    /*
+//     The core difference comes down to standardization vs. flexibility in how you handle events. Let me break it down clearly:
+
+        //1. Method Signature (The Biggest Difference)
+        //Class Action Approach:
+
+        //You can use any method signature you want
+
+        //Example:
+
+        //csharp
+        //Copy
+        //button.Click += MyCustomHandler;  // Can be void MyCustomHandler() or whatever you need
+        //EventHandler Approach:
+
+        //Must follow the standard .NET event pattern:
+
+        //csharp
+        //Copy
+        //void MethodName(object sender, EventArgs e)
+        //Example:
+
+        //csharp
+        //Copy
+        //button.Click += (sender, e) => { /* handler code */
+        //};
+        //2.Information Available
+        //Class Action:
+
+        //Typically only knows about the event itself
+
+        //Doesn't automatically get information about who raised the event (the sender)
+
+        //Doesn't get standard event data (EventArgs)
+
+        //EventHandler:
+
+        //Always receives:
+
+        //sender(the object that raised the event)
+
+        //e(event arguments with details about what happened)
+
+        //Example accessing info:
+
+        //csharp
+        //Copy
+        //void Button_Click(object sender, EventArgs e) 
+        //{
+        //    var button = (Button)sender; // Can access the button that was clicked
+        //var mouseEvent = (MouseEventArgs)e; // Can access mouse position, etc.
+        //}
+        //3.Where Each Is Used
+        //Class Actions Are Good For:
+
+        //Simple scenarios where you don't need event details
+
+        //Internal event handling within your class
+
+        //When you want maximum flexibility in method signatures
+
+        //EventHandler Is Used For:
+
+        //Public events in libraries/components
+
+        //Cases where you need to know which object triggered the event
+
+        //Situations where you need to pass detailed event data
+
+        //Following .NET design guidelines for consistency
+
+        //4. Real-world Analogy
+        //Think of it like receiving mail:
+
+        //Class Action = Getting a blank postcard (just knowing you got mail)
+
+        //EventHandler = Getting a full envelope with return address (sender) and contents (EventArgs)
+
+        //Which Should You Use?
+        //If you're creating events for others to use → Use EventHandler
+
+        //If you're consuming simple events internally → Class Action is fine
+
+        //If you need event details → You must use EventHandler
+
+        //The EventHandler approach is more powerful and standard, while class actions are simpler but more limited.
+    #endregion
+
+// Event to notify when the value changes
     public event Action<T, T> OnValueChanged;
 
     // Backing field for the value
