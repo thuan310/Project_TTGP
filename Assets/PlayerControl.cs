@@ -49,7 +49,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                     ""name"": ""Attack"",
                     ""type"": ""Button"",
                     ""id"": ""6c2ab1b8-8984-453a-af3d-a3c78ae1679a"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -76,7 +76,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                     ""name"": ""Jump"",
                     ""type"": ""Button"",
                     ""id"": ""f1ba0d36-48eb-4cd5-b651-1c94a6531f70"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -94,7 +94,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                     ""name"": ""Next"",
                     ""type"": ""Button"",
                     ""id"": ""b7230bb6-fc9b-4f52-8b25-f5e19cb2c2ba"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -103,6 +103,15 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                     ""name"": ""Sprint"",
                     ""type"": ""PassThrough"",
                     ""id"": ""641cd816-40e6-41b4-8c3d-04687c349290"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ToggleQuest"",
+                    ""type"": ""Button"",
+                    ""id"": ""289e9f5d-c688-47fc-a6e9-aac52981f2fe"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": ""Hold"",
@@ -492,6 +501,17 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Dodge"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""446ddedc-585d-4015-8302-4e2990026eda"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""ToggleQuest"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1108,6 +1128,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         m_Player_Previous = m_Player.FindAction("Previous", throwIfNotFound: true);
         m_Player_Next = m_Player.FindAction("Next", throwIfNotFound: true);
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
+        m_Player_ToggleQuest = m_Player.FindAction("ToggleQuest", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1197,6 +1218,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Previous;
     private readonly InputAction m_Player_Next;
     private readonly InputAction m_Player_Sprint;
+    private readonly InputAction m_Player_ToggleQuest;
     public struct PlayerActions
     {
         private @PlayerControl m_Wrapper;
@@ -1210,6 +1232,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         public InputAction @Previous => m_Wrapper.m_Player_Previous;
         public InputAction @Next => m_Wrapper.m_Player_Next;
         public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
+        public InputAction @ToggleQuest => m_Wrapper.m_Player_ToggleQuest;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1246,6 +1269,9 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
             @Sprint.started += instance.OnSprint;
             @Sprint.performed += instance.OnSprint;
             @Sprint.canceled += instance.OnSprint;
+            @ToggleQuest.started += instance.OnToggleQuest;
+            @ToggleQuest.performed += instance.OnToggleQuest;
+            @ToggleQuest.canceled += instance.OnToggleQuest;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1277,6 +1303,9 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
             @Sprint.started -= instance.OnSprint;
             @Sprint.performed -= instance.OnSprint;
             @Sprint.canceled -= instance.OnSprint;
+            @ToggleQuest.started -= instance.OnToggleQuest;
+            @ToggleQuest.performed -= instance.OnToggleQuest;
+            @ToggleQuest.canceled -= instance.OnToggleQuest;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1476,6 +1505,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         void OnPrevious(InputAction.CallbackContext context);
         void OnNext(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
+        void OnToggleQuest(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
