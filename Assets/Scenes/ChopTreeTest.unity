@@ -240,6 +240,31 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!1 &748128844 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2769601282690864663, guid: 57bdc80a1b0101544819f6a222c292b8, type: 3}
+  m_PrefabInstance: {fileID: 2473174739698295}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &748128846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 748128844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd315cd48c2772744920ccbd2eb88dcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  treeType: 0
+  fxTreeDestroyed: {fileID: 0}
+  fxTreeLogDestroyed: {fileID: 0}
+  fxTreeLogHalfDestroy: {fileID: 0}
+  fxTreeStumpDestroyed: {fileID: 0}
+  treeLog: {fileID: 0}
+  treeLogHalf: {fileID: 0}
+  treeStump: {fileID: 0}
 --- !u!1 &767701913
 GameObject:
   m_ObjectHideFlags: 0
@@ -327,7 +352,7 @@ Transform:
   m_GameObject: {fileID: 767701913}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 17.87, z: -10}
+  m_LocalPosition: {x: 1.33, y: 2.09, z: -5.61}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -377,6 +402,112 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!1 &1111121741
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1111121743}
+  - component: {fileID: 1111121742}
+  m_Layer: 0
+  m_Name: Player
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1111121742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111121741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dab06559d5f2984da9864ad67f7ba2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  treeChopped: {fileID: 0}
+  animator: {fileID: 0}
+  visualTransform: {fileID: 0}
+  cameraTransform: {fileID: 0}
+  treeShake: {fileID: 0}
+  hitArea: {fileID: 1288658913}
+  fxTreeHit: {fileID: 0}
+  fxTreeHitBlocks: {fileID: 0}
+--- !u!4 &1111121743
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111121741}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.89, y: 0, z: -1.967}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1288658914}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1288658913
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1288658914}
+  - component: {fileID: 1288658915}
+  m_Layer: 0
+  m_Name: Hit Area
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1288658914
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288658913}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 2.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1111121743}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1288658915
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288658913}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1679852993
 GameObject:
   m_ObjectHideFlags: 0
@@ -390,8 +521,8 @@ GameObject:
   - component: {fileID: 1679852995}
   - component: {fileID: 1679852994}
   - component: {fileID: 1679852998}
-  - component: {fileID: 1679852999}
   - component: {fileID: 1679853000}
+  - component: {fileID: 1679853001}
   m_Layer: 0
   m_Name: TreeUnchoped
   m_TagString: Untagged
@@ -512,26 +643,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1679852999
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1679852993}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6dab06559d5f2984da9864ad67f7ba2e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  treeChopped: {fileID: 2769601282690864663, guid: 57bdc80a1b0101544819f6a222c292b8, type: 3}
-  animator: {fileID: 0}
-  visualTransform: {fileID: 0}
-  cameraTransform: {fileID: 0}
-  treeShake: {fileID: 0}
-  hitArea: {fileID: 0}
-  fxTreeHit: {fileID: 0}
-  fxTreeHitBlocks: {fileID: 0}
 --- !u!54 &1679853000
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -559,6 +670,26 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1679853001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1679852993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd315cd48c2772744920ccbd2eb88dcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  treeType: 0
+  fxTreeDestroyed: {fileID: 0}
+  fxTreeLogDestroyed: {fileID: 0}
+  fxTreeLogHalfDestroy: {fileID: 0}
+  fxTreeStumpDestroyed: {fileID: 0}
+  treeLog: {fileID: 0}
+  treeLogHalf: {fileID: 0}
+  treeStump: {fileID: 0}
 --- !u!1 &1726581948
 GameObject:
   m_ObjectHideFlags: 0
@@ -667,6 +798,31 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2128702039 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8609523545004249200, guid: 57bdc80a1b0101544819f6a222c292b8, type: 3}
+  m_PrefabInstance: {fileID: 2473174739698295}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2128702041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2128702039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd315cd48c2772744920ccbd2eb88dcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  treeType: 0
+  fxTreeDestroyed: {fileID: 0}
+  fxTreeLogDestroyed: {fileID: 0}
+  fxTreeLogHalfDestroy: {fileID: 0}
+  fxTreeStumpDestroyed: {fileID: 0}
+  treeLog: {fileID: 0}
+  treeLogHalf: {fileID: 0}
+  treeStump: {fileID: 0}
 --- !u!1001 &2473174739698295
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -722,7 +878,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2769601282690864663, guid: 57bdc80a1b0101544819f6a222c292b8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 748128846}
+    - targetCorrespondingSourceObject: {fileID: 8609523545004249200, guid: 57bdc80a1b0101544819f6a222c292b8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2128702041}
   m_SourcePrefab: {fileID: 100100000, guid: 57bdc80a1b0101544819f6a222c292b8, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
@@ -733,3 +895,4 @@ SceneRoots:
   - {fileID: 1726581952}
   - {fileID: 2473174739698295}
   - {fileID: 1679852997}
+  - {fileID: 1111121743}
