@@ -38,5 +38,25 @@ public class InputManager : MonoBehaviour {
         }
     }
 
+    public void DodgePressed(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            EventManager.instance.inputEvents.DodgePressed(true);
+        }
+    }
+
+    public void SprintPressed(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            EventManager.instance.inputEvents.SprintPressed(true);
+        }
+
+        if (context.canceled)
+        {
+            EventManager.instance.inputEvents.SprintPressed(true);
+        }
+    }
 
 }

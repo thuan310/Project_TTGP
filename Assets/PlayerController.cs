@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Windows;
 
-public class PlayerController : MonoBehaviour
+public class PlayerControllerTest : MonoBehaviour
 {
 
     public Transform cam;

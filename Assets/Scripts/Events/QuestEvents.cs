@@ -4,50 +4,46 @@ using UnityEngine;
 public class QuestEvents 
 {
     public event Action<string> onStartQuest;
-
     public void StartQuest(string id)
     {
-        if (onStartQuest != null)
-        {
-            onStartQuest(id);
-        }
+        onStartQuest?.Invoke(id);
     }
 
     public event Action<string> onAdvanceQuest;
 
     public void AdvanceQuest(string id)
     {
-        if (onAdvanceQuest != null)
-        {
-            onAdvanceQuest(id);
-        }
+        onAdvanceQuest?.Invoke(id);
     }
 
     public event Action<string> onFinishQuest;
 
     public void FinishQuest(string id)
     {
-        if (onFinishQuest != null)
-        {
-            onFinishQuest(id);
-        }
+
+        onFinishQuest?.Invoke(id);
+        
     }
 
     public event Action<Quest> onQuestStateChange;
     public void QuestStateChange(Quest quest)
     {
-        if (onQuestStateChange != null)
-        {
-            onQuestStateChange(quest);
-        }
+
+        onQuestStateChange?.Invoke(quest);
+  
     }
 
     public event Action<string, int, QuestStepState> onQuestStepStateChange;
     public void QuestStepStateChange(string id, int stepIndex, QuestStepState questStepState)
     {
-        if (onQuestStepStateChange != null)
-        {
-            onQuestStepStateChange(id, stepIndex, questStepState);
-        }
+
+        onQuestStepStateChange?.Invoke(id, stepIndex, questStepState);
+        
+    }
+
+    public event Action<string> onFinishQuestStep;
+    public void FinishQuestStep(string id)
+    {
+        onFinishQuestStep?.Invoke(id);
     }
 }

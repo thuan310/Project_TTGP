@@ -2,6 +2,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.InputSystem;
 using UnityEngine.Rendering.VirtualTexturing;
 using UnityEngine.SceneManagement;
 public class PlayerInputManager : MonoBehaviour
@@ -9,7 +10,18 @@ public class PlayerInputManager : MonoBehaviour
     public static PlayerInputManager instance;
 
     public PlayerManager player;
+    public void MovePressed(InputAction.CallbackContext context)
+    {
+        if (context.performed || context.started)
+        {
+            EventManager.instance.inputEvents.MovePressed(context.ReadValue<Vector2>());
+        }
 
+        if (context.canceled)
+        {
+            EventManager.instance.inputEvents.MovePressed(Vector2.zero);
+        }
+    }
     // Think about goals in steps
     // 1. find a way to read the values of a joy stick
     // 2. Move character based on those values
@@ -55,7 +67,7 @@ public class PlayerInputManager : MonoBehaviour
         // If we are loading into our world scene, enable our players controls
         if (newScene.buildIndex == WorldSaveGameManager.instance.GetWorldSceneIndex())
         {
-            PositionGuilding.instance.agent = player.GetComponentInChildren<NavMeshAgent>();
+            //PositionGuilding.instance.agent = player.GetComponentInChildren<NavMeshAgent>();
             instance.enabled = true;
             player.SetUpStammina();
             PlayerCamera.instance.SetCameraToFollowPlayer();
@@ -75,13 +87,36 @@ public class PlayerInputManager : MonoBehaviour
         {
             playerControls = new PlayerControl();
 
-            playerControls.Player.Move.performed += i => movementInput = i.ReadValue<Vector2>();
-            playerControls.Player.Dodge.performed += i => dodgeInput = true;
+            playerControls.Player.Move.performed += i =>
+            {
+                movementInput = i.ReadValue<Vector2>();
+                EventManager.instance.inputEvents.MovePressed(movementInput);
+            };
 
+            playerControls.Player.Dodge.performed += i => 
+            {
+
+                dodgeInput = true;
+                EventManager.instance.inputEvents.ToggleQuestPressed();
+
+
+            };
             //Holding the input, sets the bool
             playerControls.Player.Sprint.performed += i => sprintInpput = true;
             // releasing the input, sets the bool to false
             playerControls.Player.Sprint.canceled += i => sprintInpput = false;
+
+            playerControls.Player.Interact.performed += i =>
+            {
+                Debug.Log("E key pressed in PlayerInputManager");
+
+                EventManager.instance.inputEvents.InteractPressed();
+            };
+
+            playerControls.Player.ToggleQuest.performed += i =>
+            {
+                EventManager.instance.inputEvents.ToggleQuestPressed();
+            };
 
             #region LýThuyết
             /*3. Lambda Expression
@@ -95,7 +130,11 @@ public class PlayerInputManager : MonoBehaviour
         }
         playerControls.Enable();
 
+
+
     }
+
+
     private void OnApplicationFocus(bool focus)
     {
         if (enabled)
