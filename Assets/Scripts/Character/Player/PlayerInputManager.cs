@@ -60,7 +60,7 @@ public class PlayerInputManager : MonoBehaviour
 
         SceneManager.activeSceneChanged += OnSceneChange;
 
-        instance.enabled = false;
+        //instance.enabled = false;
     }
     private void OnSceneChange(Scene oldScene, Scene newScene)
     {
