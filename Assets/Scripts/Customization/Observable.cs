@@ -173,6 +173,19 @@ public class Observable<T>
         }
     }
 
+    //private T _previousValue;
+
+    //private void OnValidate()
+    //{
+    //    if (!Equals(_previousValue, _value))
+    //    {
+    //        T oldValue = _previousValue;
+    //        _previousValue = _value;
+    //        OnValueChanged?.Invoke(oldValue, _value);
+    //    }
+    //}
+
+
     // Constructor to initialize the value
     public Observable(T initialValue)
     {

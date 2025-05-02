@@ -14,7 +14,7 @@ public class WorldSaveGameManager : MonoBehaviour
     [SerializeField] bool loadGame;
 
     [Header("World Scene Index")]
-    [SerializeField] int worldSceneIndex = 2;
+    [SerializeField] int worldSceneIndex;
 
     [Header("Save Data Writer")]
     private SaveFileDataWriter saveFileDataWriter;
@@ -126,7 +126,7 @@ public class WorldSaveGameManager : MonoBehaviour
             currentCharaterSlotBeingUsed = CharacterSlot.CharacterSlot_01;
 
             currentCharacterData = new CharacterSaveData();
-            StartCoroutine(LoadWorldScene());
+            NewGame();
             return;
         }
 
@@ -140,7 +140,7 @@ public class WorldSaveGameManager : MonoBehaviour
             currentCharaterSlotBeingUsed = CharacterSlot.CharacterSlot_02;
 
             currentCharacterData = new CharacterSaveData();
-            StartCoroutine(LoadWorldScene());
+            NewGame();
             return;
         }
 
@@ -154,7 +154,7 @@ public class WorldSaveGameManager : MonoBehaviour
             currentCharaterSlotBeingUsed = CharacterSlot.CharacterSlot_03;
 
             currentCharacterData = new CharacterSaveData();
-            StartCoroutine(LoadWorldScene());
+            NewGame();
             return;
         }
 
@@ -169,7 +169,7 @@ public class WorldSaveGameManager : MonoBehaviour
             currentCharaterSlotBeingUsed = CharacterSlot.CharacterSlot_04;
 
             currentCharacterData = new CharacterSaveData();
-            StartCoroutine(LoadWorldScene());
+            NewGame();
             return;
         }
 
@@ -184,7 +184,7 @@ public class WorldSaveGameManager : MonoBehaviour
             currentCharaterSlotBeingUsed = CharacterSlot.CharacterSlot_05;
 
             currentCharacterData = new CharacterSaveData();
-            StartCoroutine(LoadWorldScene());
+            NewGame();
             return;
         }
 
@@ -199,7 +199,7 @@ public class WorldSaveGameManager : MonoBehaviour
             currentCharaterSlotBeingUsed = CharacterSlot.CharacterSlot_06;
 
             currentCharacterData = new CharacterSaveData();
-            StartCoroutine(LoadWorldScene());
+            NewGame();
             return;
         }
 
@@ -214,7 +214,7 @@ public class WorldSaveGameManager : MonoBehaviour
             currentCharaterSlotBeingUsed = CharacterSlot.CharacterSlot_07;
 
             currentCharacterData = new CharacterSaveData();
-            StartCoroutine(LoadWorldScene());
+            NewGame();
             return;
         }
 
@@ -229,7 +229,7 @@ public class WorldSaveGameManager : MonoBehaviour
             currentCharaterSlotBeingUsed = CharacterSlot.CharacterSlot_08;
 
             currentCharacterData = new CharacterSaveData();
-            StartCoroutine(LoadWorldScene());
+            NewGame();
             return;
         }
 
@@ -244,7 +244,7 @@ public class WorldSaveGameManager : MonoBehaviour
             currentCharaterSlotBeingUsed = CharacterSlot.CharacterSlot_09;
 
             currentCharacterData = new CharacterSaveData();
-            StartCoroutine(LoadWorldScene());
+            NewGame();
             return;
         }
 
@@ -258,7 +258,7 @@ public class WorldSaveGameManager : MonoBehaviour
             currentCharaterSlotBeingUsed = CharacterSlot.CharacterSlot_10;
 
             currentCharacterData = new CharacterSaveData();
-            StartCoroutine(LoadWorldScene());
+            NewGame();
             return;
         }
 
@@ -266,6 +266,13 @@ public class WorldSaveGameManager : MonoBehaviour
         // If there are no free slots, notify the player
         TitleScreenManager.instance.DisplayNoFreeCharacterSlotsPopUp();
 
+    }
+
+    private void NewGame()
+    {
+        // save the newly created characters Stats, and items(when creation screen is added)
+        SaveGame();
+        StartCoroutine(LoadWorldScene());
     }
     public void LoadGame()
     {
@@ -352,6 +359,7 @@ public class WorldSaveGameManager : MonoBehaviour
         //print("what the1");
         // if you just want 1 world scene use this
         AsyncOperation loadOperation = SceneManager.LoadSceneAsync(worldSceneIndex);
+        //print(worldSceneIndex);
         //print(currentCharacterData.characterName);
 
         // if you want to use different scenes for levels in your project use this

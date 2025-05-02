@@ -16,6 +16,7 @@ public class ResetActionFlag : StateMachineBehaviour
         character.applyRootMotion = false;
         character.canRotate = true;
         character.canMove = true;
+        character.isJumping = false;
     }
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state

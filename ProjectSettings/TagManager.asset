@@ -12,10 +12,11 @@ TagManager:
   - Water
   - UI
   - Environment
+  - Character
   - 
   - 
   - 
-  - 
+  - DamageCollider
   - 
   - 
   - 

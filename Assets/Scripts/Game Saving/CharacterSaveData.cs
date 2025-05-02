@@ -18,4 +18,12 @@ public class CharacterSaveData
     public float yPosition;
     public float zPosition;
 
+    [Header("Stats")]
+    public int currentHealth;
+    public float currentStamina;
+
+    [Header("Stats")]
+    public int vitality;
+    public int endurance;
+
 }

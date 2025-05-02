@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CharacterStatsManager : MonoBehaviour
@@ -11,12 +12,26 @@ public class CharacterStatsManager : MonoBehaviour
     [SerializeField] float staminaRegenerationDelay = 2f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
+    protected virtual void Start()
+    {
+
+    }
     protected virtual void Awake()
     {
         character = GetComponent<CharacterManager>();
     }
 
-    public int CalculateStaminaOnEnduranceLevel(int endurance)
+    public int CalculateHealthBasedOnVitalityLevel(int vitality)
+    {
+        float health = 0;
+
+        // Create an equation for how you want your stamina to be calculated
+
+        health = vitality * 10;
+        return Mathf.RoundToInt(health);
+    }
+
+    public int CalculateStaminaBasedOnEnduranceLevel(int endurance)
     {
         float stamina = 0;
 

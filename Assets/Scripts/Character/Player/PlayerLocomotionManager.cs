@@ -1,10 +1,13 @@
-﻿using Unity.VisualScripting;
+﻿using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem.Interactions;
 
 public class PlayerLocomotionManager : CharacterLocomotionManager
 {
     PlayerManager player;
+    TreeChopSimulator treeChopSimulator;
+
 
     [SerializeField] float verticalMovement;
     [SerializeField]  float horizontalMovement;
@@ -13,31 +16,46 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
     [Header("Movement Settings")]
     Vector3 targetRotationDirection;
     Vector3 moveDirection;
-    
     [SerializeField] private float sprintingSpeed = 10f;
     [SerializeField] private float runningSpeed = 5f;
     [SerializeField] private float walkingSpeed = 2.5f;
     [SerializeField] float rotationSpeed = 15;
     [SerializeField] float sprintingStaminaCost = 2;
 
+    [Header("Jump")]
+    [SerializeField] float jumpStaminaCost = 25f;
+    [SerializeField] float jumpHeight = 4;
+    [SerializeField] float jumpForwardSpeed = 5;
+    [SerializeField] float freeFallSpeed = 2;
+    private Vector3 jumpDirection;
+
+    [SerializeField] private GameObject hitArea;
+
     [Header("Dodge")]
     private Vector3 rollDirection;
     [SerializeField] float dodgeStaminaCost = 25f;
 
+
+
     protected override void Awake()
     {
         base.Awake();
+        treeChopSimulator= GetComponent<TreeChopSimulator>();
         player = GetComponent<PlayerManager>();
     }
     protected override void Update()
     {
         base.Update();
+
+        HandlePickUpLog();
     }
 
     public void HandleAllMovement()
     {
         HandleGroundMovement();
         HandleRotation();
+        HandleJumpingMovement();
+        HandleFreeFallMovement();
     }
     private void GetMovementValues()
     {
@@ -80,6 +98,28 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         }
 
 
+    }
+
+    private void HandleJumpingMovement()
+    {
+        if(player.isJumping)
+        {
+            player.characterController.Move(jumpDirection * jumpForwardSpeed * Time.deltaTime);
+        }
+    }
+
+    private void HandleFreeFallMovement()
+    {
+        if (!player.isGrounded)
+        {
+            Vector3 freeFallDirection;
+
+            freeFallDirection = PlayerCamera.instance.transform.forward * PlayerInputManager.instance.verticaInput_Values;
+            freeFallDirection += freeFallDirection + PlayerCamera.instance.transform.right * PlayerInputManager.instance.horizontalInput_Values;
+            freeFallDirection.y = 0;
+
+            player.characterController.Move(freeFallDirection * freeFallSpeed * Time.deltaTime);
+        }
     }
 
     private void HandleRotation()
@@ -140,6 +180,7 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         }
 
     }
+
     public void AttemptToPerformDodge()
     {
         if (player.isPerformingAction)
@@ -178,5 +219,185 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         player.currentStamina.Value -= dodgeStaminaCost;
     }
 
+    public void AttemptToPerformJump()
+    {
+        // If we are performing a general action, we do not want to allow a jump (will change when combat is added)
+        if (player.isPerformingAction)
+            return;
+
+        // if we are out of stamina, we do not wish to allow a jump
+        if (player.currentStamina.Value <= 0)
+            return;
+
+        // If we are already in a jump, we do not want to allow a jump again until the current jump has finsished
+        if (player.isJumping)
+            return;
+
+        // If we are not ground, we do not want to allow a jump
+        if (!player.isGrounded)
+            return;
+
+        // if we are two handing our, play the two handed jump animatino, otherwise play the one haned animation (to do)
+        player.playerAnimatorManager.PlayTargetActionAnimation("Main_Jump_01", false);
+
+        player.isJumping = true;
+
+        player.currentStamina.Value -= jumpStaminaCost;
+
+        jumpDirection = PlayerCamera.instance.cameraObject.transform.forward * PlayerInputManager.instance.verticaInput_Values;
+        jumpDirection += PlayerCamera.instance.cameraObject.transform.right * PlayerInputManager.instance.horizontalInput_Values;
+        jumpDirection.y = 0;
+
+        if (jumpDirection != Vector3.zero)
+        {
+            // if we are sprinting, jump direction is at full distance 
+            if (player.isSprinting.Value)
+            {
+                jumpDirection *= 1;
+            }
+            // if we are running, jump direction is at half distance
+            else if (PlayerInputManager.instance.moveAmount >= 0.5)
+            {
+                jumpDirection *= 0.5f;
+            }
+            //if we are walking, jump direction is at quater distance
+            else if (PlayerInputManager.instance.moveAmount <= 0.5)
+            {
+                jumpDirection *= 0.25f;
+            }
+        }
+
+
+
+    }
+
+    public void ApplyJumpingVelocity()
+    {
+        // apply an upward velocity
+        yVelocity.y = Mathf.Sqrt(jumpHeight * -2 * gravityForce);
+    }
+
+    //Attack Part
+    public void AttemptToAttack()
+    {
+        switch(PlayerInputManager.instance.action)
+        {
+            default:
+                break;
+            case PlayerInputManager.Action.Normal:
+                player.playerAnimatorManager.PlayTargetActionAnimation("SwingAxe", true, true);
+                StartCoroutine(AnimationEvent_OnHit());
+                return;
+            case PlayerInputManager.Action.ChopTree:
+                if (PlayerUIManager.instance.playerUIDynamicHUDManager.treeChopMinigame_UI.GetComponentInChildren<ProgressBar>().CheckIfValided())
+                {
+                    player.playerAnimatorManager.PlayTargetActionAnimation("SwingAxe", true, true,false,false);
+                    StartCoroutine(AnimationEvent_OnHit());
+                }
+                else
+                {
+                   PlayerUIManager.instance.playerUIDynamicHUDManager.treeChopMinigame_UI.GetComponentInChildren<CheckBox>().TickColor();
+                }
+                return;
+            case PlayerInputManager.Action.LogSharpening:
+                if (PlayerUIManager.instance.playerUIDynamicHUDManager.logSharpeningMinigame_UI.GetComponentInChildren<ProgressBar>().CheckIfValided())
+                {
+                    player.playerAnimatorManager.PlayTargetActionAnimation("SwingAxe", true, true, false, false);
+                    Vector3 colliderSize = Vector3.one * 0.3f;
+                    Collider[] colliderArray = Physics.OverlapBox(hitArea.transform.position, colliderSize);
+                    //print(colliderArray[0]);
+                    foreach (Collider collider in colliderArray)
+                    {
+                        //print(collider.name);
+                        if (collider.GetComponent<SharpingTable>() != null)
+                        {
+                            collider.GetComponent<SharpingTable>().SharpLog();
+                        }
+
+                        //sharpingTable.SharpLog();
+
+                    }
+                }
+                else
+                {
+                    PlayerUIManager.instance.playerUIDynamicHUDManager.logSharpeningMinigame_UI.GetComponentInChildren<CheckBox>().TickColor();
+                }
+                return ;
+        }
+        
+    }
+
+    IEnumerator AnimationEvent_OnHit()
+    {
+        //Find objects in Hit area
+        Vector3 colliderSize = Vector3.one * 0.3f;
+        Collider[] colliderArray = Physics.OverlapBox(hitArea.transform.position, colliderSize);
+        //print(colliderArray[0]);
+        foreach (Collider collider in colliderArray)
+        {
+           
+            IDamageable attackableObject = collider.GetComponentInParent<IDamageable>();
+            if (attackableObject == null)
+            {
+                continue;
+            }
+            SharpingTable sharpingTable = collider.GetComponentInParent<SharpingTable>();
+            print("hit");
+            attackableObject.Damage();
+           
+        }
+        yield return new WaitForSeconds(0.5f);
+    }
+    //Interact part
+    public void AttemptInteract()
+    {
+        switch (PlayerInputManager.instance.action)
+        {
+            default:
+                break;
+            case PlayerInputManager.Action.Normal:
+                if (player.playerDetectArea.interactableObject != null )
+                {
+                    //print(player.playerDetectArea.interactableObject);
+                    player.playerDetectArea.interactableObject.OnInteracted();
+
+                }
+                return;
+            case PlayerInputManager.Action.ChopTree:
+                // check if playing animation
+                if (player.isPerformingAction)
+                {
+                    return;
+                }
+                PlayerUIManager.instance.playerUIDynamicHUDManager.treeChopMinigame_UI.GetComponentInChildren<ProgressBar>().AddValue();
+                return;
+            case PlayerInputManager.Action.CarrySomething:
+                // check if playing animation
+                if (player.isPerformingAction)
+                {
+                    return;
+                }
+                PlayerUIManager.instance.playerUIDynamicHUDManager.carryLogMinigame_UI.GetComponentInChildren<ProgressBar>().AddValue();
+                return;
+        }
+    }
+    //Escape part
+    public void AttemptingQuitting()
+    {
+        if(PlayerInputManager.instance.action != PlayerInputManager.Action.Normal)
+        {
+            PlayerInputManager.instance.action = PlayerInputManager.Action.Normal;
+            player.canMove = true;
+        }
+
+    }
+
+    public void HandlePickUpLog()
+    {
+        if (PlayerInputManager.instance.action != PlayerInputManager.Action.CarrySomething) 
+        {
+            return;
+        }
+    }
 
 }
