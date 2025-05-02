@@ -39,7 +39,7 @@ public class TitleScreenManager : MonoBehaviour
 
     public void CreatePlayer()
     {
-        Instantiate(playerPrefab);
+        Instantiate(playerPrefab, new Vector3 (0,2,0), Quaternion.identity);
     }
 
     public void StartNewGame()
