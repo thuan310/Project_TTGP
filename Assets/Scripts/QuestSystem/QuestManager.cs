@@ -71,6 +71,9 @@ public class QuestManager : MonoBehaviour {
                 Debug.Log("Duplicate ID Found");
             }
             idToQuestMap.Add(questinfo.id, LoadQuest(questinfo));
+
+            Debug.Log($"Loaded Quest: ID = {questinfo.id}, Name = {questinfo.name}");
+
         }
 
         return idToQuestMap;

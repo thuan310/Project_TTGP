@@ -2,6 +2,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.InputSystem;
 using UnityEngine.Rendering.VirtualTexturing;
 using UnityEngine.SceneManagement;
 public class PlayerInputManager : MonoBehaviour
@@ -108,12 +109,30 @@ public class PlayerInputManager : MonoBehaviour
             playerControls.Player.Attack.performed += i => attackInput = true;
             playerControls.Player.Quit.performed += i => quittingInput = true;
 
+            playerControls.Player.Dodge.performed += i => 
+            {
+
+                dodgeInput = true;
+                EventManager.instance.inputEvents.ToggleQuestPressed();
+
+
+            };
             //Holding the input, sets the bool
             playerControls.Player.Sprint.performed += i => sprintInpput = true;
             // releasing the input, sets the bool to false
             playerControls.Player.Sprint.canceled += i => sprintInpput = false;
 
+            playerControls.Player.Interact.performed += i =>
+            {
+                Debug.Log("E key pressed in PlayerInputManager");
 
+                EventManager.instance.inputEvents.InteractPressed();
+            };
+
+            playerControls.Player.ToggleQuest.performed += i =>
+            {
+                EventManager.instance.inputEvents.ToggleQuestPressed();
+            };
 
             #region LýThuyết
             /*3. Lambda Expression
@@ -126,6 +145,8 @@ public class PlayerInputManager : MonoBehaviour
             #endregion
         }
         playerControls.Enable();
+
+
 
     }
 

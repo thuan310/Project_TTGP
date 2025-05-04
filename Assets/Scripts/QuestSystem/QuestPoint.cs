@@ -5,7 +5,8 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(SphereCollider))]
 public class QuestPoint : MonoBehaviour {
 
-    private PlayerInput inputActions;
+    [Header("Dialogue (optional)")]
+    [SerializeField] private string dialogueKnotName;
 
     [Header("Quest")]
     [SerializeField] private QuestInfoSO questInfoForPoint;
@@ -26,7 +27,6 @@ public class QuestPoint : MonoBehaviour {
         questID = questInfoForPoint.id;
         //questIcon = GetComponentInChildren<QuestIcon>();
 
-        inputActions = new PlayerInput();
 
     }
 
@@ -45,22 +45,34 @@ public class QuestPoint : MonoBehaviour {
 
     }
 
-    private void SubmitPressed()
+    private void SubmitPressed(InputEventContext context)
     {
-        if (!playerIsNear)
-        {
+        Debug.Log("Interacted");
 
+        if (!playerIsNear || !context.Equals(InputEventContext.DEFAULT))
+        {
+            Debug.Log("Player not near or context no default");
             return;
         }
 
-        if (currentQuestState == QuestState.CAN_START && startPoint)
+        if (!dialogueKnotName.Equals(""))
         {
-            EventManager.instance.questEvents.StartQuest(questID);
+            Debug.Log("Enter Dialogue for " + dialogueKnotName);
+
+            EventManager.instance.dialogueEvents.EnterDialogue(dialogueKnotName);
         }
-        else if (currentQuestState == QuestState.CAN_FINISH && endPoint)
+        else
         {
-            EventManager.instance.questEvents.FinishQuest(questID);
+            if (currentQuestState == QuestState.CAN_START && startPoint)
+            {
+                EventManager.instance.questEvents.StartQuest(questID);
+            }
+            else if (currentQuestState == QuestState.CAN_FINISH && endPoint)
+            {
+                EventManager.instance.questEvents.FinishQuest(questID);
+            }
         }
+
 
     }
 

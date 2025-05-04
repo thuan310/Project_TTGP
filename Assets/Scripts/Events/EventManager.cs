@@ -6,6 +6,7 @@ public class EventManager : MonoBehaviour
 
     public QuestEvents questEvents;
     public InputEvents inputEvents;
+    public DialogueEvents dialogueEvents;
 
     private void Awake()
     {
@@ -13,11 +14,13 @@ public class EventManager : MonoBehaviour
         {
             Debug.LogError("Found more than one Game Events Manager in the scene.");
         }
-        instance = this;
+        instance = this; 
 
 
         questEvents = new QuestEvents();
         inputEvents = new InputEvents();
+        dialogueEvents = new DialogueEvents();
+
     }
 
 }

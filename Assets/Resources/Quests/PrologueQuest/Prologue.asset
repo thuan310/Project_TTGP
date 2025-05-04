@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a53dda29ff18348418de41cbed595d55, type: 3}
+  m_Name: Prologue
+  m_EditorClassIdentifier: 
+  <id>k__BackingField: Prologue
+  displayName: Prologue
+  questPrerequisites: []
+  questStepPrefabs:
+  - {fileID: 6599703358358376508, guid: 41f69b36af17ed64e84532284c585524, type: 3}
