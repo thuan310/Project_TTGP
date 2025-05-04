@@ -13,6 +13,7 @@ public class PlayerManager : CharacterManager
     [HideInInspector] public PlayerLocomotionManager playerLocomotionManager;
     [HideInInspector] public PlayerStatsManager playerStatsManager;
     [HideInInspector] public PlayerDetectArea playerDetectArea;
+    [HideInInspector] public PlayerInventoryManager playerInventoryManager;
 
     protected override void Awake()
     {
@@ -22,6 +23,7 @@ public class PlayerManager : CharacterManager
         playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
         playerStatsManager = GetComponent<PlayerStatsManager>();
         playerDetectArea = GetComponentInChildren<PlayerDetectArea>();
+        playerInventoryManager = GetComponent<PlayerInventoryManager>();
 
     }
     private void Start()
