@@ -51,6 +51,10 @@ public class GetBookQuestStep : QuestStep
         {
             EventManager.instance.dialogueEvents.EnterDialogue(dialogueKnotName);
         }
+
+        string status = "Got Book";
+        ChangeState("", status);
+        FinishQuestStep();
     }
 
     private void OnTriggerEnter(Collider collision)

@@ -109,14 +109,6 @@ public class PlayerInputManager : MonoBehaviour
             playerControls.Player.Attack.performed += i => attackInput = true;
             playerControls.Player.Quit.performed += i => quittingInput = true;
 
-            playerControls.Player.Dodge.performed += i => 
-            {
-
-                dodgeInput = true;
-                EventManager.instance.inputEvents.ToggleQuestPressed();
-
-
-            };
             //Holding the input, sets the bool
             playerControls.Player.Sprint.performed += i => sprintInpput = true;
             // releasing the input, sets the bool to false
@@ -167,6 +159,8 @@ public class PlayerInputManager : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log("Update is running");
+
         HandleAllInput();
         ControlAction();
     }
@@ -174,6 +168,7 @@ public class PlayerInputManager : MonoBehaviour
     //Movement
     private void HandleAllInput()
     {
+        Debug.Log("hanele");
         HandlePlayerMovementInput();
         HandleDodgeInput();
         HandleSprintInput();
