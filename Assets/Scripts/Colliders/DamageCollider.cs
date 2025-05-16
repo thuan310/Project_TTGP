@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class DamageCollider : MonoBehaviour
 {
+    [Header("Collider")]
+    [SerializeField] protected Collider damageCollider;
+
+
     [Header("Damage")]
     public float physicalDamage = 0; // in the future will be split into "Standard", Strike", " slah" and " pierce"
     public float magicDamage = 0;
@@ -12,16 +16,22 @@ public class DamageCollider : MonoBehaviour
     public float holyDamage = 0;
 
     [Header("Contact Point")]
-    private Vector3 contactPoint;
+    public Vector3 contactPoint;
 
     [Header("Character Damaged")]
     protected List<CharacterManager> charactersDamaged = new List<CharacterManager>();
 
-    private void OnTriggerEnter(Collider other)
+    protected virtual void Awake()
     {
-        CharacterManager damageTarget = other.GetComponent<CharacterManager>();
 
-        if(damageTarget != null)
+    }
+
+    protected virtual void OnTriggerEnter(Collider other)
+    {
+        //print(other.name);
+        CharacterManager damageTarget = other.GetComponentInParent<CharacterManager>();
+
+        if (damageTarget != null)
         {
             contactPoint = other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
 
@@ -53,5 +63,16 @@ public class DamageCollider : MonoBehaviour
         damageEffect.contactPoint = contactPoint;
 
         damgageTarget.characterEffectManager.ProcessInstantEffect(damageEffect);
+    }
+
+    public virtual void EnableDamageCollider()
+    {
+        damageCollider.enabled = true;
+    }
+
+    public virtual void DisableDamageCollider()
+    {
+        damageCollider.enabled = false;
+        charactersDamaged.Clear(); // we reset the characters that have been hit when we reset the collider, so they may be hit again
     }
 }

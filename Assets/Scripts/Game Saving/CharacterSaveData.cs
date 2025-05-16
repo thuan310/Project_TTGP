@@ -26,4 +26,13 @@ public class CharacterSaveData
     public int vitality;
     public int endurance;
 
+    [Header("Bosses")]
+    public SerializableDictionary<int, bool> bossesAwakened; // the int is the boss I.D, the bool is the awakened status //hashmap
+    public SerializableDictionary<int, bool> bossesDefeated; // the int is the boss I.D, the bool is the awakened status
+
+    public CharacterSaveData()
+    {
+        bossesAwakened = new SerializableDictionary<int, bool>();
+        bossesDefeated = new SerializableDictionary<int, bool>();
+    }
 }

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 65171837840757486}
-  - component: {fileID: 8569788272878863999}
+  - component: {fileID: 9039194437784377875}
   m_Layer: 0
   m_Name: CreateGuidingLight
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8569788272878863999
+--- !u!114 &9039194437784377875
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,9 +41,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 5411573237109769385}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c4f358179446384ab98d0eaa6fecfaa, type: 3}
+  m_Script: {fileID: 11500000, guid: 8a27d29cf1e20cf4c94c5296d08bd205, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   agent: {fileID: 0}
-  sparklePrefab: {fileID: 2022366882908725742, guid: 510499d1ff12e014f8897402452b198c, type: 3}
+  sparklePrefab: {fileID: 0}
+  destinationPosition: {fileID: 0}
   sparkleSpacing: 0.5
+  isGuilding: 0

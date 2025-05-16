@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class CharacterLocomotionManager : MonoBehaviour
 {
-    CharacterManager character;
+    public CharacterManager character;
 
     [Header("Ground Check & Jumping")]
     [SerializeField] protected float gravityForce = -5.55f;
@@ -14,6 +14,9 @@ public class CharacterLocomotionManager : MonoBehaviour
     [SerializeField] protected float fallStartYVelocity = -5f; // the force at which our character begins to fall when they become ungrounded (rises as they fall longer)
     protected bool fallingVelocityHasBeenSet = false;
     protected float inAirTimer = 0;
+
+    [Header("Flags")]
+    public bool isRolling = false;
 
     protected virtual void Awake()
     {
@@ -55,6 +58,7 @@ public class CharacterLocomotionManager : MonoBehaviour
     protected void HandleGroundCheck()
     {
         character.isGrounded = Physics.CheckSphere(character.transform.position, groundCheckSphereRaidus, groundLayer);
+        //print(Physics.CheckSphere(character.transform.position, groundCheckSphereRaidus, groundLayer));
     }
 
     // draws our ground check sphere in scene view 
@@ -65,5 +69,15 @@ public class CharacterLocomotionManager : MonoBehaviour
             Gizmos.DrawSphere(character.transform.position, groundCheckSphereRaidus);
         }
         
+    }
+
+    public void EnableCanRotate()
+    {
+        character.canRotate = true;
+    }
+
+    public void DisableCanRotate()
+    {
+        character.canRotate = false;
     }
 }

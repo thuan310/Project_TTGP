@@ -1,6 +1,7 @@
 using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
+
 [CreateAssetMenu(menuName = "Character Effects/Instant Effects/TakeDamage")]
 public class TakeDamageEffect : InstantCharacterEffect
 {
@@ -41,6 +42,10 @@ public class TakeDamageEffect : InstantCharacterEffect
 
     public override void ProcessEffect(CharacterManager character)
     {
+
+        //check for "Invelnerability"
+        if (character.isInvulnerable.Value)
+            return;
         base.ProcessEffect(character);
 
         //if the character is dead, no additional damage effects should be processed
@@ -49,22 +54,24 @@ public class TakeDamageEffect : InstantCharacterEffect
             return;
         }
 
-        //check for "Invelnerability"
-
         // calculate damage
         CalculateDamage(character);
         // check which directional damage came from
+        PlayDirectionalBasedDamageAnimation(character);
         //play a damage animation
         // check for build ups (poison, bleed ect)
         // play damage sound fx
+        PlayDamageSFX(character);
         //play damage VFX(blood)
+        PlayDamageVFX(character);
+
 
         // if character is A.I, check for new target if chartacter causing damage is present
     }
 
     private void CalculateDamage(CharacterManager character)
     {
-        if(CharacterCausingManager != null)
+        if (CharacterCausingManager != null)
         {
             // check for damage modifiers and modify base damage (Physical/ Elemental damage buff)
             // (physical *= physicalModifier ect
@@ -78,13 +85,86 @@ public class TakeDamageEffect : InstantCharacterEffect
 
         finalDamageDealt = Mathf.RoundToInt(physicalDamage + magicDamage + fireDamage + lightningDamage + holyDamage);
 
-        if(finalDamageDealt <= 0)
+        if (finalDamageDealt <= 0)
         {
             finalDamageDealt = 1;
         }
 
         Debug.Log("Final Damage given: " + finalDamageDealt);
+        if (character.isDummy == true)
+        {
+            finalDamageDealt = 1;
+        }
         character.currentHealth.Value -= finalDamageDealt;
         // calculate poise damage to determine if the character will be stunned
     }
+
+    private void PlayDamageVFX(CharacterManager character)
+    {
+        // If we have fire damage, play fire particles
+        // lightning damage, lightning particle ect
+        character.characterEffectManager.PLayBloodSplatter(contactPoint);
+    }
+
+    private void PlayDamageSFX(CharacterManager character)
+{
+    AudioClip physicalDamageSFX = WorldSoundFXManager.instance.ChooseRandomSFXFromArray(WorldSoundFXManager.instance.physicalDamageSFX);
+
+    character.characterSoundFXManager.PLaySoundFX(physicalDamageSFX);
+    character.characterSoundFXManager.PlayerDamageGruntsSoundFX();    
+    // if fire damage is greater than 0, play burn sfx
+    // if lightning damage is greate than 0, play zap sfx
 }
+
+    private void PlayDirectionalBasedDamageAnimation(CharacterManager character)
+    {
+
+        // calculate if poise is broken
+        poiseIsBroken = true;
+
+        if (character.isDead.Value)
+            return;
+
+
+
+        if (angleHitFrom >= 145 && angleHitFrom <= 180)
+        {
+            //Debug.Log(character.characterAnimatorManager.forward_Medium_Damage.Count);
+            // PLay Front Animation
+            damageAnimation = character.characterAnimatorManager.GetRandomAnimationFromList(character.characterAnimatorManager.forward_Medium_Damage);
+        }
+        else if (angleHitFrom <= -145 && angleHitFrom >= -180)
+        {
+            //Debug.Log(character.characterAnimatorManager.forward_Medium_Damage.Count);
+            // PLay Front Animation
+            damageAnimation = character.characterAnimatorManager.GetRandomAnimationFromList(character.characterAnimatorManager.forward_Medium_Damage);
+        }
+        else if (angleHitFrom >= -45 && angleHitFrom <= 45)
+        {
+            //Debug.Log(character.characterAnimatorManager.backward_Medium_Damage.Count);
+            // PLay Back Animation
+            damageAnimation = character.characterAnimatorManager.GetRandomAnimationFromList(character.characterAnimatorManager.backward_Medium_Damage);
+        }
+        else if (angleHitFrom >= -144 && angleHitFrom <= -45)
+        {
+            //Debug.Log(character.characterAnimatorManager.left_Medium_Damage.Count);
+            // PLay Left Animation
+            damageAnimation = character.characterAnimatorManager.GetRandomAnimationFromList(character.characterAnimatorManager.left_Medium_Damage);
+        }
+        else if (angleHitFrom >= 45 && angleHitFrom <= 144)
+        {
+            //Debug.Log(character.characterAnimatorManager.right_Medium_Damage.Count);
+            // play Right Animation
+            damageAnimation = character.characterAnimatorManager.GetRandomAnimationFromList(character.characterAnimatorManager.right_Medium_Damage);
+        }
+
+        // if poise is broken, play a staggering damage animation
+        if (poiseIsBroken)
+        {
+            character.characterAnimatorManager.lastDamagAnimationPlayed = damageAnimation;
+            character.characterAnimatorManager.PlayTargetActionAnimation(damageAnimation, true);
+        }
+    }
+
+}
+

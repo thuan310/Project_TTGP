@@ -105,7 +105,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                     ""id"": ""641cd816-40e6-41b4-8c3d-04687c349290"",
                     ""expectedControlType"": """",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Hold"",
                     ""initialStateCheck"": false
                 },
                 {
@@ -121,6 +121,78 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                     ""name"": ""Quit"",
                     ""type"": ""Button"",
                     ""id"": ""a8754967-ec5d-4fc0-b883-e4a608d1cb0e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RB"",
+                    ""type"": ""Button"",
+                    ""id"": ""74caf6b2-50df-4bbf-ba11-057d2d28855f"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RT"",
+                    ""type"": ""Button"",
+                    ""id"": ""bfd2c405-e317-4a59-9f9c-c70aa35c87aa"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""HoldRT"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""7af4bc8e-37cd-4f3b-b88b-d315e72caccd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Lock On"",
+                    ""type"": ""Button"",
+                    ""id"": ""2390c1f9-8324-4351-90ee-cf3408b85c68"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Seek Left Lock On Target"",
+                    ""type"": ""Button"",
+                    ""id"": ""d2772764-64c9-415d-969d-a47525fe2dc9"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Seek Right Lock On Target"",
+                    ""type"": ""Button"",
+                    ""id"": ""50ca9108-4fdb-49d4-9234-f72e34acaf4f"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Switch Right Weapon"",
+                    ""type"": ""Button"",
+                    ""id"": ""2bd097f9-f289-44ec-bbec-660318bffc3e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Switch Left Weapon"",
+                    ""type"": ""Button"",
+                    ""id"": ""c88e9f7f-a17d-45be-9639-c82a61625b2b"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -532,6 +604,204 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Quit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1564de9d-c1dc-47f6-adf9-134a6a4a0bee"",
+                    ""path"": ""<XInputController>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RB"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""972628b5-8071-4327-b6dc-383f98cc72ad"",
+                    ""path"": ""<XboxOneGamepadAndroid>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RB"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""909f165a-01b6-460c-969d-6af1b66b90cc"",
+                    ""path"": ""<XboxOneGampadiOS>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RB"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d84b04fd-f987-43df-8665-acad71dfb475"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RB"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c4a0eeac-21de-4944-a170-91bc9f5a6e54"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RT"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7526c4b2-2810-4f45-ad51-2bfcf99da713"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RT"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d3277583-f1a5-4360-80cc-5c3e50698e8c"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""HoldRT"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""758e6cab-12bb-45df-9a1b-a5690f22f40f"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""HoldRT"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b9e1dad3-6c81-49ef-897f-1fd458d3d074"",
+                    ""path"": ""<Gamepad>/rightStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Lock On"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b5b3f217-a0ba-4998-9d74-a2aa93175302"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Lock On"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c48e7ee6-d6ea-4fb6-b959-113eae397b8c"",
+                    ""path"": ""<Gamepad>/rightStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Seek Left Lock On Target"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a9b3251c-c211-4018-9324-99f21a0d3898"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Seek Left Lock On Target"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9a0d239b-c6ea-49c6-a705-be03f9a47f01"",
+                    ""path"": ""<Gamepad>/rightStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Seek Right Lock On Target"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""895b00dd-e281-47b6-bf72-c273f50b1d80"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Seek Right Lock On Target"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""eba22d8d-c37c-4805-ae37-7f7419910128"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Switch Right Weapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1a96299b-991f-489f-ab68-8ceb7e4d44bc"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Switch Right Weapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""97b8c4f2-a165-48eb-873d-898cd281f823"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Switch Left Weapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b2c16484-408a-480f-b989-d18b1a354b13"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Switch Left Weapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1074,7 +1344,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""2835f570-92c0-4fe2-9fdb-a3d74a1be88f"",
-                    ""path"": ""<Keyboard>/backspace"",
+                    ""path"": ""<Keyboard>/delete"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -1161,6 +1431,14 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         m_Player_ToggleQuest = m_Player.FindAction("ToggleQuest", throwIfNotFound: true);
         m_Player_Quit = m_Player.FindAction("Quit", throwIfNotFound: true);
+        m_Player_RB = m_Player.FindAction("RB", throwIfNotFound: true);
+        m_Player_RT = m_Player.FindAction("RT", throwIfNotFound: true);
+        m_Player_HoldRT = m_Player.FindAction("HoldRT", throwIfNotFound: true);
+        m_Player_LockOn = m_Player.FindAction("Lock On", throwIfNotFound: true);
+        m_Player_SeekLeftLockOnTarget = m_Player.FindAction("Seek Left Lock On Target", throwIfNotFound: true);
+        m_Player_SeekRightLockOnTarget = m_Player.FindAction("Seek Right Lock On Target", throwIfNotFound: true);
+        m_Player_SwitchRightWeapon = m_Player.FindAction("Switch Right Weapon", throwIfNotFound: true);
+        m_Player_SwitchLeftWeapon = m_Player.FindAction("Switch Left Weapon", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1252,6 +1530,14 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Sprint;
     private readonly InputAction m_Player_ToggleQuest;
     private readonly InputAction m_Player_Quit;
+    private readonly InputAction m_Player_RB;
+    private readonly InputAction m_Player_RT;
+    private readonly InputAction m_Player_HoldRT;
+    private readonly InputAction m_Player_LockOn;
+    private readonly InputAction m_Player_SeekLeftLockOnTarget;
+    private readonly InputAction m_Player_SeekRightLockOnTarget;
+    private readonly InputAction m_Player_SwitchRightWeapon;
+    private readonly InputAction m_Player_SwitchLeftWeapon;
     public struct PlayerActions
     {
         private @PlayerControl m_Wrapper;
@@ -1267,6 +1553,14 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
         public InputAction @ToggleQuest => m_Wrapper.m_Player_ToggleQuest;
         public InputAction @Quit => m_Wrapper.m_Player_Quit;
+        public InputAction @RB => m_Wrapper.m_Player_RB;
+        public InputAction @RT => m_Wrapper.m_Player_RT;
+        public InputAction @HoldRT => m_Wrapper.m_Player_HoldRT;
+        public InputAction @LockOn => m_Wrapper.m_Player_LockOn;
+        public InputAction @SeekLeftLockOnTarget => m_Wrapper.m_Player_SeekLeftLockOnTarget;
+        public InputAction @SeekRightLockOnTarget => m_Wrapper.m_Player_SeekRightLockOnTarget;
+        public InputAction @SwitchRightWeapon => m_Wrapper.m_Player_SwitchRightWeapon;
+        public InputAction @SwitchLeftWeapon => m_Wrapper.m_Player_SwitchLeftWeapon;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1309,6 +1603,30 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
             @Quit.started += instance.OnQuit;
             @Quit.performed += instance.OnQuit;
             @Quit.canceled += instance.OnQuit;
+            @RB.started += instance.OnRB;
+            @RB.performed += instance.OnRB;
+            @RB.canceled += instance.OnRB;
+            @RT.started += instance.OnRT;
+            @RT.performed += instance.OnRT;
+            @RT.canceled += instance.OnRT;
+            @HoldRT.started += instance.OnHoldRT;
+            @HoldRT.performed += instance.OnHoldRT;
+            @HoldRT.canceled += instance.OnHoldRT;
+            @LockOn.started += instance.OnLockOn;
+            @LockOn.performed += instance.OnLockOn;
+            @LockOn.canceled += instance.OnLockOn;
+            @SeekLeftLockOnTarget.started += instance.OnSeekLeftLockOnTarget;
+            @SeekLeftLockOnTarget.performed += instance.OnSeekLeftLockOnTarget;
+            @SeekLeftLockOnTarget.canceled += instance.OnSeekLeftLockOnTarget;
+            @SeekRightLockOnTarget.started += instance.OnSeekRightLockOnTarget;
+            @SeekRightLockOnTarget.performed += instance.OnSeekRightLockOnTarget;
+            @SeekRightLockOnTarget.canceled += instance.OnSeekRightLockOnTarget;
+            @SwitchRightWeapon.started += instance.OnSwitchRightWeapon;
+            @SwitchRightWeapon.performed += instance.OnSwitchRightWeapon;
+            @SwitchRightWeapon.canceled += instance.OnSwitchRightWeapon;
+            @SwitchLeftWeapon.started += instance.OnSwitchLeftWeapon;
+            @SwitchLeftWeapon.performed += instance.OnSwitchLeftWeapon;
+            @SwitchLeftWeapon.canceled += instance.OnSwitchLeftWeapon;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1346,6 +1664,30 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
             @Quit.started -= instance.OnQuit;
             @Quit.performed -= instance.OnQuit;
             @Quit.canceled -= instance.OnQuit;
+            @RB.started -= instance.OnRB;
+            @RB.performed -= instance.OnRB;
+            @RB.canceled -= instance.OnRB;
+            @RT.started -= instance.OnRT;
+            @RT.performed -= instance.OnRT;
+            @RT.canceled -= instance.OnRT;
+            @HoldRT.started -= instance.OnHoldRT;
+            @HoldRT.performed -= instance.OnHoldRT;
+            @HoldRT.canceled -= instance.OnHoldRT;
+            @LockOn.started -= instance.OnLockOn;
+            @LockOn.performed -= instance.OnLockOn;
+            @LockOn.canceled -= instance.OnLockOn;
+            @SeekLeftLockOnTarget.started -= instance.OnSeekLeftLockOnTarget;
+            @SeekLeftLockOnTarget.performed -= instance.OnSeekLeftLockOnTarget;
+            @SeekLeftLockOnTarget.canceled -= instance.OnSeekLeftLockOnTarget;
+            @SeekRightLockOnTarget.started -= instance.OnSeekRightLockOnTarget;
+            @SeekRightLockOnTarget.performed -= instance.OnSeekRightLockOnTarget;
+            @SeekRightLockOnTarget.canceled -= instance.OnSeekRightLockOnTarget;
+            @SwitchRightWeapon.started -= instance.OnSwitchRightWeapon;
+            @SwitchRightWeapon.performed -= instance.OnSwitchRightWeapon;
+            @SwitchRightWeapon.canceled -= instance.OnSwitchRightWeapon;
+            @SwitchLeftWeapon.started -= instance.OnSwitchLeftWeapon;
+            @SwitchLeftWeapon.performed -= instance.OnSwitchLeftWeapon;
+            @SwitchLeftWeapon.canceled -= instance.OnSwitchLeftWeapon;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1547,6 +1889,14 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         void OnSprint(InputAction.CallbackContext context);
         void OnToggleQuest(InputAction.CallbackContext context);
         void OnQuit(InputAction.CallbackContext context);
+        void OnRB(InputAction.CallbackContext context);
+        void OnRT(InputAction.CallbackContext context);
+        void OnHoldRT(InputAction.CallbackContext context);
+        void OnLockOn(InputAction.CallbackContext context);
+        void OnSeekLeftLockOnTarget(InputAction.CallbackContext context);
+        void OnSeekRightLockOnTarget(InputAction.CallbackContext context);
+        void OnSwitchRightWeapon(InputAction.CallbackContext context);
+        void OnSwitchLeftWeapon(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

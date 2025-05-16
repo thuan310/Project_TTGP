@@ -13,12 +13,11 @@ TagManager:
   - UI
   - Environment
   - Character
-  - 
+  - Damageable Character
   - 
   - 
   - DamageCollider
-  - 
-  - 
+  - Event Trigger
   - 
   - 
   - 
