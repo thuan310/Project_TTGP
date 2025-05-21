@@ -14,7 +14,8 @@ VAR PrologueState = "REQUIREMENTS_NOT_MET"
 
 = start
 ("Ugh... How long was I out?")
-("Still so much to study... Maybe just one more book.")    
+("Still so much to study... Maybe just one more book.")  
+
 ~ StartQuest(PrologueId)
 -> END
 

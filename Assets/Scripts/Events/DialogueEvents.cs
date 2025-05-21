@@ -8,6 +8,7 @@ public class DialogueEvents {
 
     public void EnterDialogue(string dialogue)
     {
+        Debug.Log("Enter dialogue for " + dialogue);
         onEnterDialogue?.Invoke(dialogue);
     }
 

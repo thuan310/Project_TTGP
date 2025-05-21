@@ -47,7 +47,6 @@ public class QuestPoint : MonoBehaviour {
 
     private void SubmitPressed(InputEventContext context)
     {
-        Debug.Log("Interacted");
 
         if (!playerIsNear || !context.Equals(InputEventContext.DEFAULT))
         {

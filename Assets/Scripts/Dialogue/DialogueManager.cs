@@ -16,6 +16,8 @@ public class DialogueManager : MonoBehaviour {
     private InkExternalFunctions inkExternalFunctions;
     private InkDialogueVariables inkDialogueVariables;
 
+
+
     private void Awake()
     {
         story = new Story(inkJson.text);
@@ -106,6 +108,7 @@ public class DialogueManager : MonoBehaviour {
 
     private void ContinueOrExitStory()
     {
+
         if (story.currentChoices.Count > 0 && currentChoiceIndex != -1)
         {
             story.ChooseChoiceIndex(currentChoiceIndex);
@@ -115,6 +118,15 @@ public class DialogueManager : MonoBehaviour {
         if (story.canContinue)
         {
             string dialogueLine = story.Continue();
+            
+     
+            if (story.currentTags.Count > 0)
+            {
+                foreach (string tag in story.currentTags)
+                {
+                    HandleTag(tag);
+                }
+            }
 
             while (IsLineBlank(dialogueLine) && story.canContinue)
             {
@@ -157,4 +169,28 @@ public class DialogueManager : MonoBehaviour {
     {
         return dialogueLine.Trim().Equals("") || dialogueLine.Trim().Equals("\n");
     }
+
+
+    private void HandleTag(string tag)
+    {
+        if (tag.StartsWith("timeline:"))
+        {
+            string timelineName = tag.Substring("timeline:".Length).Trim();
+            TimelineManager.instance.PlayTimeline(timelineName);
+        }
+        else if (tag == "continue")
+        {
+            if (TimelineManager.instance.IsTimeLinePlaying())
+            {
+                TimelineManager.instance.SkipToNextPause();
+                TimelineManager.instance.ResumeTimeline();
+            }
+            else
+            {
+                TimelineManager.instance.ResumeTimeline();
+
+            }
+        }
+    }
+
 }

@@ -49,9 +49,9 @@ public class CharacterLocomotionManager : MonoBehaviour {
         }
 
         //there should always be some force applied to the y velocity
-        Debug.Log("Before Move: " + character.characterController.transform.position);
+        //Debug.Log("Before Move: " + character.characterController.transform.position);
         character.characterController.Move(yVelocity * Time.deltaTime);
-        Debug.Log("After Move: " + character.characterController.transform.position);
+        //Debug.Log("After Move: " + character.characterController.transform.position);
         originPosition = character.transform.position;
 
     }
