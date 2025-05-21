@@ -6,7 +6,6 @@ using UnityEngine.InputSystem.Interactions;
 public class PlayerLocomotionManager : CharacterLocomotionManager
 {
     PlayerManager player;
-    TreeChopSimulator treeChopSimulator;
 
 
     [SerializeField] float verticalMovement;
@@ -40,7 +39,6 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
     protected override void Awake()
     {
         base.Awake();
-        treeChopSimulator= GetComponent<TreeChopSimulator>();
         player = GetComponent<PlayerManager>();
     }
     protected override void Update()
@@ -59,8 +57,8 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
     }
     private void GetMovementValues()
     {
-        verticalMovement = PlayerInputManager.instance.verticaInput_Values;
-        horizontalMovement = PlayerInputManager.instance.horizontalInput_Values;
+        verticalMovement = PlayerInputManager.instance.vertical_Input;
+        horizontalMovement = PlayerInputManager.instance.horizontal_Input;
         moveAmount = PlayerInputManager.instance.moveAmount;
     }
     
@@ -87,6 +85,7 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         }
         else
         {
+            //print("dang chay");
             if (moveAmount > 0.5f)
             {
                 player.characterController.Move(moveDirection * runningSpeed * Time.deltaTime);
@@ -114,8 +113,8 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         {
             Vector3 freeFallDirection;
 
-            freeFallDirection = PlayerCamera.instance.transform.forward * PlayerInputManager.instance.verticaInput_Values;
-            freeFallDirection += freeFallDirection + PlayerCamera.instance.transform.right * PlayerInputManager.instance.horizontalInput_Values;
+            freeFallDirection = PlayerCamera.instance.transform.forward * PlayerInputManager.instance.vertical_Input;
+            freeFallDirection += freeFallDirection + PlayerCamera.instance.transform.right * PlayerInputManager.instance.horizontal_Input;
             freeFallDirection.y = 0;
 
             player.characterController.Move(freeFallDirection * freeFallSpeed * Time.deltaTime);
@@ -124,27 +123,64 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
 
     private void HandleRotation()
     {
+        if(player.isDead.Value)
+            return;
         if (!player.canRotate)
         {
             return;
         }
 
-        targetRotationDirection = Vector3.zero;
-        targetRotationDirection = PlayerCamera.instance.cameraObject.transform.forward * verticalMovement;
-        targetRotationDirection = targetRotationDirection + PlayerCamera.instance.cameraObject.transform.right * horizontalMovement;
-        targetRotationDirection.Normalize();
-        targetRotationDirection.y = 0;
-        //print(PlayerCamera.instance.cameraObject.transform.forward);
-
-        if (targetRotationDirection == Vector3.zero)
+        if(player.isLockedOn.Value)
         {
-            targetRotationDirection = transform.forward;
-        }
+            if(player.isSprinting.Value || player.playerLocomotionManager.isRolling)
+            {
+                Vector3 targetDirection = Vector3.zero;
+                targetDirection = PlayerCamera.instance.cameraObject.transform.forward * verticalMovement;
+                targetDirection += PlayerCamera.instance.cameraObject.transform.right * horizontalMovement;
+                targetDirection.Normalize();
+                targetDirection.y = 0; 
 
-        Quaternion newRotation = Quaternion.LookRotation(targetRotationDirection);
-        //print(newRotation.eulerAngles);
-        Quaternion targetRotation = Quaternion.Slerp(transform.rotation, newRotation, rotationSpeed * Time.deltaTime);
-        transform.rotation = targetRotation;
+                if (targetDirection == Vector3.zero)
+                    targetDirection = transform.forward;
+
+                Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
+                Quaternion finalRotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+                transform.rotation = finalRotation;
+            }
+            else
+            {
+                if (player.playerCombatManager.currentTarget == null)
+                    return;
+
+                Vector3 targetDirection;
+                targetDirection = player.playerCombatManager.currentTarget.transform.position - transform.position;
+                targetDirection.y = 0;
+                targetDirection.Normalize();
+
+                Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
+                Quaternion finalRotation = Quaternion.Slerp(transform.rotation,targetRotation, rotationSpeed * Time.deltaTime);
+                transform.rotation = finalRotation;
+            }
+        }
+        else
+        {
+            targetRotationDirection = Vector3.zero;
+            targetRotationDirection = PlayerCamera.instance.cameraObject.transform.forward * verticalMovement;
+            targetRotationDirection = targetRotationDirection + PlayerCamera.instance.cameraObject.transform.right * horizontalMovement;
+            targetRotationDirection.Normalize();
+            targetRotationDirection.y = 0;
+            //print(PlayerCamera.instance.cameraObject.transform.forward);
+
+            if (targetRotationDirection == Vector3.zero)
+            {
+                targetRotationDirection = transform.forward;
+            }
+
+            Quaternion newRotation = Quaternion.LookRotation(targetRotationDirection);
+            //print(newRotation.eulerAngles);
+            Quaternion targetRotation = Quaternion.Slerp(transform.rotation, newRotation, rotationSpeed * Time.deltaTime);
+            transform.rotation = targetRotation;
+        }
     }
 
     public void HandleSprinting()
@@ -196,8 +232,8 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         if (PlayerInputManager.instance.moveAmount > 0)
         {
             //print("dodge one time");
-            rollDirection = PlayerCamera.instance.cameraObject.transform.forward * PlayerInputManager.instance.verticaInput_Values;
-            rollDirection += PlayerCamera.instance.cameraObject.transform.right * PlayerInputManager.instance.horizontalInput_Values;
+            rollDirection = PlayerCamera.instance.cameraObject.transform.forward * PlayerInputManager.instance.vertical_Input;
+            rollDirection += PlayerCamera.instance.cameraObject.transform.right * PlayerInputManager.instance.horizontal_Input;
             rollDirection.y = 0;
             rollDirection.Normalize();
 
@@ -208,6 +244,7 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
             //print("Roll");
             //print(player.playerAnimatorManager);
             player.playerAnimatorManager.PlayTargetActionAnimation("Male_Rolling_F", true, true);
+            player.playerLocomotionManager.isRolling = true;
 
         }
         // if we are stationary, we perform a backstep
@@ -244,8 +281,8 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
 
         player.currentStamina.Value -= jumpStaminaCost;
 
-        jumpDirection = PlayerCamera.instance.cameraObject.transform.forward * PlayerInputManager.instance.verticaInput_Values;
-        jumpDirection += PlayerCamera.instance.cameraObject.transform.right * PlayerInputManager.instance.horizontalInput_Values;
+        jumpDirection = PlayerCamera.instance.cameraObject.transform.forward * PlayerInputManager.instance.vertical_Input;
+        jumpDirection += PlayerCamera.instance.cameraObject.transform.right * PlayerInputManager.instance.horizontal_Input;
         jumpDirection.y = 0;
 
         if (jumpDirection != Vector3.zero)

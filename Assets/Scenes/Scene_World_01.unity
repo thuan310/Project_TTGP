@@ -1813,6 +1813,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerUIHUDManager: {fileID: 0}
   playerUIDynamicHUDManager: {fileID: 0}
+  playerUIPopUpManager: {fileID: 0}
 --- !u!114 &2537910082430018709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1825,6 +1826,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb70b92dc8c635e43805689e875e7caa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthBar: {fileID: 0}
   staminaBar: {fileID: 8361756708660217015}
 --- !u!1 &2617721686123609788
 GameObject:
@@ -2294,6 +2296,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42c9a2e061d00dc4b86e8d7f97716881, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scaleBarLengthWithStats: 1
+  widthScaleMultiplier: 1
 --- !u!224 &8415756519071144308
 RectTransform:
   m_ObjectHideFlags: 0

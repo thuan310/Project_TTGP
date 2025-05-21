@@ -1,18 +1,47 @@
+﻿using NUnit.Framework.Constraints;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PlayerManager : CharacterManager
 {
+    //                       _oo0oo_
+    //                      o8888888o
+    //                      88" . "88
+    //                      (| -_- |)
+    //                      0\  =  /0
+    //                    ___/`---'\___
+    //                  .' \\|     |// '.
+    //                 / \\|||  :  |||// \
+    //                / _||||| -:- |||||- \
+    //               |   | \\\  -  /// |   |
+    //               | \_|  ''\---/''  |_/ |
+    //               \  .-\__  '-'  ___/-. /
+    //             ___'. .'  /--.--\  `. .'___
+    //          ."" '<  `.___\_<|>_/___.' >' "".
+    //         | | :  `- \`.;`\ _ /`;.`/ - ` : | |
+    //         \  \ `_.   \_ __\ /__ _/   .-` /  /
+    //     =====`-.____`.___ \_____/___.-`___.-'=====
+    //                       `=---='
+    //
+    //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    //            Phật phù hộ, không bao giờ BUG
+    //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
     public Observable<string> playerName;
 
-    [Header("Debug menu")]
-    [SerializeField] bool respawnCharcter = false;
+    //[Header("Debug menu")]
+    //[SerializeField] bool respawnCharcter = false;
+    //[SerializeField] bool switchRightWeapon = false;
+
 
     [HideInInspector] public PlayerAnimatorManager playerAnimatorManager;
     [HideInInspector] public PlayerLocomotionManager playerLocomotionManager;
     [HideInInspector] public PlayerStatsManager playerStatsManager;
     [HideInInspector] public PlayerDetectArea playerDetectArea;
+    [HideInInspector] public PlayerInventoryManager playerInventoryManager;
+    [HideInInspector] public PLayerEquipmentManager playerEquipmentManager;
+    [HideInInspector] public PlayerCombatManager playerCombatManager;
 
     protected override void Awake()
     {
@@ -22,17 +51,36 @@ public class PlayerManager : CharacterManager
         playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
         playerStatsManager = GetComponent<PlayerStatsManager>();
         playerDetectArea = GetComponentInChildren<PlayerDetectArea>();
+        playerInventoryManager = GetComponent<PlayerInventoryManager>();
+        playerEquipmentManager = GetComponent<PLayerEquipmentManager>();
+        playerCombatManager = GetComponent<PlayerCombatManager>();
 
     }
-    private void Start()
+    protected override void Start()
     {
-        PlayerInputManager.instance.player = this;
-        playerDetectArea.player = this;
-
         if (!PlayerInputManager.instance.isTesting)
         {
             WorldSaveGameManager.instance.player = this;
+            PlayerInputManager.instance.player = this;
+            PlayerCamera.instance.player = this;
             playerDetectArea.enabled = false;
+        }
+
+        base.Start();
+        playerDetectArea.player = this;
+
+        if (!isDummy)
+        {
+            if (PlayerInputManager.instance.isTesting)
+            {
+                PlayerInputManager.instance.player = this;
+                PlayerCamera.instance.player = this;
+                //PlayerCamera.instance.SetCameraToFollowPlayer();
+                if (PlayerInputManager.instance.playerControls != null)
+                {
+                    PlayerInputManager.instance.playerControls.Enable();
+                }
+            }
         }
         SetUp();
 
@@ -52,11 +100,57 @@ public class PlayerManager : CharacterManager
         currentStamina.OnValueChanged += playerStatsManager.ResetStaminaRegenTimer;
         // This will be moved when saving and loading is added
 
+        // stats
         currentHealth.OnValueChanged += CheckHp;
+
+        // LockOn
+        isLockedOn.OnValueChanged += OnIsLockedOnChanged;
+        //currentargetNetworkObjectID.OnValueChanged += OnLockOnTargetIDChange;
+
+        // equipment
+        currentRightHandWeaponID.OnValueChanged += OnCurrentRightHandWeaponIDChange;
+        currentLeftHandWeaponID.OnValueChanged += OnCurrentLeftHandWeaponIDChange;
+        currentWeaponBeingUsed.OnValueChanged += OnCurrentWeaponBeingUsedIDChanged;
+
+        // flags
+        isCharingingAttack.OnValueChanged += OnIsChargingAttackChanged;
 
         vitality.Value = 10;
         endurance.Value = 10;
-}
+    }
+
+    public void OnRemove()
+    {
+        //print("Dang tinh lai Mana");
+        //Update the total amount of health or stamina when the stat linked to either changes
+        vitality.OnValueChanged -= SetNewMaxHealthValue;
+        endurance.OnValueChanged -= SetNewMaxStaminaValue;
+
+        //updates UI stat bars when a stat changes(health or stamina
+        currentHealth.OnValueChanged -= PlayerUIManager.instance.playerUIHUDManager.SetNewHealthValue;
+
+        currentStamina.OnValueChanged -= PlayerUIManager.instance.playerUIHUDManager.SetNewStaminaValue;
+        currentStamina.OnValueChanged -= playerStatsManager.ResetStaminaRegenTimer;
+        // This will be moved when saving and loading is added
+
+        // stats
+        currentHealth.OnValueChanged -= CheckHp;
+
+        // LockOn
+        isLockedOn.OnValueChanged -= OnIsLockedOnChanged;
+        //currentargetNetworkObjectID.OnValueChanged += OnLockOnTargetIDChange;
+
+        // equipment
+        currentRightHandWeaponID.OnValueChanged -= OnCurrentRightHandWeaponIDChange;
+        currentLeftHandWeaponID.OnValueChanged -= OnCurrentLeftHandWeaponIDChange;
+        currentWeaponBeingUsed.OnValueChanged -= OnCurrentWeaponBeingUsedIDChanged;
+
+        // flags
+        isCharingingAttack.OnValueChanged -= OnIsChargingAttackChanged;
+
+        vitality.Value = 0;
+        endurance.Value = 0;
+    }
 
     protected override void Update()
     {
@@ -65,22 +159,23 @@ public class PlayerManager : CharacterManager
         //    return;
         //}
         //testing for some property cause my custom observer is suck
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !isDummy)
         {
-            currentHealth.Value = 0;
+            //currentHealth.Value = 0;
         }
 
         base.Update();
 
         if(PlayerInputManager.instance.isActiveAndEnabled)
         {
+            if (!isDummy)
+            {
+                playerLocomotionManager.HandleAllMovement();
+            }
             //handle movement
-            playerLocomotionManager.HandleAllMovement();
 
             // Regen Stamina
             playerStatsManager.RegenerateStamina();
-
-            DebugMenu();
         }
 
     }
@@ -95,7 +190,10 @@ public class PlayerManager : CharacterManager
 
     public override void ReviveCharacter()
     {
+        if(isDummy) 
+            return;
         base.ReviveCharacter();
+        isDead.Value = false;
 
         currentHealth.Value = maxHealth.Value;
         currentStamina.Value = maxStamina.Value;
@@ -141,16 +239,20 @@ public class PlayerManager : CharacterManager
         PlayerUIManager.instance.playerUIHUDManager.SetMaxStaminaValue(maxStamina.Value);
     }
 
-    // Debug delete later
-    private void DebugMenu()
+    //
+    public void SetCharcterActionHand(bool rightHandedAction)
     {
-        if ( respawnCharcter)
+        if (rightHandedAction)
         {
-            respawnCharcter = false;
-            ReviveCharacter();
+            isUsingLeftHand.Value = false;
+            isUsingRightHand.Value = true;
+        }
+        else
+        {
+            isUsingLeftHand.Value = true;
+            isUsingRightHand.Value = false; 
         }
     }
-
     public void SetNewMaxHealthValue(int oldVitality, int newVitality)
     {
         //print("tinh lai mau");
@@ -164,6 +266,62 @@ public class PlayerManager : CharacterManager
         maxStamina.Value = playerStatsManager.CalculateStaminaBasedOnEnduranceLevel(newEndurance);
         PlayerUIManager.instance.playerUIHUDManager.SetMaxStaminaValue(maxStamina.Value);
         currentStamina.Value = maxStamina.Value;
+    }
+
+    public void OnCurrentRightHandWeaponIDChange(int oldID, int newID)
+    {
+        WeaponItem newWeapon = Instantiate(WorldItemDatabase.instance.GetWeaponByID(newID));
+        playerInventoryManager.currentRightHandWeapon = newWeapon;
+        playerEquipmentManager.LoadRightWeapon();
+
+        PlayerUIManager.instance.playerUIHUDManager.SetRightWeaponQuickSLotICon(newID);
+    }
+
+    public void OnCurrentLeftHandWeaponIDChange(int oldID, int newID)
+    {
+        WeaponItem newWeapon = Instantiate(WorldItemDatabase.instance.GetWeaponByID(newID));
+        playerInventoryManager.currentLeftHandWeapon = newWeapon;
+        playerEquipmentManager.LoadLeftWeapon();
+
+        PlayerUIManager.instance.playerUIHUDManager.SetLeftWeaponQuickSLotICon(newID);
+    }
+
+    public void OnCurrentWeaponBeingUsedIDChanged(int oldID, int newID)
+    {
+        WeaponItem newWeapon = Instantiate(WorldItemDatabase.instance.GetWeaponByID(newID));
+        playerCombatManager.currentWeaponBeingUsed = newWeapon;
+    }
+
+    //public void PerformWeaponBasedAction(int actionID, int weaponID)
+    //{
+    //    WeaponItemAction weaponAction = WorldActionManager.instance.GetWeaponItemActionByID(actionID);
+
+    //    if (weaponAction != null)
+    //    {
+    //        weaponAction.AttemptToPerformAction(this, WorldItemDatabase.instance.GetWeaponByID(weaponID));
+    //    }
+    //    else
+    //    {
+    //        Debug.LogError("Action is null, cannot be performed");
+    //    }
+    //}
+
+    //public void OnLockOnTargetIDChange(ulong oldID, ulong newID)
+    //{
+    //    //characterCombatManager.currentTarget = Net
+    //}
+
+    public void OnIsLockedOnChanged(bool old, bool isLockedOn)
+    {
+        if(!isLockedOn)
+        {
+            characterCombatManager.currentTarget = null;
+        }
+    }
+
+    public void OnIsChargingAttackChanged(bool oldStatus, bool newStatus)
+    {
+        animator.SetBool("isChargingAttack", isCharingingAttack.Value);
     }
 
 

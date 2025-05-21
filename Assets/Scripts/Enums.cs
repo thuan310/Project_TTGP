@@ -19,3 +19,31 @@ public enum CharacterSlot
     CharacterSlot_10,
     NO_SLOT
 }
+
+public enum CharacterGroup
+{
+    Team_01,
+    Team_02, 
+
+}
+
+public enum WeaponModeSLot
+{
+    RightHand,
+    LeftHand,
+    // Right hips
+    // Left hips
+    // Back
+}
+
+// this is used to calculate damage based on attackType
+public enum AttackType
+{
+    LightAttack01,
+    LightAttack02,
+    LightAttack03,
+    HeavyAttack01,
+    HeavyAttack02,
+    ChargedAttack01,
+    ChargedAttack02,
+}

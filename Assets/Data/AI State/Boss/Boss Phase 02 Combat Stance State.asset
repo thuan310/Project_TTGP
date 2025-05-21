@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c5f81ad6bf91f94fac8594eaf836041, type: 3}
+  m_Name: Boss Phase 02 Combat Stance State
+  m_EditorClassIdentifier: 
+  aiCharacterAttacks:
+  - {fileID: 11400000, guid: 8f2109165f108dc479419c17a6f82208, type: 2}
+  - {fileID: 11400000, guid: 4229cdeb7e481ca4ab854c24c68ded75, type: 2}
+  - {fileID: 11400000, guid: 284a2697ea9b951418bcdc4f1f8525ee, type: 2}
+  - {fileID: 11400000, guid: b2d5195501a525842ad304bad2ce4fa3, type: 2}
+  canPerformCombo: 0
+  chanceToPerformCombo: 25
+  maximumEngagementDistance: 5
