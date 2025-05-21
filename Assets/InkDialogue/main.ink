@@ -4,5 +4,5 @@ EXTERNAL FinishQuest(questId)
 EXTERNAL FinishQuestStep(questId)
 
 INCLUDE prologue.ink
-
+INCLUDE village.ink
 

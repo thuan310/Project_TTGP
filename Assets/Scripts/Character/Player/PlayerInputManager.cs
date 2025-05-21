@@ -131,6 +131,15 @@ public class PlayerInputManager : MonoBehaviour
         }
     }
 
+    private void OnDisable()
+    {
+        if (playerControls != null)
+        {
+            playerControls.Disable();
+        }
+    }
+
+
     private void OnEnable()
     {
         if (playerControls == null)
@@ -169,13 +178,13 @@ public class PlayerInputManager : MonoBehaviour
 
             playerControls.Player.Interact.performed += i =>
             {
-                Debug.Log("E key pressed in PlayerInputManager");
 
                 EventManager.instance.inputEvents.InteractPressed();
             };
 
             playerControls.Player.ToggleQuest.performed += i =>
             {
+
                 EventManager.instance.inputEvents.ToggleQuestPressed();
             };
 

@@ -1,9 +1,8 @@
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 
-public class CharacterLocomotionManager : MonoBehaviour
-{
-    public CharacterManager character;
+public class CharacterLocomotionManager : MonoBehaviour {
+    CharacterManager character;
 
     [Header("Ground Check & Jumping")]
     [SerializeField] protected float gravityForce = -5.55f;
@@ -18,6 +17,7 @@ public class CharacterLocomotionManager : MonoBehaviour
     [Header("Flags")]
     public bool isRolling = false;
 
+    private Vector3 originPosition; 
     protected virtual void Awake()
     {
         character = GetComponent<CharacterManager>();
@@ -45,21 +45,60 @@ public class CharacterLocomotionManager : MonoBehaviour
                 yVelocity.y = fallStartYVelocity;
             }
 
-            inAirTimer = inAirTimer+ Time.deltaTime;
+            inAirTimer = inAirTimer + Time.deltaTime;
             character.animator.SetFloat("InAirTimer", inAirTimer);
 
             yVelocity.y += gravityForce * Time.deltaTime;
         }
 
         //there should always be some force applied to the y velocity
+        //Debug.Log("Before Move: " + character.characterController.transform.position);
         character.characterController.Move(yVelocity * Time.deltaTime);
+        //Debug.Log("After Move: " + character.characterController.transform.position);
+        originPosition = character.transform.position;
+
     }
 
+
+    public float sphereOffset = 2f;
     protected void HandleGroundCheck()
     {
         character.isGrounded = Physics.CheckSphere(character.transform.position, groundCheckSphereRaidus, groundLayer);
         //print(Physics.CheckSphere(character.transform.position, groundCheckSphereRaidus, groundLayer));
+
+        //Vector3 origin = character.transform.position + Vector3.up * sphereOffset; // Start ray slightly above feet
+        //character.isGrounded = Physics.CheckSphere(origin, groundCheckSphereRaidus, groundLayer);
+        ////float rayDistance = 3.0f; // Adjust based on character height and tolerance
+
+        ////character.isGrounded = Physics.Raycast(origin, Vector3.down, rayDistance, groundLayer);
+        //Debug.Log(character.isGrounded);
+        ////Debug.DrawRay(origin, Vector3.down * rayDistance, Color.red, 2f);
+        ///
+
+
+        float sphereCastOffset = 1f;         // Start height above feet
+        float groundCheckSphereRadius = 1f;  // Radius of the sphere
+        float groundCheckDistance = 0.6f;
+        Vector3 origin = originPosition + Vector3.up * sphereCastOffset;
+        Vector3 direction = Vector3.down;
+
+        character.isGrounded = Physics.SphereCast(
+            origin,
+            groundCheckSphereRadius,
+            direction,
+            out RaycastHit hit,
+            groundCheckDistance,
+            groundLayer
+        );
+        //Debug.DrawRay(origin, direction * groundCheckDistance, Color.black, 0.1f);
+
+        //Debug.Log(origin);
+        //Debug.Log(character.isGrounded);
+
+
+
     }
+
 
     // draws our ground check sphere in scene view 
     protected void OnDrawGizmosSelected()
@@ -80,4 +119,5 @@ public class CharacterLocomotionManager : MonoBehaviour
     {
         character.canRotate = false;
     }
+
 }
