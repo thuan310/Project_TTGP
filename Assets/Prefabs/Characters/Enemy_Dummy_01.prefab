@@ -568,7 +568,7 @@ MonoBehaviour:
     _value: 0
   isInteracting: 0
   isActive:
-    _value: 0
+    _value: 1
   currentWeaponBeingUsed:
     _value: 0
   currentRightHandWeaponID:
@@ -592,6 +592,7 @@ MonoBehaviour:
   endurance:
     _value: 10
   isDummy: 0
+  characterName: 
   aiCharacterCombatManager: {fileID: 0}
   aiCharacterLocomotionManager: {fileID: 0}
   navMeshAgent: {fileID: 0}
@@ -625,6 +626,7 @@ MonoBehaviour:
   backward_Medium_Damage: []
   left_Medium_Damage: []
   right_Medium_Damage: []
+  speed: 1
 --- !u!114 &7986553697924213258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -646,6 +648,7 @@ MonoBehaviour:
   groundedYVelocity: -20
   fallStartYVelocity: -5
   isRolling: 0
+  sphereOffset: 2
 --- !u!114 &1068505170180441417
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -748,6 +751,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: ec37c89a97a3a194d98cecd9bb3a61d5, type: 3}
   - {fileID: 8300000, guid: 5db80d54d2dafd348b6cae53c6d9924a, type: 3}
   - {fileID: 8300000, guid: 37f1bb4806a676249891c3249bf962a2, type: 3}
+  footSteps: []
+  footStepsDirt: []
+  footStepsStone: []
 --- !u!114 &6162154732381137071
 MonoBehaviour:
   m_ObjectHideFlags: 0

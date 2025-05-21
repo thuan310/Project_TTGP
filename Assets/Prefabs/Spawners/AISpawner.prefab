@@ -1605,7 +1605,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6445579768356466358}
-  - component: {fileID: 3788718811136814428}
+  - component: {fileID: 5717563236687552476}
   m_Layer: 0
   m_Name: AISpawner
   m_TagString: Untagged
@@ -1637,7 +1637,7 @@ Transform:
   - {fileID: 2408171476728712721}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3788718811136814428
+--- !u!114 &5717563236687552476
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1646,7 +1646,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7312780386898533724}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93ec97a716895634784345de9833fa79, type: 3}
+  m_Script: {fileID: 11500000, guid: b58c4baea2c689141bdb8bc6a90a7a38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   characterGameObject: {fileID: 8264884787282394761, guid: c8eb21bfb9702be498a19be42b97a54b, type: 3}
