@@ -162,14 +162,6 @@ public class PlayerInputManager : MonoBehaviour
             playerControls.Player.Attack.performed += i => attack_Input = true;
             playerControls.Player.Quit.performed += i => quitting_Input = true;
 
-            playerControls.Player.Dodge.performed += i => 
-            {
-
-                dodgeInput = true;
-                EventManager.instance.inputEvents.ToggleQuestPressed();
-
-
-            };
             //Holding the input, sets the bool
             playerControls.Player.Sprint.performed += i => { sprint_Inpput = true; };
             // releasing the input, sets the bool to false
