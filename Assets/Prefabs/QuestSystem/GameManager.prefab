@@ -77,6 +77,7 @@ Transform:
   - {fileID: 6277153689699329256}
   - {fileID: 5420825682405736499}
   - {fileID: 4963281214999679927}
+  - {fileID: 2609275237347220771}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &182600407650447337
@@ -91,6 +92,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0271d1074c88bb641ad863dfca1bdcbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &7405450754553681992
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2609275237347220771}
+  - component: {fileID: 3950832015396200963}
+  m_Layer: 0
+  m_Name: DialogueManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2609275237347220771
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7405450754553681992}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 751457933512546479}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3950832015396200963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7405450754553681992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ba63d3f9a5b71a40a50b10303d95b16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inkJson: {fileID: 4900000, guid: 79c585668f1bbe448b074b5b4ebe81d4, type: 3}
 --- !u!1001 &1054870961292996653
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -142,6 +188,10 @@ PrefabInstance:
     - target: {fileID: 5847774679600242124, guid: d36e40cd99527e84e978dd5668275e76, type: 3}
       propertyPath: m_Name
       value: InputManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 5847774679600242124, guid: d36e40cd99527e84e978dd5668275e76, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

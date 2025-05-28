@@ -167,7 +167,6 @@ public class PlayerInputManager : MonoBehaviour
             playerControls.Player.SeekLeftLockOnTarget.performed += i => lockOn_Left_Input = true;
             playerControls.Player.SeekRightLockOnTarget.performed += i => lockOn_Right_Input = true;
 
-            playerControls.Player.Interact.performed += i => interact_Input = true;
             playerControls.Player.Attack.performed += i => attack_Input = true;
             playerControls.Player.Quit.performed += i => quitting_Input = true;
 
@@ -178,7 +177,7 @@ public class PlayerInputManager : MonoBehaviour
 
             playerControls.Player.Interact.performed += i =>
             {
-
+                interact_Input = true;
                 EventManager.instance.inputEvents.InteractPressed();
             };
 
