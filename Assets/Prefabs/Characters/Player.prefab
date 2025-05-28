@@ -201,7 +201,7 @@ GameObject:
   - component: {fileID: 9157488568303165678}
   m_Layer: 7
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -350,11 +350,12 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 1
-  groundCheckSphereRaidus: 0.3
+  groundCheckSphereRaidus: 1
   yVelocity: {x: 0, y: 0, z: 0}
   groundedYVelocity: -20
   fallStartYVelocity: -5
   isRolling: 0
+  sphereOffset: 2
   verticalMovement: 0
   horizontalMovement: 0
   moveAmount: 0
@@ -458,6 +459,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 641d4e6025e406c4885dfa1e5c73ba9b, type: 3}
   - {fileID: 8300000, guid: c61a58e3035da7b46a1dd47889d38d2b, type: 3}
   attackGrunts: []
+  footSteps: []
+  footStepsDirt: []
+  footStepsStone: []
 --- !u!114 &-8912130311746873046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -821,7 +825,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: af56a0e2e16b16a46a59fe300ae1f16d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.13
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: af56a0e2e16b16a46a59fe300ae1f16d, type: 3}
       propertyPath: m_LocalPosition.z

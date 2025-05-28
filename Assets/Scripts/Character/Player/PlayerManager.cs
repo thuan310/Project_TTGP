@@ -75,7 +75,7 @@ public class PlayerManager : CharacterManager
             {
                 PlayerInputManager.instance.player = this;
                 PlayerCamera.instance.player = this;
-                //PlayerCamera.instance.SetCameraToFollowPlayer();
+                PlayerCamera.instance.SetCameraTo(this);
                 if (PlayerInputManager.instance.playerControls != null)
                 {
                     PlayerInputManager.instance.playerControls.Enable();

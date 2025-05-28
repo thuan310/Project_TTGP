@@ -76,20 +76,20 @@ public class CharacterLocomotionManager : MonoBehaviour {
         ///
 
 
-        float sphereCastOffset = 1f;         // Start height above feet
-        float groundCheckSphereRadius = 1f;  // Radius of the sphere
-        float groundCheckDistance = 0.6f;
-        Vector3 origin = originPosition + Vector3.up * sphereCastOffset;
-        Vector3 direction = Vector3.down;
+        //float sphereCastOffset = 1f;         // Start height above feet
+        //float groundCheckSphereRadius = 1f;  // Radius of the sphere
+        //float groundCheckDistance = 0.6f;
+        //Vector3 origin = originPosition + Vector3.up * sphereCastOffset;
+        //Vector3 direction = Vector3.down;
 
-        character.isGrounded = Physics.SphereCast(
-            origin,
-            groundCheckSphereRadius,
-            direction,
-            out RaycastHit hit,
-            groundCheckDistance,
-            groundLayer
-        );
+        //character.isGrounded = Physics.SphereCast(
+        //    origin,
+        //    groundCheckSphereRadius,
+        //    direction,
+        //    out RaycastHit hit,
+        //    groundCheckDistance,
+        //    groundLayer
+        //);
         //Debug.DrawRay(origin, direction * groundCheckDistance, Color.black, 0.1f);
 
         //Debug.Log(origin);

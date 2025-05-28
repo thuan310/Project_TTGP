@@ -50,7 +50,6 @@ public class PlayerCamera : MonoBehaviour
                 Debug.LogError("CinemachineVirtualCamera reference is not set!");
                 return;
             }
-            SetCameraTo(player);
         }
     }
 

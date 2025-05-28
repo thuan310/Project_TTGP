@@ -5414,7 +5414,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6165858770794470826, guid: 01847a5ea356afe4c9e27874e785cb10, type: 3}
       propertyPath: worldSceneIndex
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7177965300836491864, guid: 01847a5ea356afe4c9e27874e785cb10, type: 3}
       propertyPath: m_Name
