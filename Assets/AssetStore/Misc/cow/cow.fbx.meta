@@ -3,7 +3,42 @@ guid: 639e2e2e2c0e3314ead546e3a2bb4531
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Eye_Black
+    second: {fileID: 2100000, guid: 9edcdfdafa514c54d8f61f630821b7d9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Eye_White
+    second: {fileID: 2100000, guid: b4c386588c5dacd449910c4225f8dcfd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hooves
+    second: {fileID: 2100000, guid: 334e4a1486e0d0d4e944a0390a6381e8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Horns
+    second: {fileID: 2100000, guid: d17900e7093d44c4f8253d9ccd1ceb0e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Main
+    second: {fileID: 2100000, guid: 39626173e257fe346b7dc1e59c26ab85, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Main_Light
+    second: {fileID: 2100000, guid: 39626173e257fe346b7dc1e59c26ab85, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Muzzle
+    second: {fileID: 2100000, guid: ca01662c892fbc64ea7214bd783a539c, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
