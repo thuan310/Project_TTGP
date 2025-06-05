@@ -464,7 +464,7 @@ MonoBehaviour:
     Enabled: 0
     DefaultMode: 2
   DefaultBlend:
-    Style: 1
+    Style: 0
     Time: 2
     CustomCurve:
       serializedVersion: 2
@@ -622,13 +622,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4808466ed069f142986c1c634238416, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  freelookCamera: {fileID: 6232033141527218034}
+  cinemachineCamera: {fileID: 0}
   player: {fileID: 0}
   cameraObject: {fileID: 7990109955864323496}
   lockOnRadius: 20
   minimumViewablAngle: -50
   maximumViewableAngle: 50
-  maximumLockOnDistance: 20
+  nearestLockOnTarget: {fileID: 0}
+  currentLockOnTarget: {fileID: 0}
+  leftLockOnTarget: {fileID: 0}
+  rightLockOnTarget: {fileID: 0}
 --- !u!1 &3242758439543804257
 GameObject:
   m_ObjectHideFlags: 0
