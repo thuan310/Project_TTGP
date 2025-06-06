@@ -88,4 +88,9 @@ public class PlayerUIManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    private void Update()
+    {
+        playerUIDynamicHUDManager.ControlUI();
+    }
+
 }

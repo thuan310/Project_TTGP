@@ -15,6 +15,12 @@ public class WorldSoundFXManager : MonoBehaviour
     [Header("Action Sounds")] 
     public AudioClip rollSFX;
 
+    [Header("Cat Spawn Sounds")]
+    public AudioClip catSpawnSFX;
+
+    [Header("Magic")]
+    public AudioClip sparkle;
+
     private void Awake()
     {
         if (instance == null)

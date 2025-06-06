@@ -44,7 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2eb94dcf1d19ee940b36df5e6b089702, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bossIntroPlayer: {fileID: 0}
+  bossLoopPlayer: {fileID: 0}
   physicalDamageSFX:
   - {fileID: 8300000, guid: 7cbd6cd765888ff418d01d98bd1ce9c2, type: 3}
   - {fileID: 8300000, guid: 3df9bbbc130ccb344af5f3fc793a630f, type: 3}
   rollSFX: {fileID: 8300000, guid: 5c79074bed9f45a489745ecca5a7e480, type: 3}
+  catSpawnSFX: {fileID: 8300000, guid: 38422e706e79ffe41bafe0eee5e8e60c, type: 3}
+  sparkle: {fileID: 8300000, guid: e1d3635c9734fae408700a1fd0775286, type: 3}

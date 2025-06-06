@@ -9,11 +9,14 @@ EditorBuildSettings:
     path: Assets/Scenes/Scene_MainMenu_01.unity
     guid: 9d087ec44bea0f343bb67b370459d94d
   - enabled: 1
-    path: Assets/Scenes/Scene_World_01.unity
+    path: Assets/Scenes/Scene_World_01_ThuVien.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
     path: Assets/Scenes/Scene_World_02.unity
     guid: f8ee5991ebebab84bad8d2e3662f7883
+  - enabled: 1
+    path: Assets/Scenes/Scene_BookMenu.unity
+    guid: 8f8fef043640ec04493478382887ada8
   - enabled: 1
     path: Assets/Scenes/ChopTreeTest.unity
     guid: eeefe04d3ff9cb14fa77ca91655e4053

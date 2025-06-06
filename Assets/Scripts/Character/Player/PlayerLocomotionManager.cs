@@ -315,92 +315,21 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
     }
 
     //Attack Part
-    public void AttemptToAttack()
-    {
-        switch(PlayerInputManager.instance.action)
-        {
-            default:
-                break;
-            case PlayerInputManager.Action.Normal:
-                player.playerAnimatorManager.PlayTargetActionAnimation("SwingAxe", true, true);
-                StartCoroutine(AnimationEvent_OnHit());
-                return;
-            case PlayerInputManager.Action.ChopTree:
-                if (PlayerUIManager.instance.playerUIDynamicHUDManager.treeChopMinigame_UI.GetComponentInChildren<ProgressBar>().CheckIfValided())
-                {
-                    player.playerAnimatorManager.PlayTargetActionAnimation("SwingAxe", true, true,false,false);
-                    StartCoroutine(AnimationEvent_OnHit());
-                }
-                else
-                {
-                   PlayerUIManager.instance.playerUIDynamicHUDManager.treeChopMinigame_UI.GetComponentInChildren<CheckBox>().TickColor();
-                }
-                return;
-            case PlayerInputManager.Action.LogSharpening:
-                if (PlayerUIManager.instance.playerUIDynamicHUDManager.logSharpeningMinigame_UI.GetComponentInChildren<ProgressBar>().CheckIfValided())
-                {
-                    player.playerAnimatorManager.PlayTargetActionAnimation("SwingAxe", true, true, false, false);
-                    Vector3 colliderSize = Vector3.one * 0.3f;
-                    Collider[] colliderArray = Physics.OverlapBox(hitArea.transform.position, colliderSize);
-                    //print(colliderArray[0]);
-                    foreach (Collider collider in colliderArray)
-                    {
-                        //print(collider.name);
-                        if (collider.GetComponent<SharpingTable>() != null)
-                        {
-                            collider.GetComponent<SharpingTable>().SharpLog();
-                        }
-
-                        //sharpingTable.SharpLog();
-
-                    }
-                }
-                else
-                {
-                    PlayerUIManager.instance.playerUIDynamicHUDManager.logSharpeningMinigame_UI.GetComponentInChildren<CheckBox>().TickColor();
-                }
-                return ;
-        }
-        
-    }
-
-    IEnumerator AnimationEvent_OnHit()
-    {
-        //Find objects in Hit area
-        Vector3 colliderSize = Vector3.one * 0.3f;
-        Collider[] colliderArray = Physics.OverlapBox(hitArea.transform.position, colliderSize);
-        //print(colliderArray[0]);
-        foreach (Collider collider in colliderArray)
-        {
-           
-            IDamageable attackableObject = collider.GetComponentInParent<IDamageable>();
-            if (attackableObject == null)
-            {
-                continue;
-            }
-            SharpingTable sharpingTable = collider.GetComponentInParent<SharpingTable>();
-            print("hit");
-            attackableObject.Damage();
-           
-        }
-        yield return new WaitForSeconds(0.5f);
-    }
     //Interact part
     public void AttemptInteract()
     {
-        switch (PlayerInputManager.instance.action)
+        switch (MinigameInputManager.instance.action)
         {
             default:
                 break;
-            case PlayerInputManager.Action.Normal:
+            case PLayerAction.Normal:
                 if (player.playerDetectArea.interactableObject != null )
                 {
                     //print(player.playerDetectArea.interactableObject);
                     player.playerDetectArea.interactableObject.OnInteracted();
-
                 }
                 return;
-            case PlayerInputManager.Action.ChopTree:
+            case PLayerAction.ChopTree:
                 // check if playing animation
                 if (player.isPerformingAction)
                 {
@@ -408,7 +337,7 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
                 }
                 PlayerUIManager.instance.playerUIDynamicHUDManager.treeChopMinigame_UI.GetComponentInChildren<ProgressBar>().AddValue();
                 return;
-            case PlayerInputManager.Action.CarrySomething:
+            case PLayerAction.CarrySomething:
                 // check if playing animation
                 if (player.isPerformingAction)
                 {
@@ -421,9 +350,11 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
     //Escape part
     public void AttemptingQuitting()
     {
-        if(PlayerInputManager.instance.action != PlayerInputManager.Action.Normal)
+        if(MinigameInputManager.instance.action != PLayerAction.Normal)
         {
-            PlayerInputManager.instance.action = PlayerInputManager.Action.Normal;
+            MinigameInputManager.instance.action = PLayerAction.Normal;
+            MinigameInputManager.instance.enabled = false;
+            PlayerInputManager.instance.enabled = true;
             player.canMove = true;
         }
 
@@ -431,7 +362,7 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
 
     public void HandlePickUpLog()
     {
-        if (PlayerInputManager.instance.action != PlayerInputManager.Action.CarrySomething) 
+        if (MinigameInputManager.instance.action != PLayerAction.CarrySomething) 
         {
             return;
         }

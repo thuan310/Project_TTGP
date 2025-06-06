@@ -45,9 +45,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  movementInput: {x: 0, y: 0}
-  verticaInput_Values: 0
-  horizontalInput_Values: 0
-  dodgeInput: 0
-  sprintInpput: 0
+  playerDetectArea: {fileID: 0}
+  isTesting: 1
+  lockOn_Input: 0
+  lockOn_Left_Input: 0
+  lockOn_Right_Input: 0
+  movement_Input: {x: 0, y: 0}
+  vertical_Input: 0
+  horizontal_Input: 0
+  dodge_Input: 0
+  sprint_Inpput: 0
+  jump_Input: 0
+  interact_Input: 0
+  attack_Input: 0
+  quitting_Input: 0
+  switch_Right_Weapon_Input: 0
+  switch_Left_Weapon_Input: 0
+  RB_Input: 0
+  RT_Input: 0
+  hold_RT_Input: 0
+  action: 0
   moveAmount: 0

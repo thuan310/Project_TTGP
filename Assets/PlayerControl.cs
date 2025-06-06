@@ -422,17 +422,6 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""b3c1c7f0-bd20-4ee7-a0f1-899b24bca6d7"",
-                    ""path"": ""<Keyboard>/enter"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Attack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""cbac6039-9c09-46a1-b5f2-4e5124ccb5ed"",
                     ""path"": ""<Keyboard>/2"",
                     ""interactions"": """",
@@ -709,7 +698,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""b5b3f217-a0ba-4998-9d74-a2aa93175302"",
-                    ""path"": ""<Keyboard>/tab"",
+                    ""path"": ""<Keyboard>/backquote"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -1342,6 +1331,76 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Minigame"",
+            ""id"": ""7e66a39c-57f7-482a-a56b-d2adb5d6bf13"",
+            ""actions"": [
+                {
+                    ""name"": ""Attack"",
+                    ""type"": ""Button"",
+                    ""id"": ""f958080b-a2dd-45d1-8d33-17e47faedf20"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""ecc2f55b-be7b-416a-b9c0-c56a38329eea"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""e8c9055b-f3dc-407a-b51b-86391809dc61"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1e19ceb7-e3c6-44de-bef1-8957d79477d0"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5d651dc5-1df7-4a8d-ab48-4c84e1988419"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a66f2835-5ff8-4113-897b-8286247da633"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -1441,12 +1500,17 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
         m_UI_X = m_UI.FindAction("X", throwIfNotFound: true);
+        // Minigame
+        m_Minigame = asset.FindActionMap("Minigame", throwIfNotFound: true);
+        m_Minigame_Attack = m_Minigame.FindAction("Attack", throwIfNotFound: true);
+        m_Minigame_Interact = m_Minigame.FindAction("Interact", throwIfNotFound: true);
     }
 
     ~@PlayerControl()
     {
         UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, PlayerControl.Player.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_UI.enabled, "This will cause a leak and performance issues, PlayerControl.UI.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_Minigame.enabled, "This will cause a leak and performance issues, PlayerControl.Minigame.Disable() has not been called.");
     }
 
     public void Dispose()
@@ -1820,6 +1884,60 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         }
     }
     public UIActions @UI => new UIActions(this);
+
+    // Minigame
+    private readonly InputActionMap m_Minigame;
+    private List<IMinigameActions> m_MinigameActionsCallbackInterfaces = new List<IMinigameActions>();
+    private readonly InputAction m_Minigame_Attack;
+    private readonly InputAction m_Minigame_Interact;
+    public struct MinigameActions
+    {
+        private @PlayerControl m_Wrapper;
+        public MinigameActions(@PlayerControl wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Attack => m_Wrapper.m_Minigame_Attack;
+        public InputAction @Interact => m_Wrapper.m_Minigame_Interact;
+        public InputActionMap Get() { return m_Wrapper.m_Minigame; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(MinigameActions set) { return set.Get(); }
+        public void AddCallbacks(IMinigameActions instance)
+        {
+            if (instance == null || m_Wrapper.m_MinigameActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_MinigameActionsCallbackInterfaces.Add(instance);
+            @Attack.started += instance.OnAttack;
+            @Attack.performed += instance.OnAttack;
+            @Attack.canceled += instance.OnAttack;
+            @Interact.started += instance.OnInteract;
+            @Interact.performed += instance.OnInteract;
+            @Interact.canceled += instance.OnInteract;
+        }
+
+        private void UnregisterCallbacks(IMinigameActions instance)
+        {
+            @Attack.started -= instance.OnAttack;
+            @Attack.performed -= instance.OnAttack;
+            @Attack.canceled -= instance.OnAttack;
+            @Interact.started -= instance.OnInteract;
+            @Interact.performed -= instance.OnInteract;
+            @Interact.canceled -= instance.OnInteract;
+        }
+
+        public void RemoveCallbacks(IMinigameActions instance)
+        {
+            if (m_Wrapper.m_MinigameActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IMinigameActions instance)
+        {
+            foreach (var item in m_Wrapper.m_MinigameActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_MinigameActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public MinigameActions @Minigame => new MinigameActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -1900,5 +2018,10 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         void OnTrackedDevicePosition(InputAction.CallbackContext context);
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
         void OnX(InputAction.CallbackContext context);
+    }
+    public interface IMinigameActions
+    {
+        void OnAttack(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
 }

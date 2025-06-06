@@ -13,7 +13,7 @@ public class PlayerInputManager : MonoBehaviour
     public static PlayerInputManager instance;
 
     public PlayerManager player;
-    [HideInInspector] public PlayerDetectArea playerDetectArea;
+    [HideInInspector] public PlayerDetectAreaManager playerDetectArea;
 
     // Think about goals in steps
     // 1. find a way to read the values of a joy stick
@@ -45,8 +45,6 @@ public class PlayerInputManager : MonoBehaviour
     [SerializeField] bool sprint_Inpput = false;
     [SerializeField] bool jump_Input = false;
     [SerializeField] bool interact_Input = false;
-    [SerializeField] bool attack_Input = false;
-    [SerializeField] bool quitting_Input = false;
     [SerializeField] bool switch_Right_Weapon_Input = false;
     [SerializeField] bool switch_Left_Weapon_Input = false;
 
@@ -56,19 +54,6 @@ public class PlayerInputManager : MonoBehaviour
     [Header("Trigger input")]
     [SerializeField] bool RT_Input = false;
     [SerializeField] bool hold_RT_Input = false;
-
-
-
-    public enum Action
-    {
-        Normal,
-        ChopTree,
-        CarrySomething,
-        LogSharpening,
-
-    }
-    [Header("Player Action")]
-    [SerializeField] public Action action;
 
     [SerializeField] public float moveAmount;
 
@@ -115,8 +100,6 @@ public class PlayerInputManager : MonoBehaviour
             {
                 playerControls.Enable();
             }
-
-
         }
         //otherwise we must be at the main menu, diable our players controls
         // this is so our player cant move around if we enter things like a character creation menu ect
@@ -167,23 +150,15 @@ public class PlayerInputManager : MonoBehaviour
             playerControls.Player.SeekLeftLockOnTarget.performed += i => lockOn_Left_Input = true;
             playerControls.Player.SeekRightLockOnTarget.performed += i => lockOn_Right_Input = true;
 
-            playerControls.Player.Attack.performed += i => attack_Input = true;
-            playerControls.Player.Quit.performed += i => quitting_Input = true;
-
             //Holding the input, sets the bool
             playerControls.Player.Sprint.performed += i => { sprint_Inpput = true; };
             // releasing the input, sets the bool to false
             playerControls.Player.Sprint.canceled += i => { sprint_Inpput = false; };
 
-            playerControls.Player.Interact.performed += i =>
-            {
-                interact_Input = true;
-                EventManager.instance.inputEvents.InteractPressed();
-            };
+            playerControls.Player.Interact.performed += i => interact_Input = true;
 
             playerControls.Player.ToggleQuest.performed += i =>
             {
-
                 EventManager.instance.inputEvents.ToggleQuestPressed();
             };
 
@@ -198,9 +173,6 @@ public class PlayerInputManager : MonoBehaviour
             #endregion
         }
         playerControls.Enable();
-
-
-
     }
 
     private void OnApplicationFocus(bool focus)
@@ -221,7 +193,6 @@ public class PlayerInputManager : MonoBehaviour
     private void Update()
     {
         HandleAllInput();
-        ControlAction();
     }
 
     //Movement
@@ -234,8 +205,6 @@ public class PlayerInputManager : MonoBehaviour
         HandleSprintInput();
         HandleJumpInput();
         HandleInteractInput();
-        //HandleAttack();
-        HandleQuitting();
         HandleRBInput();
         HandleRTInput();
         HandleChargeRTInput();
@@ -495,57 +464,5 @@ public class PlayerInputManager : MonoBehaviour
 
     }
 
-    private void HandleAttack()
-    {
-        if (player.isPerformingAction)
-        {
-            return;
-        }
-        if (attack_Input)
-        {
-            attack_Input = false;
-            player.playerLocomotionManager.AttemptToAttack();
-        }
-    }
-
-    private void HandleQuitting()
-    {
-        if (quitting_Input)
-        {
-            quitting_Input = false;
-            player.playerLocomotionManager.AttemptingQuitting();
-        }
-    }
-
-    public void Quit()
-    {
-        player.playerLocomotionManager.AttemptingQuitting();
-    }
-
-    private void ControlAction()
-    {
-        PlayerUIManager.instance.playerUIDynamicHUDManager.ControlUI();
-        switch (action)
-        {
-            default:
-                break;
-            case Action.Normal:
-                player.isInteracting = false;
-                break;
-            case Action.ChopTree:
-                movement_Input = new Vector2(0, 0);
-                player.isInteracting = true;
-                player.canMove = false;
-                break;
-            case Action.CarrySomething:
-                player.isInteracting = true;
-                break;
-            case Action.LogSharpening:
-                movement_Input = new Vector2(0, 0);
-                player.isInteracting = true;
-                player.canMove = false;
-                break;
-        }
-    }
 
 }

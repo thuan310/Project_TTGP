@@ -13,8 +13,10 @@ VAR PrologueState = "REQUIREMENTS_NOT_MET"
 }
 
 = start
+#timeline: ThuVien
 ("Ugh... How long was I out?")
-("Still so much to study... Maybe just one more book.")  
+#continue
+("Still so much to study... Maybe just one more book.")
 
 ~ StartQuest(PrologueId)
 -> END
@@ -28,7 +30,8 @@ VAR PrologueState = "REQUIREMENTS_NOT_MET"
     (Huh, what's this?)
     (Never seen this book before)
     ~ FinishQuestStep(PrologueId)
-    
+    #continue
+    ->bookOpened
 * [Come back later]
     (Maybe I'll comeback later)
     - -> END
@@ -36,6 +39,7 @@ VAR PrologueState = "REQUIREMENTS_NOT_MET"
     
 === bookOpened ===
 Let's see what this weird book is about...
+    #continue
 AAAAAHHHHHH—! 
 Ow. That landing was less graceful than I hoped.
 W-What the— Who are you?!
@@ -45,13 +49,16 @@ Nope. You just triggered a time-binding portal. This book doesn’t just *tell* 
 Why would a book like that be here?
 That... is a long story. But I’m here to help. You and I? We're gonna make sure history stays on track.
 So, you're the one they chose?
+    #continue
 Who are you?!
+    #continue
 Just someone who’s tired of history always going the same way. Time for a rewrite.
+    #continue
 No! Stop him—!
 He’s trying to change the past. If we don’t follow him, everything could fall apart.
 Then let’s go.
-Hold on tight. This is going to get... historical.
 Before we jump in, touch the book again. It’ll open the quest menu — you'll need it where we’re going.
+
 -->END
 
 === openQuestMenu ===

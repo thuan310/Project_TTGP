@@ -38,7 +38,7 @@ public class PlayerManager : CharacterManager
     [HideInInspector] public PlayerAnimatorManager playerAnimatorManager;
     [HideInInspector] public PlayerLocomotionManager playerLocomotionManager;
     [HideInInspector] public PlayerStatsManager playerStatsManager;
-    [HideInInspector] public PlayerDetectArea playerDetectArea;
+    [HideInInspector] public PlayerDetectAreaManager playerDetectArea;
     [HideInInspector] public PlayerInventoryManager playerInventoryManager;
     [HideInInspector] public PLayerEquipmentManager playerEquipmentManager;
     [HideInInspector] public PlayerCombatManager playerCombatManager;
@@ -50,7 +50,7 @@ public class PlayerManager : CharacterManager
         playerLocomotionManager = GetComponent<PlayerLocomotionManager>();
         playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
         playerStatsManager = GetComponent<PlayerStatsManager>();
-        playerDetectArea = GetComponentInChildren<PlayerDetectArea>();
+        playerDetectArea = GetComponentInChildren<PlayerDetectAreaManager>();
         playerInventoryManager = GetComponent<PlayerInventoryManager>();
         playerEquipmentManager = GetComponent<PLayerEquipmentManager>();
         playerCombatManager = GetComponent<PlayerCombatManager>();
@@ -62,6 +62,10 @@ public class PlayerManager : CharacterManager
         {
             WorldSaveGameManager.instance.player = this;
             PlayerInputManager.instance.player = this;
+
+            MinigameInputManager.instance.player = this;
+            MinigameInputManager.instance.enabled = false;
+
             PlayerCamera.instance.player = this;
             playerDetectArea.enabled = false;
         }
@@ -69,19 +73,21 @@ public class PlayerManager : CharacterManager
         base.Start();
         playerDetectArea.player = this;
 
-        if (!isDummy)
+        if (PlayerInputManager.instance.isTesting&&!isDummy)
         {
-            if (PlayerInputManager.instance.isTesting)
+            PlayerInputManager.instance.player = this;
+
+            MinigameInputManager.instance.player = this;
+            MinigameInputManager.instance.enabled = false ;
+
+            PlayerCamera.instance.player = this;
+            PlayerCamera.instance.SetCameraTo(this);
+            if (PlayerInputManager.instance.playerControls != null)
             {
-                PlayerInputManager.instance.player = this;
-                PlayerCamera.instance.player = this;
-                PlayerCamera.instance.SetCameraTo(this);
-                if (PlayerInputManager.instance.playerControls != null)
-                {
-                    PlayerInputManager.instance.playerControls.Enable();
-                }
+                PlayerInputManager.instance.playerControls.Enable();
             }
         }
+
         SetUp();
 
     }

@@ -47,3 +47,19 @@ public enum AttackType
     ChargedAttack01,
     ChargedAttack02,
 }
+
+public enum TreeType
+{
+    Tree,
+    Log,
+    Coc
+}
+
+public enum PLayerAction
+{
+    Normal,
+    ChopTree,
+    CarrySomething,
+    LogSharpening,
+
+}

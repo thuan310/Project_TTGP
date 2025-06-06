@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerUIDynamicHUDManager : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class PlayerUIDynamicHUDManager : MonoBehaviour
     public GameObject carryLogMinigame_UI;
     public GameObject logSharpeningMinigame_UI;
     public GameObject interacted_UI;
+    public TextMeshProUGUI actionToDo;
     private void Start()
     {
         treeChopMinigame_UI.SetActive(false);
@@ -16,31 +18,32 @@ public class PlayerUIDynamicHUDManager : MonoBehaviour
 
     public void ControlUI()
     {
-        switch(PlayerInputManager.instance.action)
+        switch(MinigameInputManager.instance.action)
         {
-            case PlayerInputManager.Action.Normal:
+            case PLayerAction.Normal:
                 treeChopMinigame_UI.gameObject.SetActive(false);
                 carryLogMinigame_UI.SetActive(false);
                 logSharpeningMinigame_UI.SetActive(false);
                 return;
-            case PlayerInputManager.Action.ChopTree:
+            case PLayerAction.ChopTree:
                 interacted_UI.SetActive(false);
                 treeChopMinigame_UI.gameObject.SetActive(true);
                 return;
-            case PlayerInputManager.Action.CarrySomething:
+            case PLayerAction.CarrySomething:
                 interacted_UI.SetActive(false);
                 carryLogMinigame_UI.SetActive(true);
                 return;
-            case PlayerInputManager.Action.LogSharpening:
+            case PLayerAction.LogSharpening:
                 interacted_UI.SetActive(false);
                 logSharpeningMinigame_UI.SetActive(true);
                 return;
 
         }
     }
-    public void SetInteractableUI(bool flag)
+    public void SetInteractableUIWithAction(bool flag, string action)
     {
         interacted_UI.SetActive(flag);
+        actionToDo.text = action;
     }
 
 }

@@ -31,6 +31,6 @@ public class CheckBox : MonoBehaviour
     }
     public void OnFail()
     {
-        PlayerInputManager.instance.Quit();
+        MinigameInputManager.instance.Quit();
     }
 }

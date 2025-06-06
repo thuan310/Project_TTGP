@@ -1,0 +1,119 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5622860053576511506
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1356099140975757124}
+  - component: {fileID: 6331179724891331939}
+  - component: {fileID: 8297858662072937466}
+  - component: {fileID: 927686232236556235}
+  m_Layer: 0
+  m_Name: Timeline
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1356099140975757124
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5622860053576511506}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 66.72456, y: -65.77372, z: 44.288715}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!320 &6331179724891331939
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5622860053576511506}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 0}
+  m_InitialState: 0
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: 4379079463389732750, guid: 388cac0cc90dd7a488dd23f9ee360b9e, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -7767783202328619098, guid: 388cac0cc90dd7a488dd23f9ee360b9e, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 8019691242978972469, guid: 388cac0cc90dd7a488dd23f9ee360b9e, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -6420144015218372626, guid: 388cac0cc90dd7a488dd23f9ee360b9e, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 1428955209424844261, guid: 388cac0cc90dd7a488dd23f9ee360b9e, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 7327819973274615959, guid: 388cac0cc90dd7a488dd23f9ee360b9e, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 8230085347077978000, guid: 388cac0cc90dd7a488dd23f9ee360b9e, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -4849100146008501765, guid: 388cac0cc90dd7a488dd23f9ee360b9e, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 2065493441360414916, guid: 388cac0cc90dd7a488dd23f9ee360b9e, type: 2}
+    value: {fileID: 927686232236556235}
+  m_ExposedReferences:
+    m_References: []
+--- !u!114 &8297858662072937466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5622860053576511506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8752d94b503a93348a1419c9845c3558, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  director: {fileID: 0}
+  timelineAssets:
+  - name: Test
+    asset: {fileID: 11400000, guid: 388cac0cc90dd7a488dd23f9ee360b9e, type: 2}
+  blackScreen: {fileID: 0}
+  fadeDuration: 1
+--- !u!114 &927686232236556235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5622860053576511506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 794ae69a7e547e9408bdf97e4ac60a71, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8297858662072937466}
+          m_TargetAssemblyTypeName: TimelineManager, Assembly-CSharp
+          m_MethodName: PauseTimeline
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2

@@ -2,12 +2,12 @@ using System.Collections;
 using TMPro.Examples;
 using UnityEngine;
 
-public class Log : MonoBehaviour,IInteractableObject, IDamageable
+public class Log : IInteractableObject, IDamageable
 {
     PlayerManager player;
     private HealthSystem healthSystem;
 
-    [SerializeField] private Tree.Type treeType;
+    [SerializeField] private TreeType treeType;
     [SerializeField] private Transform coc;
 
     public Transform carryArea;
@@ -19,12 +19,12 @@ public class Log : MonoBehaviour,IInteractableObject, IDamageable
         switch (treeType)
         {
             default:
-            case Tree.Type.Tree:
+            case TreeType.Tree:
                 {
                     healthAmount = 30;
                     break;
                 }
-            case Tree.Type.Log:
+            case TreeType.Log:
                 {
                     healthAmount = 30;
                     break;
@@ -40,7 +40,7 @@ public class Log : MonoBehaviour,IInteractableObject, IDamageable
 
     public void Damage()
     {
-        if (PlayerInputManager.instance.action != PlayerInputManager.Action.LogSharpening)
+        if (MinigameInputManager.instance.action != PLayerAction.LogSharpening)
         {
             return;
         }
@@ -64,7 +64,7 @@ public class Log : MonoBehaviour,IInteractableObject, IDamageable
         {
             default:
                 break;
-            case Tree.Type.Log:
+            case TreeType.Log:
 
                 print("Spawn Coc");
                 //topTreeRb.isKinematic = false;
@@ -119,7 +119,7 @@ public class Log : MonoBehaviour,IInteractableObject, IDamageable
 
     void AttachToPlayer()
     {
-        if(PlayerInputManager.instance.action != PlayerInputManager.Action.CarrySomething)
+        if(MinigameInputManager.instance.action != PLayerAction.CarrySomething)
         {
             return;
         }
@@ -132,16 +132,19 @@ public class Log : MonoBehaviour,IInteractableObject, IDamageable
         }
         return;
     }
-    public void OnInteracted()
+    public override void OnInteracted()
     {
-        PlayerInputManager.instance.action = PlayerInputManager.Action.CarrySomething;
+        base.OnInteracted();
+        MinigameInputManager.instance.enabled = true;
+        MinigameInputManager.instance.action = PLayerAction.CarrySomething;
         OnReset();
         InvokeRepeating("AttachToPlayer", 0f,0.01f);
     }
 
-    public void OnExitInteracted()
+    public override void OnExitInteracted()
     {
-        PlayerInputManager.instance.Quit();
-        CancelInvoke("AttachToPlayer");
+        base.OnExitInteracted();
+        MinigameInputManager.instance.enabled = false;
     }
+
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SharpingTable : MonoBehaviour, IInteractableObject
+public class SharpingTable : IInteractableObject
 {
     public GameObject dropArea;
     public Vector3 colliderSize = new Vector3(1, 1, 1);
@@ -48,21 +48,24 @@ public class SharpingTable : MonoBehaviour, IInteractableObject
     {
         log.Damage();
     }
-    public void OnInteracted()
+    public override void OnInteracted()
     {
+        base.OnInteracted();
+        MinigameInputManager.instance.enabled = true;
         //print("A");
         if (dropPlace.GetComponentInChildren<Log>() != null)
         {
-            PlayerInputManager.instance.action = PlayerInputManager.Action.LogSharpening;
+            MinigameInputManager.instance.action = PLayerAction.LogSharpening;
             OnReset();
         }
     }
 
-    public void OnExitInteracted()
+    public override void OnExitInteracted()
     {
-        PlayerInputManager.instance.Quit();
-
+        base.OnExitInteracted();
+        MinigameInputManager.instance.enabled = false;
     }
+
     private void OnDrawGizmos()
     {
         if (dropArea == null) return;

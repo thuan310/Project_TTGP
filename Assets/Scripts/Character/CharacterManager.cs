@@ -96,6 +96,7 @@ public class CharacterManager : MonoBehaviour
     protected virtual void Update()
     {
         animator.SetBool("isGrounded", isGrounded);
+        //print(applyRootMotion);
     }
 
     protected virtual void FixedUpdate()

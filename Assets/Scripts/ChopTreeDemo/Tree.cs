@@ -3,20 +3,15 @@ using System.Runtime.CompilerServices;
 using UnityEditor.ShaderGraph.Serialization;
 using UnityEngine;
 
-public class Tree : MonoBehaviour, IDamageable, IInteractableObject
+public class Tree : IInteractableObject, IDamageable
 {
     //Các cuộc nghiên cứu cho thấy các cọc ở đây đa phần được làm từ gỗ lim,
     //thân dài từ 2,6 đến 2,8 mét và có đường kính khoảng 20 đến 30 cm.
     //Phần đầu cọc được đẽo nhọn để cắm xuống đáy sông dài từ 0,5 đến 1 mét
     //và khoảng cách trung bình giữa các cọc khoảng 1 mét.[13][14] Gần bãi cọc
     //có một tấm bia được dựng lên để đánh dấu và ghi nhận khu di tích.[13]
-    public enum Type
-    {
-        Tree,
-        Log,
-        Coc
-    }
-    [SerializeField] private Type treeType;
+
+    [SerializeField] private TreeType treeType;
     [SerializeField] private Transform fxTreeDestroyed;
     [SerializeField] private Transform fxTreeLogDestroyed;
     [SerializeField] private Transform fxTreeLogHalfDestroy;
@@ -40,12 +35,12 @@ public class Tree : MonoBehaviour, IDamageable, IInteractableObject
         switch (treeType)
         {
             default:
-            case Type.Tree:
+            case TreeType.Tree:
                 {
                     healthAmount = 30;
                     break;
                 }
-            case Type.Log:
+            case TreeType.Log:
                 {
                     healthAmount = 50;
                     break;
@@ -86,7 +81,7 @@ public class Tree : MonoBehaviour, IDamageable, IInteractableObject
         {
             default:
                 break ;
-            case Type.Tree:
+            case TreeType.Tree:
                 this.gameObject.GetComponent<BoxCollider>().enabled = false;
 
                 botTree.GetComponent<BoxCollider>().enabled = true;
@@ -133,7 +128,7 @@ public class Tree : MonoBehaviour, IDamageable, IInteractableObject
 
     public void Damage()
     {
-        if(PlayerInputManager.instance.action != PlayerInputManager.Action.ChopTree)
+        if(MinigameInputManager.instance.action != PLayerAction.ChopTree)
         {
             return;
         }
@@ -153,16 +148,19 @@ public class Tree : MonoBehaviour, IDamageable, IInteractableObject
         print(healthSystem.GetHealth());
     }
 
-    public void OnInteracted() 
+    public override void OnInteracted() 
     {
-        PlayerInputManager.instance.action = PlayerInputManager.Action.ChopTree;
-
+        base.OnInteracted();
+        MinigameInputManager.instance.enabled = true;
+        MinigameInputManager.instance.action = PLayerAction.ChopTree;
         OnReset();
-        //print("tien Hanh Chat cay");
+        print("tien Hanh Chat cay");
     }
-    public void OnExitInteracted()
+
+    public override void OnExitInteracted()
     {
-        PlayerInputManager.instance.Quit();
+        base.OnExitInteracted();
+        MinigameInputManager.instance.enabled = false;
     }
 
 }

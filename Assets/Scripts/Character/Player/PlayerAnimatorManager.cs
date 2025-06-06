@@ -11,7 +11,17 @@ public class PlayerAnimatorManager : CharacterAnimatorManager
     }
     private void OnAnimatorMove()
     {
-        if (player.applyRootMotion)
+        if(!UnityEditor.EditorApplication.isPlaying && TimelineManager.instance.IsTimeLinePlaying())
+        {
+            player.transform.position += player.animator.deltaPosition;
+            player.transform.rotation *= player.animator.deltaRotation;
+        }
+        if (UnityEditor.EditorApplication.isPlaying && TimelineManager.instance.IsTimeLinePlaying())
+        {
+            player.transform.position += player.animator.deltaPosition;
+            player.transform.rotation *= player.animator.deltaRotation;
+        }
+        else if (player.applyRootMotion)
         {
             Vector3 velocity = player.animator.deltaPosition;
             player.characterController.Move(velocity);

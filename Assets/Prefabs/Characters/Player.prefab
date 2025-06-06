@@ -56,6 +56,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7059065620209560090}
   - component: {fileID: 4098561587923691910}
+  - component: {fileID: 1533320762004455950}
   m_Layer: 0
   m_Name: Hit Area
   m_TagString: Untagged
@@ -72,7 +73,7 @@ Transform:
   m_GameObject: {fileID: 2245792451967453607}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.14, z: 0.78}
+  m_LocalPosition: {x: 0, y: 3.14, z: 0.78}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -95,10 +96,25 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1.72, y: 2.83, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1533320762004455950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2245792451967453607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51026549cd016eb4dbf2f071fe5fe3ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  interactableObjectsArray: []
+  interactableObject: {fileID: 0}
 --- !u!1 &4938308236447451836
 GameObject:
   m_ObjectHideFlags: 0
@@ -195,7 +211,6 @@ GameObject:
   - component: {fileID: 4361518818712029005}
   - component: {fileID: -8912130311746873046}
   - component: {fileID: -8568255722457520264}
-  - component: {fileID: 4431936201881738476}
   - component: {fileID: 5603242508840220076}
   - component: {fileID: 5887994652713629509}
   - component: {fileID: 9157488568303165678}
@@ -495,22 +510,6 @@ MonoBehaviour:
   lockOnTransform: {fileID: 2415179763404551204}
   currentWeaponBeingUsed: {fileID: 0}
   canComboWithMainHandWeapon: 0
---- !u!114 &4431936201881738476
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6906817555111550964}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4768b7b8f798e84f91571484f785c35, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  hitArea: {fileID: 7059065620209560090}
-  gizmoColor: {r: 1, g: 0, b: 0, a: 1}
-  colliderSize: {x: 0.6, y: 1.6, z: 0.3}
 --- !u!143 &5603242508840220076
 CharacterController:
   m_ObjectHideFlags: 0

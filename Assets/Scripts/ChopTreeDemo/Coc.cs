@@ -1,11 +1,11 @@
 using TMPro.Examples;
 using UnityEngine;
 
-public class Coc : MonoBehaviour,IInteractableObject
+public class Coc : IInteractableObject
 {
     PlayerManager player;
 
-    [SerializeField] private Tree.Type treeType;
+    [SerializeField] private TreeType treeType;
 
     private Transform carryArea;
     private void OnTriggerEnter(Collider other)
@@ -21,7 +21,7 @@ public class Coc : MonoBehaviour,IInteractableObject
 
     void AttachToPlayer()
     {
-        if (PlayerInputManager.instance.action != PlayerInputManager.Action.CarrySomething)
+        if (MinigameInputManager.instance.action != PLayerAction.CarrySomething)
         {
             return;
         }
@@ -34,17 +34,20 @@ public class Coc : MonoBehaviour,IInteractableObject
         }
         return;
     }
-    public void OnInteracted()
+    public override void OnInteracted()
     {
+        base.OnInteracted();
+        MinigameInputManager.instance.enabled = true;
         OnReset();
-        this.gameObject.GetComponent<Rigidbody>().isKinematic = false; 
-        PlayerInputManager.instance.action = PlayerInputManager.Action.CarrySomething;
+        this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+        MinigameInputManager.instance.action = PLayerAction.CarrySomething;
         InvokeRepeating("AttachToPlayer", 0f, 0.01f);
     }
 
-    public void OnExitInteracted()
+    public override void OnExitInteracted()
     {
-        PlayerInputManager.instance.Quit();
-        CancelInvoke("AttachToPlayer");
+        base.OnExitInteracted();
+        MinigameInputManager.instance.enabled = false;
     }
+
 }
