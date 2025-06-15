@@ -14,9 +14,6 @@ public class MinigameInputManager : MonoBehaviour
 
     [HideInInspector] public PlayerControl minigameControls;
 
-    [Header("Player Action")]
-    [SerializeField] public PLayerAction action;
-
     private void Awake()
     {
         if (instance == null)
@@ -32,15 +29,10 @@ public class MinigameInputManager : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
 
-        if (!PlayerInputManager.instance.isTesting)
-        {
-            instance.enabled = false;
-        }
         if (minigameControls != null)
         {
             minigameControls.Disable();
         }
-        this.enabled = false ;
 
     }
 
@@ -84,7 +76,6 @@ public class MinigameInputManager : MonoBehaviour
     private void Update()
     {
         HandleAllInput();
-        ControlAction();
     }
 
     private void HandleAllInput()
@@ -132,33 +123,9 @@ public class MinigameInputManager : MonoBehaviour
         player.playerLocomotionManager.AttemptingQuitting();
     }
 
-    private void ControlAction()
-    {
-        //print(action);
-        switch (action)
-        {
-            default:
-                break;
-            case PLayerAction.Normal:
-                player.isInteracting = false;
-                break;
-            case PLayerAction.ChopTree:
-                player.isInteracting = true;
-                player.canMove = false;
-                break;
-            case PLayerAction.CarrySomething:
-                player.isInteracting = true;
-                break;
-            case PLayerAction.LogSharpening:
-                player.isInteracting = true;
-                player.canMove = false;
-                break;
-        }
-    }
-
     public void AttemptToAttack()
     {
-        switch (MinigameInputManager.instance.action)
+        switch (player.action.Value)
         {
             default:
                 break;
@@ -167,18 +134,18 @@ public class MinigameInputManager : MonoBehaviour
                 StartCoroutine(AnimationEvent_OnHit());
                 return;
             case PLayerAction.ChopTree:
-                if (PlayerUIManager.instance.playerUIDynamicHUDManager.treeChopMinigame_UI.GetComponentInChildren<ProgressBar>().CheckIfValided())
+                if (PlayerUIManager.instance.treeChopMinigame_UI.GetComponentInChildren<ProgressBar>().CheckIfValided())
                 {
                     player.playerAnimatorManager.PlayTargetActionAnimation("SwingAxe", true, true, false, false);
                     StartCoroutine(AnimationEvent_OnHit());
                 }
                 else
                 {
-                    PlayerUIManager.instance.playerUIDynamicHUDManager.treeChopMinigame_UI.GetComponentInChildren<CheckBox>().TickColor();
+                    PlayerUIManager.instance.treeChopMinigame_UI.GetComponentInChildren<CheckBox>().TickColor();
                 }
                 return;
             case PLayerAction.LogSharpening:
-                if (PlayerUIManager.instance.playerUIDynamicHUDManager.logSharpeningMinigame_UI.GetComponentInChildren<ProgressBar>().CheckIfValided())
+                if (PlayerUIManager.instance.logSharpeningMinigame_UI.GetComponentInChildren<ProgressBar>().CheckIfValided())
                 {
                     player.playerAnimatorManager.PlayTargetActionAnimation("SwingAxe", true, true, false, false);
                     Vector3 colliderSize = Vector3.one * 0.3f;
@@ -198,7 +165,7 @@ public class MinigameInputManager : MonoBehaviour
                 }
                 else
                 {
-                    PlayerUIManager.instance.playerUIDynamicHUDManager.logSharpeningMinigame_UI.GetComponentInChildren<CheckBox>().TickColor();
+                    PlayerUIManager.instance.logSharpeningMinigame_UI.GetComponentInChildren<CheckBox>().TickColor();
                 }
                 return;
         }
@@ -216,7 +183,7 @@ public class MinigameInputManager : MonoBehaviour
                 yield break;
             }
             print("hit");
-        player.playerDetectArea.interactableObject.gameObject.GetComponent<Tree>().Damage();
+        //player.playerDetectArea.interactableObject.gameObject.GetComponent<Tree>().Damage();
         yield return new WaitForSeconds(0.5f);
     }
 }

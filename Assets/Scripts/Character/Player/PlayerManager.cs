@@ -43,6 +43,9 @@ public class PlayerManager : CharacterManager
     [HideInInspector] public PLayerEquipmentManager playerEquipmentManager;
     [HideInInspector] public PlayerCombatManager playerCombatManager;
 
+    [Header("Player Action")]
+    public Observable<PLayerAction> action;
+
     protected override void Awake()
     {
         base.Awake();
@@ -67,6 +70,9 @@ public class PlayerManager : CharacterManager
             MinigameInputManager.instance.enabled = false;
 
             PlayerCamera.instance.player = this;
+            PlayerUIManager.instance.player = this;
+            action.OnValueChanged += PlayerUIManager.instance.ControlUI;
+
             playerDetectArea.enabled = false;
         }
 
@@ -82,6 +88,9 @@ public class PlayerManager : CharacterManager
 
             PlayerCamera.instance.player = this;
             PlayerCamera.instance.SetCameraTo(this);
+            PlayerUIManager.instance.player = this;
+            action.OnValueChanged += PlayerUIManager.instance.ControlUI;
+
             if (PlayerInputManager.instance.playerControls != null)
             {
                 PlayerInputManager.instance.playerControls.Enable();
@@ -171,6 +180,7 @@ public class PlayerManager : CharacterManager
         }
 
         base.Update();
+        ControlAction();
 
         if(PlayerInputManager.instance.isActiveAndEnabled)
         {
@@ -329,6 +339,60 @@ public class PlayerManager : CharacterManager
     {
         animator.SetBool("isChargingAttack", isCharingingAttack.Value);
     }
+
+    private void ControlAction()
+    {
+        //print(action);
+        switch (action.Value)
+        {
+            default:
+                break;
+            case PLayerAction.Normal:
+                PlayerInputManager.instance.gameObject.SetActive(true);
+                //DialogueInputManager.instance.gameObject.SetActive(false);
+                MinigameInputManager.instance.gameObject.SetActive(false);
+                break;
+            case PLayerAction.ChopTree:
+                PlayerInputManager.instance.gameObject.SetActive(false);
+                //DialogueInputManager.instance.gameObject.SetActive(false);
+                MinigameInputManager.instance.gameObject.SetActive(true);
+                break;
+            case PLayerAction.CarrySomething:
+                PlayerInputManager.instance.gameObject.SetActive(true);
+                //DialogueInputManager.instance.gameObject.SetActive(false);
+                MinigameInputManager.instance.gameObject.SetActive(true);
+                break;
+            case PLayerAction.LogSharpening:
+                PlayerInputManager.instance.gameObject.SetActive(false);
+                //DialogueInputManager.instance.gameObject.SetActive(false);
+                MinigameInputManager.instance.gameObject.SetActive(true);
+                break;
+            case PLayerAction.PlayingDialogue:
+                PlayerInputManager.instance.gameObject.SetActive(false);
+                //DialogueInputManager.instance.gameObject.SetActive(false);
+                MinigameInputManager.instance.gameObject.SetActive(false);
+                break;
+        }
+    }
+
+    // event subscribe
+
+    private void OnEnable()
+    {
+        EventManager.instance.dialogueEvents.onEnterDialogue += OnEnterDialogue;
+        EventManager.instance.dialogueEvents.onDialogueFinished += OnExitDialogue;
+    }
+
+    private void OnEnterDialogue(string t)
+    {
+        action.Value = PLayerAction.PlayingDialogue;
+    }
+
+    private void OnExitDialogue()
+    {
+        action.Value = PLayerAction.Normal;
+    }
+
 
 
 }

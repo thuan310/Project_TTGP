@@ -1,10 +1,17 @@
 using System.Collections;
 using TMPro.Examples;
+using UnityEngine.Events;
 using UnityEngine;
 
-public class Log : IInteractableObject, IDamageable
+public class Log : MonoBehaviour, IInteractableObject, IDamageable
 {
-    PlayerManager player;
+    public string wordDisplayWhenInteract;
+    public string WordDisplayWhenInteract { get => wordDisplayWhenInteract; set => wordDisplayWhenInteract = value; }
+    public PlayerManager player { get; set; }
+
+
+    public UnityEvent onInteract;
+    public UnityEvent OnInteract { get => onInteract; set => onInteract = value; }
     private HealthSystem healthSystem;
 
     [SerializeField] private TreeType treeType;
@@ -40,7 +47,7 @@ public class Log : IInteractableObject, IDamageable
 
     public void Damage()
     {
-        if (MinigameInputManager.instance.action != PLayerAction.LogSharpening)
+        if (player.action.Value != PLayerAction.LogSharpening)
         {
             return;
         }
@@ -114,36 +121,33 @@ public class Log : IInteractableObject, IDamageable
 
     public void OnReset()
     {
-        PlayerUIManager.instance.playerUIDynamicHUDManager.carryLogMinigame_UI.GetComponentInChildren<ProgressBar>().ResetValue();
+        PlayerUIManager.instance.carryLogMinigame_UI.GetComponentInChildren<ProgressBar>().ResetValue();
     }
 
     void AttachToPlayer()
     {
-        if(MinigameInputManager.instance.action != PLayerAction.CarrySomething)
+        if(player.action.Value != PLayerAction.CarrySomething)
         {
             return;
         }
         this.gameObject.transform.position = carryArea.position;
         this.gameObject.transform.rotation = carryArea.rotation;
 
-        if (!PlayerUIManager.instance.playerUIDynamicHUDManager.carryLogMinigame_UI.GetComponentInChildren<ProgressBar>().CheckIfValided())
+        if (!PlayerUIManager.instance.carryLogMinigame_UI.GetComponentInChildren<ProgressBar>().CheckIfValided())
         {
             OnExitInteracted();
         }
         return;
     }
-    public override void OnInteracted()
+    public void OnInteracted()
     {
-        base.OnInteracted();
-        MinigameInputManager.instance.enabled = true;
-        MinigameInputManager.instance.action = PLayerAction.CarrySomething;
+        player.action.Value = PLayerAction.CarrySomething;
         OnReset();
         InvokeRepeating("AttachToPlayer", 0f,0.01f);
     }
 
-    public override void OnExitInteracted()
+    public void OnExitInteracted()
     {
-        base.OnExitInteracted();
         MinigameInputManager.instance.enabled = false;
     }
 

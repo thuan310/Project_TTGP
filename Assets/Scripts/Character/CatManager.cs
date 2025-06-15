@@ -66,15 +66,15 @@ public class CatManager : MonoBehaviour
     }
 
     // Nếu có Animator, xử lý root motion
-    public void OnAnimatorMove()
-    {
-        if (animator != null)
-        {
-            // Áp dụng root motion nếu cần, nhưng vẫn giữ hiệu ứng trôi nổi
-            transform.position += animator.deltaPosition;
-            transform.rotation *= animator.deltaRotation;
-        }
-    }
+    //public void OnAnimatorMove()
+    //{
+    //    if (animator != null)
+    //    {
+    //        // Áp dụng root motion nếu cần, nhưng vẫn giữ hiệu ứng trôi nổi
+    //        transform.position += animator.deltaPosition;
+    //        transform.rotation *= animator.deltaRotation;
+    //    }
+    //}
 
     public void PLayCatSpawnSFX( float volume = 0.3f, bool randomizePitch = true, float pitchRandom = 0.1f)
     {

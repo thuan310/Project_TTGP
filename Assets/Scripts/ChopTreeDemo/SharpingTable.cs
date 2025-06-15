@@ -1,7 +1,16 @@
 using UnityEngine;
+using UnityEngine.Events;
 
-public class SharpingTable : IInteractableObject
+public class SharpingTable : MonoBehaviour, IInteractableObject
 {
+    public string wordDisplayWhenInteract;
+    public string WordDisplayWhenInteract { get => wordDisplayWhenInteract; set => wordDisplayWhenInteract = value; }
+    public PlayerManager player { get; set; }
+
+
+    public UnityEvent onInteract;
+    public UnityEvent OnInteract { get => onInteract; set => onInteract = value; }
+
     public GameObject dropArea;
     public Vector3 colliderSize = new Vector3(1, 1, 1);
     public Transform dropPlace;
@@ -48,21 +57,19 @@ public class SharpingTable : IInteractableObject
     {
         log.Damage();
     }
-    public override void OnInteracted()
+    public  void OnInteracted()
     {
-        base.OnInteracted();
         MinigameInputManager.instance.enabled = true;
         //print("A");
         if (dropPlace.GetComponentInChildren<Log>() != null)
         {
-            MinigameInputManager.instance.action = PLayerAction.LogSharpening;
+            player.action.Value = PLayerAction.LogSharpening;
             OnReset();
         }
     }
 
-    public override void OnExitInteracted()
+    public void OnExitInteracted()
     {
-        base.OnExitInteracted();
         MinigameInputManager.instance.enabled = false;
     }
 
@@ -89,6 +96,6 @@ public class SharpingTable : IInteractableObject
 
     public void OnReset()
     {
-        PlayerUIManager.instance.playerUIDynamicHUDManager.logSharpeningMinigame_UI.GetComponentInChildren<CheckBox>().ResetColor();
+        PlayerUIManager.instance.logSharpeningMinigame_UI.GetComponentInChildren<CheckBox>().ResetColor();
     }
 }

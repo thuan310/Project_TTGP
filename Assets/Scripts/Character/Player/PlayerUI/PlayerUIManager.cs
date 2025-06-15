@@ -1,4 +1,5 @@
-﻿using UnityEditor.VersionControl;
+﻿using TMPro;
+using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.InputSystem.HID;
 
@@ -62,10 +63,21 @@ public class PlayerUIManager : MonoBehaviour
     #endregion
 
     public static PlayerUIManager instance;
+    public PlayerManager player;
 
-    [HideInInspector] public PlayerUIHUDManager playerUIHUDManager;
-    [HideInInspector] public PlayerUIDynamicHUDManager playerUIDynamicHUDManager;
-    [HideInInspector] public PlayerUIPopUpManager playerUIPopUpManager;
+    [Header("StaticUI")]
+    public PlayerUIHUDManager playerUIHUDManager;
+
+    [Header("DynamicUI")]
+    public PlayerUIDynamicHUDManager playerUIDynamicHUDManager;
+    public GameObject treeChopMinigame_UI;
+    public GameObject carryLogMinigame_UI;
+    public GameObject logSharpeningMinigame_UI;
+    public GameObject interacted_UI;
+    public TextMeshProUGUI actionToDo;
+
+    [Header("PopUpUI")]
+    public PlayerUIPopUpManager playerUIPopUpManager;
 
     private void Awake()
     {
@@ -86,11 +98,39 @@ public class PlayerUIManager : MonoBehaviour
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
+        playerUIDynamicHUDManager.AddCanvasToListAndTurnOn(playerUIHUDManager.gameObject);
+
     }
 
     private void Update()
     {
-        playerUIDynamicHUDManager.ControlUI();
+    }
+
+    public void ControlUI(PLayerAction oldStatus, PLayerAction newStatus)
+    {
+        switch (player.action.Value)
+        {
+            case PLayerAction.Normal:
+                playerUIDynamicHUDManager.ClearList();
+                playerUIDynamicHUDManager.AddCanvasToListAndTurnOn(playerUIHUDManager.gameObject);
+                return;
+            case PLayerAction.ChopTree:
+                playerUIDynamicHUDManager.ClearList();
+                playerUIDynamicHUDManager.AddCanvasToListAndTurnOn(treeChopMinigame_UI);
+                return;
+            case PLayerAction.CarrySomething:
+                playerUIDynamicHUDManager.ClearList();
+                playerUIDynamicHUDManager.AddCanvasToListAndTurnOn(treeChopMinigame_UI);
+                return;
+            case PLayerAction.LogSharpening:
+                playerUIDynamicHUDManager.ClearList();
+                playerUIDynamicHUDManager.AddCanvasToListAndTurnOn(logSharpeningMinigame_UI);
+                return;
+            case PLayerAction.PlayingDialogue:
+                playerUIDynamicHUDManager.ClearList();
+                return;
+
+        }
     }
 
 }

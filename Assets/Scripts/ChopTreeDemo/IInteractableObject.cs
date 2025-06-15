@@ -1,29 +1,24 @@
 ﻿using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
+using UnityEngine.Events;
+using static Unity.Collections.AllocatorManager;
 
-public class IInteractableObject : MonoBehaviour
+
+public interface IInteractableObject
 {
-    public string wordDisplayWhenInteract;
-    private PlayerManager player;
+    string WordDisplayWhenInteract { get; set; }
+    PlayerManager player { get; set; }
+
+    public UnityEvent OnInteract { get; set; }
+
     public virtual void OnInteracted()
     { 
-        PlayerInputManager.instance.enabled = false;
+        OnInteract.Invoke();
+        player.playerDetectArea.interactableObjectsArray.Remove(this);
     }
     public virtual void OnExitInteracted()
     {
         PlayerInputManager.instance.enabled = true;
         MinigameInputManager.instance.Quit();
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        player= other.GetComponentInParent<PlayerManager>();
-        player.playerDetectArea.interactableObjectsArray.Remove(this);
-        if (player.playerDetectArea.interactableObjectsArray.Count <= 0)
-        {
-            player.playerDetectArea.interactableObject = null;
-            PlayerUIManager.instance.playerUIDynamicHUDManager.SetInteractableUIWithAction(false,"");
-        }
-
     }
 }

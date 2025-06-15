@@ -29,7 +29,6 @@ VAR PrologueState = "REQUIREMENTS_NOT_MET"
 * [Take a random book]
     (Huh, what's this?)
     (Never seen this book before)
-    ~ FinishQuestStep(PrologueId)
     #continue
     ->bookOpened
 * [Come back later]
@@ -58,12 +57,13 @@ No! Stop him—!
 He’s trying to change the past. If we don’t follow him, everything could fall apart.
 Then let’s go.
 Before we jump in, touch the book again. It’ll open the quest menu — you'll need it where we’re going.
+~ FinishQuestStep(PrologueId)
 
 -->END
 
 === openQuestMenu ===
 Alright. Here goes nothing—
-Deep breath! Time’s waiting!
+    #continue
 -->END
 
 

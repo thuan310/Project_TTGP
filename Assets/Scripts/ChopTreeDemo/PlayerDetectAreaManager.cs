@@ -23,7 +23,13 @@ public class PlayerDetectAreaManager : MonoBehaviour
             return;
 
         interactableObjectsArray.Add(randomthi);
+        other.GetComponent<IInteractableObject>().player = player;
 
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        interactableObjectsArray.Remove(other.GetComponent<IInteractableObject>());
     }
     private void Update()
     {
@@ -31,7 +37,12 @@ public class PlayerDetectAreaManager : MonoBehaviour
         if(interactableObjectsArray.Count > 0)
         {
             interactableObject = interactableObjectsArray[0];
-            PlayerUIManager.instance.playerUIDynamicHUDManager.SetInteractableUIWithAction(true, interactableObject.wordDisplayWhenInteract);
+            PlayerUIManager.instance.playerUIDynamicHUDManager.SetInteractableUIWithAction(true, interactableObject.WordDisplayWhenInteract);
+        }
+        else
+        {
+            interactableObject = null;
+            PlayerUIManager.instance.playerUIDynamicHUDManager.SetInteractableUIWithAction(false, "");
         }
     }
 }

@@ -318,7 +318,7 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
     //Interact part
     public void AttemptInteract()
     {
-        switch (MinigameInputManager.instance.action)
+        switch (player.action.Value)
         {
             default:
                 break;
@@ -335,7 +335,7 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
                 {
                     return;
                 }
-                PlayerUIManager.instance.playerUIDynamicHUDManager.treeChopMinigame_UI.GetComponentInChildren<ProgressBar>().AddValue();
+                PlayerUIManager.instance.treeChopMinigame_UI.GetComponentInChildren<ProgressBar>().AddValue();
                 return;
             case PLayerAction.CarrySomething:
                 // check if playing animation
@@ -343,17 +343,18 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
                 {
                     return;
                 }
-                PlayerUIManager.instance.playerUIDynamicHUDManager.carryLogMinigame_UI.GetComponentInChildren<ProgressBar>().AddValue();
+                PlayerUIManager.instance.carryLogMinigame_UI.GetComponentInChildren<ProgressBar>().AddValue();
                 return;
         }
     }
     //Escape part
     public void AttemptingQuitting()
     {
-        if(MinigameInputManager.instance.action != PLayerAction.Normal)
+        //print("qua ngu");   
+        if(player.action.Value != PLayerAction.Normal)
         {
-            MinigameInputManager.instance.action = PLayerAction.Normal;
-            MinigameInputManager.instance.enabled = false;
+            player.action.Value = PLayerAction.Normal;
+            player.enabled = false;
             PlayerInputManager.instance.enabled = true;
             player.canMove = true;
         }
@@ -362,7 +363,7 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
 
     public void HandlePickUpLog()
     {
-        if (MinigameInputManager.instance.action != PLayerAction.CarrySomething) 
+        if (player.action.Value != PLayerAction.CarrySomething) 
         {
             return;
         }

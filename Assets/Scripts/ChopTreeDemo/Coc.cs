@@ -1,9 +1,16 @@
 using TMPro.Examples;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class Coc : IInteractableObject
+public class Coc : MonoBehaviour,IInteractableObject
 {
-    PlayerManager player;
+    public string wordDisplayWhenInteract;
+    public string WordDisplayWhenInteract { get => wordDisplayWhenInteract; set => wordDisplayWhenInteract = value; }
+    public PlayerManager player { get; set; }
+
+
+    public UnityEvent onInteract;
+    public UnityEvent OnInteract { get => onInteract; set => onInteract = value; }
 
     [SerializeField] private TreeType treeType;
 
@@ -16,37 +23,35 @@ public class Coc : IInteractableObject
 
     public void OnReset()
     {
-        PlayerUIManager.instance.playerUIDynamicHUDManager.carryLogMinigame_UI.GetComponentInChildren<ProgressBar>().ResetValue();
+        PlayerUIManager.instance.carryLogMinigame_UI.GetComponentInChildren<ProgressBar>().ResetValue();
     }
 
     void AttachToPlayer()
     {
-        if (MinigameInputManager.instance.action != PLayerAction.CarrySomething)
+        if (player.action.Value != PLayerAction.CarrySomething)
         {
             return;
         }
         this.gameObject.transform.position = carryArea.position;
         this.gameObject.transform.rotation = carryArea.rotation;
 
-        if (!PlayerUIManager.instance.playerUIDynamicHUDManager.carryLogMinigame_UI.GetComponentInChildren<ProgressBar>().CheckIfValided())
+        if (!PlayerUIManager.instance.carryLogMinigame_UI.GetComponentInChildren<ProgressBar>().CheckIfValided())
         {
             OnExitInteracted();
         }
         return;
     }
-    public override void OnInteracted()
+    public  void OnInteracted()
     {
-        base.OnInteracted();
         MinigameInputManager.instance.enabled = true;
         OnReset();
         this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
-        MinigameInputManager.instance.action = PLayerAction.CarrySomething;
+        player.action.Value = PLayerAction.CarrySomething;
         InvokeRepeating("AttachToPlayer", 0f, 0.01f);
     }
 
-    public override void OnExitInteracted()
+    public void OnExitInteracted()
     {
-        base.OnExitInteracted();
         MinigameInputManager.instance.enabled = false;
     }
 

@@ -1,10 +1,14 @@
+using System;
 using System.Collections;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneNavigationManager : MonoBehaviour
 {
     public static SceneNavigationManager instance;
+
+    public int nextSceneIndexToLoad =1;
 
     private void Awake()
     {
@@ -22,15 +26,21 @@ public class SceneNavigationManager : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
     }
+
     public void LoadSceneByIndex(int index)
     {
         StartCoroutine(LoadAsync(index));
     }
 
-    IEnumerator LoadAsync(int worldSceneIndex)
+    public void LoadNextScene()
+    {
+        nextSceneIndexToLoad++;
+        StartCoroutine(LoadAsync(nextSceneIndexToLoad));
+    }
+    IEnumerator LoadAsync(int sceneIndex)
     {
         //loadingScreen.SetActive(true);
-        AsyncOperation loadOperation = SceneManager.LoadSceneAsync(worldSceneIndex);
+        AsyncOperation loadOperation = SceneManager.LoadSceneAsync(sceneIndex);
         //loadOperation.allowSceneActivation = false; // Optional: Manual control
 
         //while (!loadOperation.isDone)

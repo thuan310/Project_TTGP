@@ -2,14 +2,23 @@
 using System.Runtime.CompilerServices;
 using UnityEditor.ShaderGraph.Serialization;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class Tree : IInteractableObject, IDamageable
+public class Tree : MonoBehaviour,IInteractableObject, IDamageable
 {
     //Các cuộc nghiên cứu cho thấy các cọc ở đây đa phần được làm từ gỗ lim,
     //thân dài từ 2,6 đến 2,8 mét và có đường kính khoảng 20 đến 30 cm.
     //Phần đầu cọc được đẽo nhọn để cắm xuống đáy sông dài từ 0,5 đến 1 mét
     //và khoảng cách trung bình giữa các cọc khoảng 1 mét.[13][14] Gần bãi cọc
     //có một tấm bia được dựng lên để đánh dấu và ghi nhận khu di tích.[13]
+    public string wordDisplayWhenInteract;
+    public string WordDisplayWhenInteract { get => wordDisplayWhenInteract; set => wordDisplayWhenInteract = value; }
+    public PlayerManager player { get; set; }
+
+
+    public UnityEvent onInteract;
+    public UnityEvent OnInteract { get => onInteract; set => onInteract = value; }
+
 
     [SerializeField] private TreeType treeType;
     [SerializeField] private Transform fxTreeDestroyed;
@@ -65,7 +74,7 @@ public class Tree : IInteractableObject, IDamageable
     public void OnReset()
     {
         healthSystem.Heal(30);
-        PlayerUIManager.instance.playerUIDynamicHUDManager.treeChopMinigame_UI.GetComponentInChildren<CheckBox>().ResetColor();
+        PlayerUIManager.instance.treeChopMinigame_UI.GetComponentInChildren<CheckBox>().ResetColor();
     }
 
     public Vector3 GetRelativeObjectDirection(Vector3 playerEulerRotation)
@@ -128,7 +137,7 @@ public class Tree : IInteractableObject, IDamageable
 
     public void Damage()
     {
-        if(MinigameInputManager.instance.action != PLayerAction.ChopTree)
+        if(player.action.Value != PLayerAction.ChopTree)
         {
             return;
         }
@@ -148,19 +157,18 @@ public class Tree : IInteractableObject, IDamageable
         print(healthSystem.GetHealth());
     }
 
-    public override void OnInteracted() 
+    public void OnInteracted() 
     {
-        base.OnInteracted();
-        MinigameInputManager.instance.enabled = true;
-        MinigameInputManager.instance.action = PLayerAction.ChopTree;
+        player.action.Value = PLayerAction.ChopTree;
         OnReset();
         print("tien Hanh Chat cay");
     }
 
-    public override void OnExitInteracted()
+    public void OnExitInteracted()
     {
-        base.OnExitInteracted();
+        //print("quangu");
         MinigameInputManager.instance.enabled = false;
+        MinigameInputManager.instance.player.playerDetectArea.interactableObjectsArray.Remove(this);
     }
 
 }

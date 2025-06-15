@@ -1,49 +1,49 @@
+using Ink.Parsed;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class PlayerUIDynamicHUDManager : MonoBehaviour
 {
-    public GameObject treeChopMinigame_UI;
-    public GameObject carryLogMinigame_UI;
-    public GameObject logSharpeningMinigame_UI;
-    public GameObject interacted_UI;
-    public TextMeshProUGUI actionToDo;
+
+    public List<GameObject> UIDisplayeds;
+
     private void Start()
     {
-        treeChopMinigame_UI.SetActive(false);
-        interacted_UI.SetActive(false);
-        logSharpeningMinigame_UI.SetActive(false);
     }
 
-    public void ControlUI()
+    public void AddCanvasToListAndTurnOn(GameObject canvas)
     {
-        switch(MinigameInputManager.instance.action)
-        {
-            case PLayerAction.Normal:
-                treeChopMinigame_UI.gameObject.SetActive(false);
-                carryLogMinigame_UI.SetActive(false);
-                logSharpeningMinigame_UI.SetActive(false);
-                return;
-            case PLayerAction.ChopTree:
-                interacted_UI.SetActive(false);
-                treeChopMinigame_UI.gameObject.SetActive(true);
-                return;
-            case PLayerAction.CarrySomething:
-                interacted_UI.SetActive(false);
-                carryLogMinigame_UI.SetActive(true);
-                return;
-            case PLayerAction.LogSharpening:
-                interacted_UI.SetActive(false);
-                logSharpeningMinigame_UI.SetActive(true);
-                return;
+        UIDisplayeds.Add(canvas);
+        canvas.SetActive(true);
+    }
 
+    public void RemoveCanvasFromListAndTurnOff(GameObject canvas)
+    {
+        UIDisplayeds.Remove(canvas);
+        canvas.SetActive(false);
+    }
+
+    public void ClearList()
+    {
+        foreach (var UIDisplayed in UIDisplayeds)
+        {
+            UIDisplayed.gameObject.SetActive(false);
         }
+        UIDisplayeds.Clear();
     }
     public void SetInteractableUIWithAction(bool flag, string action)
     {
-        interacted_UI.SetActive(flag);
-        actionToDo.text = action;
+        if(flag)
+        {
+            AddCanvasToListAndTurnOn(PlayerUIManager.instance.interacted_UI);
+        }
+        else
+        {
+            RemoveCanvasFromListAndTurnOff(PlayerUIManager.instance.interacted_UI);
+        }
+        PlayerUIManager.instance.actionToDo.text = action;
     }
 
 }
