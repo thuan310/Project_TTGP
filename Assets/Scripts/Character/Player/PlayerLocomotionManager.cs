@@ -46,6 +46,8 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         base.Update();
 
         HandlePickUpLog();
+
+        Shader.SetGlobalVector("_Player", transform.position + Vector3.up * 2);
     }
 
     public void HandleAllMovement()

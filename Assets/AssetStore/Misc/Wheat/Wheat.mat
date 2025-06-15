@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Water
-  m_Shader: {fileID: -6465566751694194690, guid: e6dc0d6392938ce48a5119e6355afd4f, type: 3}
+  m_Name: Wheat
+  m_Shader: {fileID: -6465566751694194690, guid: b015b53e49d49374d999b09f491c5a9d, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -24,8 +24,12 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _RefractionNormal:
-        m_Texture: {fileID: 2800000, guid: bf9c8743de6260a4f8522c9e4e1bc3fa, type: 3}
+    - _Base_map:
+        m_Texture: {fileID: 2800000, guid: 2c8dac18a767d0f409d80b830a2f36a6, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal_map:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -42,29 +46,20 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Alpha: 0.8
-    - _Distance: 6.67
-    - _FoamAmount: 1.65
-    - _FoamCutoff: 2
-    - _FoamScale: 40
-    - _FoamSpeed: 1.2
-    - _HeightFrequency: 6.6
-    - _NormalStrength: 0.2
+    - _InteractionDistance: 2
+    - _InteractionStrength: 10
+    - _Metalic: 0
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _RefractionSpeed: 0.05
-    - _RefractionStrength: 0.05
     - _Smoothness: 0.2
-    - _WaveAmplitude: 0.03
-    - _WaveSpeed: 2.5
+    - _TextureFlip: 0
+    - _Wind_speed: 1.53
+    - _Wind_strength: 0.25
     m_Colors:
-    - _DeepColor: {r: 0.13501239, g: 0.19297561, b: 0.6981132, a: 0.7647059}
-    - _FoamCOlor: {r: 1, g: 1, b: 1, a: 1}
-    - _RefractionScale: {r: 1, g: 1, b: 0, a: 0}
-    - _SurfaceColor: {r: 0.21176457, g: 0.6528304, b: 0.9254902, a: 0.6156863}
+    - _Wind_direction: {r: -1, g: -1, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &1247280285511480071
+--- !u!114 &7084538616383278207
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
