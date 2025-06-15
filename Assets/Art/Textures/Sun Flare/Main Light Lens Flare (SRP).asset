@@ -27,7 +27,7 @@ MonoBehaviour:
     shapeCutOffSpeed: 0
     shapeCutOffRadius: 10
     m_LocalIntensity: 1
-    lensFlareTexture: {fileID: 0}
+    lensFlareTexture: {fileID: 2800000, guid: e599c0fb105c44c4aa4404042056eaad, type: 3}
     uniformScale: 1
     sizeXY: {x: 1, y: 1}
     allowMultipleElement: 0
