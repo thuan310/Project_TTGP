@@ -53,13 +53,13 @@ Material:
     - _FoamScale: 40
     - _FoamSpeed: 1.2
     - _HeightFrequency: 6.6
-    - _NormalStrength: 0.2
+    - _NormalStrength: 0.05
     - _QueueControl: 0
     - _QueueOffset: 0
     - _RefractionSpeed: 0.05
-    - _RefractionStrength: 0.02
+    - _RefractionStrength: 0.1
     - _RippleStrength: 10
-    - _Smoothness: 0.77
+    - _Smoothness: 0.5
     - _WaveAmplitude: 0.03
     - _WaveSpeed: 2.5
     m_Colors:
