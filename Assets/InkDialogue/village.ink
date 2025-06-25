@@ -7,7 +7,7 @@ VAR VillageState = "REQUIREMENTS_NOT_MET"
 
 === villageStart ===
 
-#timeline: Test
+#timeline: Village
 Wahhh ? 
 Ouch... 
 #continue
@@ -15,7 +15,6 @@ Ugh… where are we
 Somewhere old… really old. I don’t recognize the exact place yet, but the air smells like wood smoke and wet soil. 
 #continue
 Really helpful... 
-#continue
 Hey, I’m working with what we’ve got
 #continue
 Look, there's a village nearby — let’s go there first 

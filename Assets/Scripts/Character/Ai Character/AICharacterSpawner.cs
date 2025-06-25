@@ -5,6 +5,7 @@ public class AICharacterSpawner : MonoBehaviour
     [Header("Character")]
     [SerializeField] GameObject characterGameObject;
     [SerializeField] GameObject instantiatedGameObject;
+    [SerializeField] string idleAction;
 
     private void Awake()
     {
@@ -22,6 +23,7 @@ public class AICharacterSpawner : MonoBehaviour
             instantiatedGameObject = Instantiate(characterGameObject);
             instantiatedGameObject.transform.position = transform.position;
             instantiatedGameObject.transform.rotation = transform.rotation;
+            instantiatedGameObject.gameObject.GetComponent<AICharacterManager>().idleAction = idleAction;
             WorldAIManager.instance.AddCharacterToSpawnedCharactersList(instantiatedGameObject.GetComponent<AICharacterManager>()); 
         }
     }

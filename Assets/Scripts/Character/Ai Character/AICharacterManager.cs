@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -17,10 +18,20 @@ public class AICharacterManager : CharacterManager
     [SerializeField] protected AIState currentState;
 
     [Header("States")]
-    public  IdleState idle;
+    public IdleState idle;
+    public SearchingTargetState searchingTarget;
     public PursueTargetState pursueTarget;
     public CombatStanceState combatStance;          // Combat stance
     public AttackState attack;                      // Attack
+    public TalkingState talking;
+
+    [Header("Animation Action")]
+    public string idleAction;
+    public string talkingAction;
+
+    [Header("Flags")]
+    public bool isTalking;
+    public bool isSearching;
 
     protected override void Awake()
     {
@@ -39,10 +50,16 @@ public class AICharacterManager : CharacterManager
         base.Start();
 
         idle = Instantiate(idle);
+        searchingTarget = Instantiate(searchingTarget);
         pursueTarget = Instantiate(pursueTarget);
         combatStance = Instantiate(combatStance);
         attack = Instantiate(attack);
-        currentState = idle;
+        talking = Instantiate(talking);
+
+        if (currentState == null)
+        {
+            currentState = searchingTarget;
+        }
 
         currentHealth.OnValueChanged += CheckHp;
     }
@@ -77,28 +94,34 @@ public class AICharacterManager : CharacterManager
             nextState = currentState.Tick(this);
         }
 
+        ControlAIStopOrContinueMoving();
+
+        if (nextState != null)
+        {
+            currentState = nextState;
+        }
+
+    }
+    private void ControlAIStopOrContinueMoving()
+    {
         // the position/ rotation should be reset only after the state machine has processed it's tick
         navMeshAgent.transform.localPosition = Vector3.zero;
         navMeshAgent.transform.localRotation = Quaternion.identity;
 
-        if(aiCharacterCombatManager.currentTarget != null)
+        if (aiCharacterCombatManager.currentTarget != null)
         {
             aiCharacterCombatManager.targetsDirection = aiCharacterCombatManager.currentTarget.transform.position - transform.position;
             aiCharacterCombatManager.viewableAngle = WorldUtilityManager.instance.GetAngleOfTarget(transform, aiCharacterCombatManager.targetsDirection);
             aiCharacterCombatManager.distanceFromTarget = Vector3.Distance(transform.position, aiCharacterCombatManager.currentTarget.transform.position);
         }
 
-        if(nextState != null)
-        {
-            currentState = nextState;
-        }
 
-        if(navMeshAgent.enabled)
+        if (navMeshAgent.enabled)
         {
             Vector3 agentDestination = navMeshAgent.destination;
             float remainingDistance = Vector3.Distance(agentDestination, transform.position);
 
-            if(remainingDistance > navMeshAgent.stoppingDistance)
+            if (remainingDistance > navMeshAgent.stoppingDistance)
             {
                 isMoving.Value = true;
             }
