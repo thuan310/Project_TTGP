@@ -45,6 +45,7 @@ Maybe you can help with that. Just join his force, it's open to all villagers
 -> END
 
 ===village_discuss===
+#continue
 So… it’s the year 938. The Battle of Bạch Đằng.
 That’s a turning point. Ngô Quyền’s victory kept the Southern Han from taking over.
 Then the Villain might be trying to stop that.
@@ -56,11 +57,15 @@ Something simple. Local. Try to blend in. And maybe… try not to get caught?
 -> END
 
 ===village_caught===
+#continue
+(sneaking)
+#continue
 Hey! What are you doing?!
 Wait, I can explain—
 -> END
 
 ===village_end===
+#continue
 …Fine. You don’t seem dangerous.
 If you’re serious about helping, head west. Ngô Quyền’s camp is near the bamboo grove.
 Thanks.
