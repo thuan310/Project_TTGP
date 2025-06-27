@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3713043369163924571}
   - component: {fileID: 4285833984843642825}
   m_Layer: 0
-  m_Name: TalkToNPCQuestStep
+  m_Name: VillageStartQuestStep 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

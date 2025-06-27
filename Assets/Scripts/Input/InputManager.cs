@@ -9,41 +9,6 @@ using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(PlayerInput))]
 public class InputManager : MonoBehaviour {
-
-    [SerializeField] private PlayerInput playerInput;
-
-    private void Start()
-    {
-        playerInput.enabled = false;
-    }
-    private void OnEnable()
-    {
-        EventManager.instance.dialogueEvents.onDialogueStarted += EnableInput;
-        EventManager.instance.dialogueEvents.onDialogueFinished += DisableInput;
-    }
-
-    private void OnDisable()
-    {
-
-        EventManager.instance.dialogueEvents.onDialogueStarted -= EnableInput;
-        EventManager.instance.dialogueEvents.onDialogueFinished -= DisableInput;
-    }
-
-    private void EnableInput()
-    {
-
-        PlayerInputManager.instance.enabled = false;
-        playerInput.enabled = true;
-    }
-
-    private void DisableInput()
-    {
-
-        PlayerInputManager.instance.enabled = true;
-        playerInput.enabled = false;
-    }
-
-
     public void MovePressed(InputAction.CallbackContext context)
     {
         if (context.performed || context.started)
