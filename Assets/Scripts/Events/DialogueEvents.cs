@@ -15,6 +15,7 @@ public class DialogueEvents {
     public event Action onDialogueStarted;
     public void DialogueStarted()
     {
+
         if (onDialogueStarted != null)
         {
             onDialogueStarted();
@@ -24,6 +25,7 @@ public class DialogueEvents {
     public event Action onDialogueFinished;
     public void DialogueFinished()
     {
+
         if (onDialogueFinished != null)
         {
             onDialogueFinished();

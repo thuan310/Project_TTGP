@@ -9,8 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 745318581812220067}
-  - component: {fileID: 3713043369163924571}
-  - component: {fileID: 4285833984843642825}
+  - component: {fileID: 1023516893019113883}
   m_Layer: 0
   m_Name: TalkToNPCQuestStep
   m_TagString: Untagged
@@ -34,7 +33,7 @@ Transform:
   - {fileID: 7093897711707277389}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3713043369163924571
+--- !u!114 &1023516893019113883
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,34 +42,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5218337715359441829}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0f4191f18958e9408aca50ec3ff1479, type: 3}
+  m_Script: {fileID: 11500000, guid: 3fe9691ec00bbfd4ebb442a9dcb7ad78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueKnotName: villageStart
-  status: After you get sucked in the book, you appear in a whole new world
---- !u!136 &4285833984843642825
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5218337715359441829}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 3.68
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  dialogueKnotName: 
+  status: 
 --- !u!1001 &5851812477505787269
 PrefabInstance:
   m_ObjectHideFlags: 0

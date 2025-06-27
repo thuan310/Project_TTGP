@@ -178,6 +178,50 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 0f641fc1-1fd3-457c-9a66-90d3f4eaed1d
     m_ActionName: UI/X
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a8754967-ec5d-4fc0-b883-e4a608d1cb0e
+    m_ActionName: 'Player/Quit[/Keyboard/escape]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 74caf6b2-50df-4bbf-ba11-057d2d28855f
+    m_ActionName: 'Player/RB[/Mouse/leftButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: bfd2c405-e317-4a59-9f9c-c70aa35c87aa
+    m_ActionName: 'Player/RT[/Mouse/rightButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7af4bc8e-37cd-4f3b-b88b-d315e72caccd
+    m_ActionName: 'Player/HoldRT[/Mouse/rightButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2390c1f9-8324-4351-90ee-cf3408b85c68
+    m_ActionName: 'Player/Lock On[/Keyboard/backquote]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d2772764-64c9-415d-969d-a47525fe2dc9
+    m_ActionName: 'Player/Seek Left Lock On Target[/Keyboard/leftArrow]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 50ca9108-4fdb-49d4-9234-f72e34acaf4f
+    m_ActionName: 'Player/Seek Right Lock On Target[/Keyboard/rightArrow]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2bd097f9-f289-44ec-bbec-660318bffc3e
+    m_ActionName: 'Player/Switch Right Weapon[/Keyboard/tab]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c88e9f7f-a17d-45be-9639-c82a61625b2b
+    m_ActionName: Player/Switch Left Weapon
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f958080b-a2dd-45d1-8d33-17e47faedf20
+    m_ActionName: 'Minigame/Attack[/Mouse/leftButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ecc2f55b-be7b-416a-b9c0-c56a38329eea
+    m_ActionName: 'Minigame/Interact[/Keyboard/e]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
@@ -195,3 +239,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42761d20e09a3864f97394b275d40cdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerInput: {fileID: 7340741767931992628}

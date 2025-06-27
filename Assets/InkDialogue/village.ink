@@ -6,7 +6,7 @@ VAR VillageState = "REQUIREMENTS_NOT_MET"
 
 
 === villageStart ===
-
+~ StartQuest(VillageId)
 #timeline: Village
 Wahhh ? 
 Ouch... 
@@ -54,6 +54,7 @@ Then we should join Ngô Quyền. Help out.
 Yes, yes. But first — you can’t walk into camp looking like that.
 Right... Any ideas?
 Something simple. Local. Try to blend in. And maybe… try not to get caught?
+~ FinishQuestStep(VillageId)
 -> END
 
 ===village_caught===
@@ -62,6 +63,7 @@ Something simple. Local. Try to blend in. And maybe… try not to get caught?
 #continue
 Hey! What are you doing?!
 Wait, I can explain—
+~ FinishQuestStep(VillageId)
 -> END
 
 ===village_end===
@@ -70,6 +72,7 @@ Wait, I can explain—
 If you’re serious about helping, head west. Ngô Quyền’s camp is near the bamboo grove.
 Thanks.
 That’s our lead. Let’s move — history won’t wait for us.
+~ FinishQuestStep(VillageId)
 -> END
 
 
