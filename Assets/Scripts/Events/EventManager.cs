@@ -7,7 +7,7 @@ public class EventManager : MonoBehaviour
     public QuestEvents questEvents;
     public InputEvents inputEvents;
     public DialogueEvents dialogueEvents;
-
+    public TalkToNPCEvents talkToNPCEvents;
     private void Awake()
     {
         if (instance != null)
@@ -20,7 +20,7 @@ public class EventManager : MonoBehaviour
         questEvents = new QuestEvents();
         inputEvents = new InputEvents();
         dialogueEvents = new DialogueEvents();
-
+        talkToNPCEvents = new TalkToNPCEvents();
     }
 
 }
