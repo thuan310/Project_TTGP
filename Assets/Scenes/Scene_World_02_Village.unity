@@ -42417,31 +42417,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3376395391934865344, guid: 621ec37dc1f115b4c9e06304903e9b47, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.2356534
+      value: -7.157625
       objectReference: {fileID: 0}
     - target: {fileID: 3376395391934865344, guid: 621ec37dc1f115b4c9e06304903e9b47, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.462396
+      value: 5.3809013
       objectReference: {fileID: 0}
     - target: {fileID: 3376395391934865344, guid: 621ec37dc1f115b4c9e06304903e9b47, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.462955
+      value: -15.08293
       objectReference: {fileID: 0}
     - target: {fileID: 3376395391934865344, guid: 621ec37dc1f115b4c9e06304903e9b47, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.5933383
+      value: 0.9900739
       objectReference: {fileID: 0}
     - target: {fileID: 3376395391934865344, guid: 621ec37dc1f115b4c9e06304903e9b47, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.00025412306
+      value: 0.14049768
       objectReference: {fileID: 0}
     - target: {fileID: 3376395391934865344, guid: 621ec37dc1f115b4c9e06304903e9b47, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.8049531
+      value: 0.0037129424
       objectReference: {fileID: 0}
     - target: {fileID: 3376395391934865344, guid: 621ec37dc1f115b4c9e06304903e9b47, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0003447564
+      value: -0.0005268897
       objectReference: {fileID: 0}
     - target: {fileID: 3723930240180615755, guid: 621ec37dc1f115b4c9e06304903e9b47, type: 3}
       propertyPath: m_LocalPosition.x
@@ -42517,7 +42517,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7990109955864323496, guid: 621ec37dc1f115b4c9e06304903e9b47, type: 3}
       propertyPath: field of view
-      value: 33.166725
+      value: 39.95936
       objectReference: {fileID: 0}
     - target: {fileID: 7990109955864323496, guid: 621ec37dc1f115b4c9e06304903e9b47, type: 3}
       propertyPath: near clip plane
