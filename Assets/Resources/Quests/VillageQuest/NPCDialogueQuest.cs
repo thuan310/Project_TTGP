@@ -4,6 +4,7 @@ using UnityEngine.Events;
 
 public class NPCDialogueQuest : MonoBehaviour, IInteractableObject {
     public PlayerManager player { get; set; }
+    public AICharacterManager aiCharacterManager;
 
     [Header("Word Display When Interact")]
     public string wordDisplayWhenInteract;
@@ -33,6 +34,10 @@ public class NPCDialogueQuest : MonoBehaviour, IInteractableObject {
 
     }
 
+    public void Start()
+    {
+        aiCharacterManager = GetComponent<AICharacterManager>();
+    }
     private void EnableNPC(int id)
     {
         if (npcID == id)
@@ -43,16 +48,15 @@ public class NPCDialogueQuest : MonoBehaviour, IInteractableObject {
 
     public void OnInteracted()
     {
-        Debug.Log("Tesst");
-        if(isNPCActivated && isFirstTalked) 
+        //Debug.Log("Tesst");
+        player.playerDetectArea.interactableObjectsArray.Remove(this);
+        player.action.Value = PLayerAction.PlayingDialogue;
+        EventManager.instance.dialogueEvents.EnterDialogue(dialogueKnotName);
+        OnInteract.Invoke();
+        if (isNPCActivated && isFirstTalked) 
         {
             isFirstTalked = false;
-
-            player.playerDetectArea.interactableObjectsArray.Remove(this);
-            player.action.Value = PLayerAction.PlayingDialogue;
-            EventManager.instance.dialogueEvents.EnterDialogue(dialogueKnotName);
             EventManager.instance.talkToNPCEvents.TalkToNPC(npcID);
-            OnInteract.Invoke();
         }
 
     }
