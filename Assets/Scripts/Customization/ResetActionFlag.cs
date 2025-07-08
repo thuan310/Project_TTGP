@@ -2,14 +2,19 @@ using UnityEngine;
 
 public class ResetActionFlag : StateMachineBehaviour
 {
-    CharacterManager character;
+    public CharacterManager character;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if (character == null)
         {
             character = animator.GetComponent<CharacterManager>();
+            if(character == null)
+            {
+                return;
+            }
         }
+        
 
         // This is called when ac action ends, and the state returns to "empty"
         character.isPerformingAction = false;

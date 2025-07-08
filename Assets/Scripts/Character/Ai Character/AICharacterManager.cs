@@ -15,7 +15,7 @@ public class AICharacterManager : CharacterManager
     public NavMeshAgent navMeshAgent;
 
     [Header(" Current State")]
-    [SerializeField] public AIState currentState;
+    [SerializeField] protected AIState currentState;
 
     [Header("States")]
     public IdleState idle;

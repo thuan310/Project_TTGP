@@ -46,6 +46,23 @@ public class NPCDialogueQuest : MonoBehaviour, IInteractableObject {
         }
     }
 
+    public void Update()
+    {
+        if (player != null)
+        {
+            //print("asjc");
+            if (player.action.Value == PLayerAction.PlayingDialogue)
+            {
+                aiCharacterManager.isTalking = true;
+                aiCharacterManager.aiCharacterCombatManager.currentTarget = player;
+            }
+            if (player.action.Value == PLayerAction.Normal)
+            {
+                aiCharacterManager.isTalking = false;
+            }
+        }
+    }
+
     public void OnInteracted()
     {
         //Debug.Log("Tesst");
@@ -58,7 +75,6 @@ public class NPCDialogueQuest : MonoBehaviour, IInteractableObject {
             isFirstTalked = false;
             EventManager.instance.talkToNPCEvents.TalkToNPC(npcID);
         }
-
     }
 
 }
