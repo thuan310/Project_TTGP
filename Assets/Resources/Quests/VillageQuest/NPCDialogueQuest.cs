@@ -65,7 +65,7 @@ public class NPCDialogueQuest : MonoBehaviour, IInteractableObject {
 
     public void OnInteracted()
     {
-        //Debug.Log("Tesst");
+        Debug.Log("Tesst");
         player.playerDetectArea.interactableObjectsArray.Remove(this);
         player.action.Value = PLayerAction.PlayingDialogue;
         EventManager.instance.dialogueEvents.EnterDialogue(dialogueKnotName);
@@ -73,6 +73,8 @@ public class NPCDialogueQuest : MonoBehaviour, IInteractableObject {
         if (isNPCActivated && isFirstTalked) 
         {
             isFirstTalked = false;
+            Debug.Log("Tesst2");
+
             EventManager.instance.talkToNPCEvents.TalkToNPC(npcID);
         }
     }
