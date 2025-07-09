@@ -14,4 +14,10 @@ public class TalkToNPCEvents
     {
         onActivateNPC?.Invoke(npcID);
     }
+
+    public event Action onActivateIcon;
+    public void ActivateIcon()
+    {
+        onActivateIcon?.Invoke();
+    }
 }
