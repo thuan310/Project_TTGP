@@ -87,6 +87,10 @@ public class MinigameInputManager : MonoBehaviour
 
     private void HandleAttackInput()
     {
+        if(player == null)
+        {
+            return;
+        }
         if (player.isPerformingAction)
         {
             return;

@@ -10,11 +10,10 @@ public class PlayerAnimatorManager : CharacterAnimatorManager
         player = GetComponent<PlayerManager>();
     }
     private void OnAnimatorMove()
-    {
-        if(!UnityEditor.EditorApplication.isPlaying && TimelineManager.instance.IsTimeLinePlaying())
+    {   
+        if(TimelineManager.instance == null)
         {
-            player.transform.position += player.animator.deltaPosition;
-            player.transform.rotation *= player.animator.deltaRotation;
+            return;
         }
         if (UnityEditor.EditorApplication.isPlaying && TimelineManager.instance.IsTimeLinePlaying())
         {

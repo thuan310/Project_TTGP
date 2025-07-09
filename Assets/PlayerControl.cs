@@ -1401,6 +1401,34 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""PauseMenu"",
+            ""id"": ""dfdf0956-0821-4a62-8ca0-578afc69a8b5"",
+            ""actions"": [
+                {
+                    ""name"": ""AnyKey"",
+                    ""type"": ""Button"",
+                    ""id"": ""80a498ac-02bf-4852-a43c-8d745bae1712"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""cee0edb2-0ac7-495d-afef-0e70be76146c"",
+                    ""path"": ""<Keyboard>/anyKey"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AnyKey"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -1504,6 +1532,9 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         m_Minigame = asset.FindActionMap("Minigame", throwIfNotFound: true);
         m_Minigame_Attack = m_Minigame.FindAction("Attack", throwIfNotFound: true);
         m_Minigame_Interact = m_Minigame.FindAction("Interact", throwIfNotFound: true);
+        // PauseMenu
+        m_PauseMenu = asset.FindActionMap("PauseMenu", throwIfNotFound: true);
+        m_PauseMenu_AnyKey = m_PauseMenu.FindAction("AnyKey", throwIfNotFound: true);
     }
 
     ~@PlayerControl()
@@ -1511,6 +1542,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, PlayerControl.Player.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_UI.enabled, "This will cause a leak and performance issues, PlayerControl.UI.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_Minigame.enabled, "This will cause a leak and performance issues, PlayerControl.Minigame.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_PauseMenu.enabled, "This will cause a leak and performance issues, PlayerControl.PauseMenu.Disable() has not been called.");
     }
 
     public void Dispose()
@@ -1938,6 +1970,52 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         }
     }
     public MinigameActions @Minigame => new MinigameActions(this);
+
+    // PauseMenu
+    private readonly InputActionMap m_PauseMenu;
+    private List<IPauseMenuActions> m_PauseMenuActionsCallbackInterfaces = new List<IPauseMenuActions>();
+    private readonly InputAction m_PauseMenu_AnyKey;
+    public struct PauseMenuActions
+    {
+        private @PlayerControl m_Wrapper;
+        public PauseMenuActions(@PlayerControl wrapper) { m_Wrapper = wrapper; }
+        public InputAction @AnyKey => m_Wrapper.m_PauseMenu_AnyKey;
+        public InputActionMap Get() { return m_Wrapper.m_PauseMenu; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PauseMenuActions set) { return set.Get(); }
+        public void AddCallbacks(IPauseMenuActions instance)
+        {
+            if (instance == null || m_Wrapper.m_PauseMenuActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_PauseMenuActionsCallbackInterfaces.Add(instance);
+            @AnyKey.started += instance.OnAnyKey;
+            @AnyKey.performed += instance.OnAnyKey;
+            @AnyKey.canceled += instance.OnAnyKey;
+        }
+
+        private void UnregisterCallbacks(IPauseMenuActions instance)
+        {
+            @AnyKey.started -= instance.OnAnyKey;
+            @AnyKey.performed -= instance.OnAnyKey;
+            @AnyKey.canceled -= instance.OnAnyKey;
+        }
+
+        public void RemoveCallbacks(IPauseMenuActions instance)
+        {
+            if (m_Wrapper.m_PauseMenuActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IPauseMenuActions instance)
+        {
+            foreach (var item in m_Wrapper.m_PauseMenuActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_PauseMenuActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public PauseMenuActions @PauseMenu => new PauseMenuActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -2023,5 +2101,9 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
     {
         void OnAttack(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+    }
+    public interface IPauseMenuActions
+    {
+        void OnAnyKey(InputAction.CallbackContext context);
     }
 }
