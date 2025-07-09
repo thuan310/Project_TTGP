@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8976713301587257951}
   - component: {fileID: 1982737893016804881}
   - component: {fileID: -935912458441538328}
-  - component: {fileID: 5345243846967993302}
+  - component: {fileID: 2597326634733174209}
   m_Layer: 0
   m_Name: GetClothesQuestStep
   m_TagString: Untagged
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 4949391823912160548}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -162.68958, y: 0.6281452, z: -56.4817}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -64,13 +64,13 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5345243846967993302
+--- !u!114 &2597326634733174209
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -79,7 +79,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4949391823912160548}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 806894e5fe6d700449a5534b418c6ae3, type: 3}
+  m_Script: {fileID: 11500000, guid: 209d82834292064409bdeec3e83aa6c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueKnotName: village_caught
