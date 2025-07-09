@@ -17,6 +17,8 @@ public class TalkToNPCQuestStep : QuestStep
             EventManager.instance.talkToNPCEvents.ActivateNPC(id);
         }
 
+        EventManager.instance.talkToNPCEvents.ActivateIcon();
+
     }
 
 
