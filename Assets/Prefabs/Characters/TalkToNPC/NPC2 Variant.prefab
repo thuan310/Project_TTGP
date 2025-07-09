@@ -1044,7 +1044,8 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8833407353467079690, guid: 89a677c2df78b8b4f8e61563340fe293, type: 3}
     m_RemovedGameObjects:
     - {fileID: 966297461741814807, guid: 89a677c2df78b8b4f8e61563340fe293, type: 3}
     - {fileID: 9197998398701403075, guid: 89a677c2df78b8b4f8e61563340fe293, type: 3}
@@ -1184,7 +1185,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5811230297548458273, guid: 871ae871362f27645acb16e9711278f0, type: 3}
       propertyPath: dialogueName
-      value: villageNPC1
+      value: villageNPC2
       objectReference: {fileID: 0}
     - target: {fileID: 5811230297548458273, guid: 871ae871362f27645acb16e9711278f0, type: 3}
       propertyPath: isSeperateIcon
