@@ -66,9 +66,15 @@ Wait, I can explain—
 ~ FinishQuestStep(VillageId)
 -> END
 
+===village_fight===
+#continue
+You are really suspicuos i will fight you.
+-> END
+
 ===village_end===
 #continue
 …Fine. You don’t seem dangerous.
+#continue
 If you’re serious about helping, head west. Ngô Quyền’s camp is near the bamboo grove.
 Thanks.
 That’s our lead. Let’s move — history won’t wait for us.

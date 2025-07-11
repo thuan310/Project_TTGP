@@ -372,6 +372,12 @@ public class PlayerManager : CharacterManager
                 //DialogueInputManager.instance.gameObject.SetActive(false);
                 MinigameInputManager.instance.gameObject.SetActive(false);
                 break;
+            case PLayerAction.ConvincingVillagers:
+                PlayerInputManager.instance.gameObject.SetActive(false);
+                //DialogueInputManager.instance.gameObject.SetActive(false);
+                MinigameInputManager.instance.gameObject.SetActive(false);
+                break;
+                
         }
     }
 

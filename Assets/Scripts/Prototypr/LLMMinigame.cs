@@ -6,9 +6,7 @@ using System.Text;
 using System.Collections;
 using System;
 
-public class LLMMinigame : MonoBehaviour {
-
-    public GameObject InputManager;
+public class LLMMinigame : QuestStep {
 
     public GameObject UIPanel;
 
@@ -24,6 +22,10 @@ public class LLMMinigame : MonoBehaviour {
     public TMP_Text statusText;
     public Image trustBarFill; 
     public TMP_Text trustChangeText;
+
+    public AICharacterManager[] villagers;
+
+    public PlayerManager player;
 
     async void Start()
     {
@@ -53,6 +55,13 @@ public class LLMMinigame : MonoBehaviour {
                 // Update trust bar fill
                 float normalizedTrust = Mathf.InverseLerp(trustMin, trustMax, trustScore);
                 trustBarFill.fillAmount = normalizedTrust;
+
+                print(normalizedTrust);
+
+                if(normalizedTrust > trustGoal)
+                {
+                    SuccessConvincingVillager();
+                }
 
                 if (res.status == "win")
                 {
@@ -112,31 +121,34 @@ public class LLMMinigame : MonoBehaviour {
         public string status;
     }
 
-
-    private void OnTriggerEnter(Collider collision)
+    public void StartConvincingVillager()
     {
-        if (collision.CompareTag("Player"))
+        UIPanel.SetActive(true);
+        PlayerInputManager.instance.enabled = false;
+        OnAskButtonPressed();
+        villagers = FindObjectsByType<AICharacterManager>(0);
+        player = PlayerUIManager.instance.player;
+        foreach (AICharacterManager villager in villagers)
         {
-            UIPanel.SetActive(true);
-            InputManager.SetActive(false);
+            villager.aiCharacterCombatManager.currentTarget = player;
         }
     }
 
-    private void OnTriggerExit(Collider collision)
+    public void StopConvincingVillager()
     {
-        if (collision.CompareTag("Player"))
-        {
-            UIPanel.SetActive(false);
-        }
-    }
-
-    public void ExitMinigame()
-    {
+        EventManager.instance.dialogueEvents.EnterDialogue(dialogueKnotName);
         UIPanel.SetActive(false);
-        InputManager.SetActive(true);
-
+        foreach(AICharacterManager villager in villagers)
+        {
+            villager.navMeshAgent.enabled = true;
+        }
     }
 
+    public void SuccessConvincingVillager()
+    {
+        EventManager.instance.dialogueEvents.EnterDialogue("village_end");
+        UIPanel.SetActive(false);
+    }
     public void ShowTrustChange(int amount)
     {
         trustChangeText.text = amount >= 0 ? $"+{amount}" : $"{amount}";
@@ -149,5 +161,10 @@ public class LLMMinigame : MonoBehaviour {
     {
         yield return new WaitForSeconds(seconds);
         trustChangeText.gameObject.SetActive(false);
+    }
+
+    protected override void SetQuestStepState(string state)
+    {
+
     }
 }

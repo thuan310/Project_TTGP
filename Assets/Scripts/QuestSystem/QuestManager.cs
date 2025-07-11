@@ -169,7 +169,7 @@ public class QuestManager : MonoBehaviour {
             QuestData questData = quest.GetQuestData();
             string serializeData = JsonUtility.ToJson(questData);
             PlayerPrefs.SetString(quest.info.id, serializeData);
-            Debug.Log(serializeData);
+            //Debug.Log(serializeData);
         }
         catch (System.Exception e)
         {

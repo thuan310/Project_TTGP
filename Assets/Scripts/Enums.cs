@@ -61,6 +61,7 @@ public enum PLayerAction
     ChopTree,
     CarrySomething,
     LogSharpening,
-    PlayingDialogue
+    PlayingDialogue,
+    ConvincingVillagers
 
 }

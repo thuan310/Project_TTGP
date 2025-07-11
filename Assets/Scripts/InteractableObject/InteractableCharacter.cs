@@ -34,12 +34,12 @@ public class InteractableCharacter : QuestStep, IInteractableObject
             //print("asjc");
             if (player.action.Value == PLayerAction.PlayingDialogue)
             {
-                aiCharacterManager.isTalking = true;
-                aiCharacterManager.aiCharacterCombatManager.currentTarget = player;
+                aiCharacterManager.isTalking = true;                        // se thay doi hanh dong hay state cua Ai thanh noi chuyen
+                aiCharacterManager.aiCharacterCombatManager.currentTarget = player; // them vao de xu ly viec AI se huong ve ng choi khi noi chuyen
             }
             if (player.action.Value == PLayerAction.Normal)
             {
-                aiCharacterManager.isTalking = false;
+                aiCharacterManager.isTalking = false; // dang tinh la se ko nchuyen nua khi ng choi ket thuc cuoc hoi thoai nhuwng ma no lai anh huong den ca truoc khi bat dau noi chuyen
             }
         }
     }
