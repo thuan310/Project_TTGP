@@ -1,9 +1,49 @@
 fileFormatVersion: 2
-guid: 1be0c4c2c636f7f47b30a89b825da843
+guid: edab3b5238df0d4478638888555bcb44
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: AoChoang
+    second: {fileID: 2100000, guid: a475e6c0444605545945f89d49a7a5f9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: AoVaQuan
+    second: {fileID: 2100000, guid: a09b8e6f7d15ac74bb059ca18cf2edf7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BangBuocDau
+    second: {fileID: 2100000, guid: d378c35bce423e345971fd432b7cef29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Body
+    second: {fileID: 2100000, guid: 6ba2ce50353b4584eaef08f12c9a54de, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BuiToc
+    second: {fileID: 2100000, guid: 9e032eeb3f024e74aa0db8521006fd4f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ears
+    second: {fileID: 2100000, guid: d0ac27f429f576340bb7d605f64ea31f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Head
+    second: {fileID: 2100000, guid: cc5bcde636fbe374e84f4ffe3cea4dcd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: QuanBung
+    second: {fileID: 2100000, guid: 58d1de308c238c449b96d37331f17303, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
