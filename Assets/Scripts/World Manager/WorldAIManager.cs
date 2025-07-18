@@ -26,6 +26,7 @@ public class WorldAIManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        DontDestroyOnLoad(gameObject);
     }
 
     public void SpawnCharacters(AICharacterSpawner aiCharacterSpawner)

@@ -478,11 +478,11 @@ MonoBehaviour:
   navMeshAgent: {fileID: 0}
   currentState: {fileID: 11400000, guid: 69de6631debc8a147b9cd7d03512f3c6, type: 2}
   idle: {fileID: 11400000, guid: 69de6631debc8a147b9cd7d03512f3c6, type: 2}
-  searchingTarget: {fileID: 0}
+  searchingTarget: {fileID: 11400000, guid: 6ed2d94a34bbe2b408e94dc82fae31a2, type: 2}
   pursueTarget: {fileID: 11400000, guid: 58ce6b3a7e6f4f349a1f352cf77c0d59, type: 2}
   combatStance: {fileID: 11400000, guid: f34ab4693d839aa41969b576dcc8a25e, type: 2}
   attack: {fileID: 11400000, guid: ba17afc87fbc0e843ad1db38ff537281, type: 2}
-  talking: {fileID: 0}
+  talking: {fileID: 11400000, guid: ecfd84cdcf0f4b9498e071cd4fc42580, type: 2}
   idleAction: 
   talkingAction: 
   isTalking: 0

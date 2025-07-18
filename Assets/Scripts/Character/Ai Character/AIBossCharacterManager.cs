@@ -77,7 +77,7 @@ public class AIBossCharacterManager : AICharacterManager
         // you can either sahre the same Id for the boss and fog wall, or simply place a simply place a fogwall ID variable here on look  for using i
 
         // if the boss has been awakened, enable the fog walls
-        if(hasBeenAwakened.Value)
+        if (hasBeenAwakened.Value)
         {
             for(int i = 0; i<fogWalls.Count; i++)
             {

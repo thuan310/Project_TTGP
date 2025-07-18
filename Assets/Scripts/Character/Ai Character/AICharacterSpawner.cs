@@ -3,14 +3,14 @@ using UnityEngine;
 public class AICharacterSpawner : MonoBehaviour
 {
     [Header("Character")]
-    [SerializeField] GameObject characterGameObject;
+    [SerializeField] public GameObject characterGameObject;
     [SerializeField] GameObject instantiatedGameObject;
     [SerializeField] string idleAction;
 
     private void Awake()
     {
     }
-    private void Start()
+    private void OnEnable()
     {
         WorldAIManager.instance.SpawnCharacters(this);
         gameObject.SetActive(false);

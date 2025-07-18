@@ -61,6 +61,7 @@ public class PlayerManager : CharacterManager
     }
     protected override void Start()
     {
+        DontDestroyOnLoad(gameObject);
         if (!PlayerInputManager.instance.isTesting)
         {
             WorldSaveGameManager.instance.player = this;
@@ -78,6 +79,7 @@ public class PlayerManager : CharacterManager
 
         base.Start();
         playerDetectArea.player = this;
+        SceneNavigationManager.instance.player = this;
 
         if (PlayerInputManager.instance.isTesting&&!isDummy)
         {

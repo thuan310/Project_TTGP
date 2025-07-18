@@ -44,6 +44,8 @@ public class PursueTargetState : AIState
         NavMeshPath path = new NavMeshPath();
         aiCharacter.navMeshAgent.CalculatePath(aiCharacter.aiCharacterCombatManager.currentTarget.transform.position, path);
         aiCharacter.navMeshAgent.SetPath(path);
+        //Debug.Log(aiCharacter.navMeshAgent.isOnNavMesh);
+
 
         return this;
     }

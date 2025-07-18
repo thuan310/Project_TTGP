@@ -63,7 +63,6 @@ public class CharacterManager : MonoBehaviour
 
     protected virtual void Awake()
     {
-        DontDestroyOnLoad(gameObject);
 
         characterController = GetComponent<CharacterController>();
         //add animator
