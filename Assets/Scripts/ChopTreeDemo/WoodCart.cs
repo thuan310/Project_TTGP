@@ -33,6 +33,7 @@ public class WoodCart : MonoBehaviour, IInteractableObject
             coc.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
             coc.transform.SetParent(dropPlace[idx], false);
             idx++;
+            EventManager.instance.chopWoodMinigameEvents.DropWood();
 
         }
     }

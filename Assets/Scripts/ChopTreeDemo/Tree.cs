@@ -14,7 +14,7 @@ public class Tree : MonoBehaviour,IInteractableObject, IDamageable
     public string wordDisplayWhenInteract;
     public string WordDisplayWhenInteract { get => wordDisplayWhenInteract; set => wordDisplayWhenInteract = value; }
     public PlayerManager player { get; set; }
-
+    public string treeId;
 
     public UnityEvent onInteract;
     public UnityEvent OnInteract { get => onInteract; set => onInteract = value; }
@@ -106,6 +106,8 @@ public class Tree : MonoBehaviour,IInteractableObject, IDamageable
 
                 Destroy(topTree.gameObject);
 
+                EventManager.instance.chopWoodMinigameEvents.ChopWood();
+                EventManager.instance.chopWoodMinigameEvents.DisableIcon(treeId);
 
                 //// Spawn stump
                 //Instantiate(treeStump, transform.position, transform.rotation);

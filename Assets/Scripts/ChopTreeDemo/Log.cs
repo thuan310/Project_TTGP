@@ -83,6 +83,7 @@ public class Log : MonoBehaviour, IInteractableObject, IDamageable
                 //spawn log
                 Instantiate(coc, transform.position, this.transform.rotation);
 
+                EventManager.instance.chopWoodMinigameEvents.SharpenWood();
                 Destroy(this.gameObject);
 
 
