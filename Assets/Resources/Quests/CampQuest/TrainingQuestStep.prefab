@@ -9,10 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8976713301587257951}
-  - component: {fileID: 5546597174420695335}
   - component: {fileID: -4258384268779294604}
   - component: {fileID: -935912458441538328}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: TrainingQuestStep
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,26 +27,13 @@ Transform:
   m_GameObject: {fileID: 4949391823912160548}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -83.080956, y: 0.6375189, z: -0.2631986}
+  m_LocalPosition: {x: -83.25, y: 0.6375189, z: -0.09}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6463819791191082234}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5546597174420695335
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4949391823912160548}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 209d82834292064409bdeec3e83aa6c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogueKnotName: beingCaught
 --- !u!114 &-4258384268779294604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,6 +48,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueKnotName: 
   status: Train!
+  wordDisplayWhenInteract: Fight!
+  onInteract:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!135 &-935912458441538328
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -77,11 +67,11 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 7.16
+  m_Radius: 9.42
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &7706608708091844914
 PrefabInstance:

@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class DurkStompCollider : DamageCollider
 {
-    [SerializeField] AIDurkCharacterManager durkCharacterManager;
+    [SerializeField] AINgoQuyenCharacterManager durkCharacterManager;
 
     protected override void Awake()
     {
         base.Awake();
 
-        durkCharacterManager = GetComponentInParent<AIDurkCharacterManager>();
+        durkCharacterManager = GetComponentInParent<AINgoQuyenCharacterManager>();
 
     }
     public void StompAttack()

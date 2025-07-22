@@ -18,6 +18,7 @@ public class AiVillagerFighterManager : AICharacterManager
         }
 
         SceneNavigationManager.instance.BringBackToPreviousPlace();
+        EventManager.instance.dialogueEvents.EnterDialogue("chatGeneral");
 
         yield return new WaitForSeconds(5);
     }

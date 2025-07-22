@@ -16,7 +16,7 @@ public class AIBossCharacterManager : AICharacterManager
     public Observable<bool> bossFightIsActie;
     public Observable<bool> hasBeenDefeated ;
     public Observable<bool> hasBeenAwakened ;
-    [SerializeField] List<FogWallInteractable> fogWalls;
+    [SerializeField] public  List<FogWallInteractable> fogWalls;
     [SerializeField] string sleepAnimation;
     [SerializeField] string awakenAnimation;
 

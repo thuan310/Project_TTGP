@@ -1,6 +1,7 @@
 using UnityEngine;
+using UnityEngine.Events;
 
-public class TrainingQuestStep : QuestStep
+public class TrainingQuestStep : QuestStep, IInteractableObject
 {
     public string status;
 
@@ -22,5 +23,21 @@ public class TrainingQuestStep : QuestStep
     protected override void SetQuestStepState(string state)
     {
 
+    }
+
+    public string wordDisplayWhenInteract;
+    public string WordDisplayWhenInteract { get => wordDisplayWhenInteract; set => wordDisplayWhenInteract = value; }
+    public PlayerManager player { get; set; }
+
+
+    public UnityEvent onInteract;
+    public UnityEvent OnInteract { get => onInteract; set => onInteract = value; }
+
+    public void OnInteracted()
+    {
+        player.playerDetectArea.interactableObjectsArray.Remove(this);
+        OnInteract.Invoke();
+        FinishQuestStep();
+        SceneNavigationManager.instance.GotoAreana1();
     }
 }

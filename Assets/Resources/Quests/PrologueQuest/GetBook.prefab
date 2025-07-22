@@ -203,7 +203,7 @@ GameObject:
   - component: {fileID: 8950489261200066486}
   - component: {fileID: -7543249059393501774}
   - component: {fileID: 4276888219385187617}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GetBook
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -240,6 +240,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueKnotName: getBook
   wordDisplayWhenInteract: Take Book
+  onInteract:
+    m_PersistentCalls:
+      m_Calls: []
   status: Get another book from the shelf
 --- !u!65 &4276888219385187617
 BoxCollider:

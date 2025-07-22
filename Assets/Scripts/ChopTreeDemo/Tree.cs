@@ -31,6 +31,7 @@ public class Tree : MonoBehaviour,IInteractableObject, IDamageable
     [SerializeField] private Rigidbody topTreeRb;
     [SerializeField] private Rigidbody botTreeRb;
     [SerializeField] private Transform topTree;
+    [SerializeField] private Transform logTree;
     [SerializeField] private Transform botTree;
 
     private Quaternion logRotation;
@@ -91,6 +92,7 @@ public class Tree : MonoBehaviour,IInteractableObject, IDamageable
             default:
                 break ;
             case TreeType.Tree:
+                OnExitInteracted();
                 this.gameObject.GetComponent<BoxCollider>().enabled = false;
 
                 botTree.GetComponent<BoxCollider>().enabled = true;
@@ -99,9 +101,8 @@ public class Tree : MonoBehaviour,IInteractableObject, IDamageable
                 //topTreeRb.isKinematic = false;
                 //// Spawn FX
                 //Instantiate (fxTreeDestroyed, transform.position, transform.rotation);
-                OnExitInteracted();
                 //spawn log
-                Instantiate(log, transform.position , logRotation);
+                Instantiate(log, logTree.position, logRotation);
 
                 Destroy(topTree.gameObject);
 
@@ -166,9 +167,15 @@ public class Tree : MonoBehaviour,IInteractableObject, IDamageable
 
     public void OnExitInteracted()
     {
+        player.playerDetectArea.interactableObjectsArray.Remove(this);
         //print("quangu");
-        MinigameInputManager.instance.enabled = false;
+        player.action.Value = PLayerAction.Normal;
         MinigameInputManager.instance.player.playerDetectArea.interactableObjectsArray.Remove(this);
+    }
+
+    public void OnAttack()
+    {
+        Damage();
     }
 
 }

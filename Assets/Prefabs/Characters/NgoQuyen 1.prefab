@@ -599,7 +599,7 @@ GameObject:
   - component: {fileID: 7872401440352493852}
   - component: {fileID: 2299237833072001094}
   - component: {fileID: 8705557859616237496}
-  - component: {fileID: 684292957358264008}
+  - component: {fileID: 2599843043564778011}
   - component: {fileID: 5718374578782496213}
   - component: {fileID: 2719142878943891003}
   - component: {fileID: 2506763307330100403}
@@ -610,7 +610,7 @@ GameObject:
   - component: {fileID: 4683188737530986168}
   - component: {fileID: 3380845620095104361}
   - component: {fileID: 7079707750148231038}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: NgoQuyen 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -689,7 +689,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &684292957358264008
+--- !u!114 &2599843043564778011
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -698,7 +698,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2434606875979710276}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63a7ac1dfd0afa0468422c70cf0ce09b, type: 3}
+  m_Script: {fileID: 11500000, guid: c624e079c00722947a5fc015fe36e3f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isDead:
@@ -753,7 +753,7 @@ MonoBehaviour:
   endurance:
     _value: 0
   isDummy: 0
-  characterName: "H\xF9ng"
+  characterName: "General Ng\xF4 Quy\u1EC1n"
   aiCharacterCombatManager: {fileID: 0}
   aiCharacterLocomotionManager: {fileID: 0}
   navMeshAgent: {fileID: 97620727313031119}
@@ -768,7 +768,7 @@ MonoBehaviour:
   talkingAction: 
   isTalking: 0
   isSearching: 0
-  bossID: 0
+  bossID: 1
   bossIntroClip: {fileID: 8300000, guid: d73d2ae9ed2550a43b9a9146c29673dd, type: 3}
   bossBattleLoopClip: {fileID: 8300000, guid: 2f6a8037212b6d8479c8ea9f9a2d7ff3, type: 3}
   bossFightIsActie:

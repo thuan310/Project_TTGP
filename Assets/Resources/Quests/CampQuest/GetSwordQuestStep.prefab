@@ -203,7 +203,7 @@ GameObject:
   - component: {fileID: 8950489261200066486}
   - component: {fileID: -8343233640519440812}
   - component: {fileID: 4276888219385187617}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GetSwordQuestStep
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -218,14 +218,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6599703358358376508}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.665052, y: -0.24022043, z: -0.24022043, w: 0.665052}
-  m_LocalPosition: {x: -83.32, y: 0.24, z: 36.2}
+  m_LocalRotation: {x: -0.6381303, y: -0.30461422, z: -0.30461422, w: 0.63813025}
+  m_LocalPosition: {x: -88.37, y: 0.24, z: 44.65}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7797203384812306988}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: -51.035}
 --- !u!114 &-8343233640519440812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -263,5 +263,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.8910196, y: 6.783252, z: 9.909824}
-  m_Center: {x: -1.5738211, y: -1.0621566, z: 0.44431496}
+  m_Size: {x: 1.89, y: 6.77, z: 5.81}
+  m_Center: {x: -2.52, y: -1.31, z: 4.41}

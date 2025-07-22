@@ -32,18 +32,20 @@ public class Coc : MonoBehaviour,IInteractableObject
         {
             return;
         }
+        this.gameObject.GetComponent<Collider>().enabled = false;
         this.gameObject.transform.position = carryArea.position;
         this.gameObject.transform.rotation = carryArea.rotation;
 
         if (!PlayerUIManager.instance.carryLogMinigame_UI.GetComponentInChildren<ProgressBar>().CheckIfValided())
         {
+            this.gameObject.GetComponent<Collider>().enabled = true;
             OnExitInteracted();
         }
         return;
     }
     public  void OnInteracted()
     {
-        MinigameInputManager.instance.enabled = true;
+        player.playerDetectArea.interactableObjectsArray.Remove(this);
         OnReset();
         this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
         player.action.Value = PLayerAction.CarrySomething;
@@ -52,7 +54,8 @@ public class Coc : MonoBehaviour,IInteractableObject
 
     public void OnExitInteracted()
     {
-        MinigameInputManager.instance.enabled = false;
+        player.playerDetectArea.interactableObjectsArray.Remove(this);
+        player.action.Value = PLayerAction.Normal;
     }
 
 }

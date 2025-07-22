@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Camp
   m_EditorClassIdentifier: 
   <id>k__BackingField: Camp
-  displayName: 
+  displayName: Camping
   questPrerequisites: []
   questStepPrefabs:
   - {fileID: 5218337715359441829, guid: 7c12136783de2ce4380c8e56769566b0, type: 3}

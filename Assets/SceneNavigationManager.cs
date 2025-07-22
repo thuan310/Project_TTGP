@@ -43,12 +43,14 @@ public class SceneNavigationManager : MonoBehaviour
         previousSceneIndex = SceneManager.GetActiveScene().buildIndex;
         nextSceneIndex= previousSceneIndex++;
         StartCoroutine(LoadAsync(nextSceneIndex));
-        print("da CHuyen Scene");
+        print("da CHuyen next Scene");
     }
     public void BringBackToPreviousPlace()
     {
-        print("wth");
+        //print("wth");
+        player.gameObject.SetActive(false);
         player.gameObject.transform.position = playerPreviousPosition;
+        player.gameObject.SetActive(true);
         // Scene cũ vẫn còn và không bị reset
 
     }
@@ -57,14 +59,21 @@ public class SceneNavigationManager : MonoBehaviour
     {
         ArenaManager.instance.FightVillager();
         playerPreviousPosition = player.gameObject.transform.position;
+        //print(ArenaManager.instance.playerSpawnPosition.position);
+        //print(player.gameObject.transform.position);
+        player.gameObject.SetActive(false);
         player.gameObject.transform.position = ArenaManager.instance.playerSpawnPosition.position;
+        player.gameObject.SetActive(true);
+        //print(player.gameObject.transform.position);
     }
 
     public void GotoAreana2()
     {
         ArenaManager.instance.FightNgoQuyen();
         playerPreviousPosition = player.gameObject.transform.position;
+        player.gameObject.SetActive(false);
         player.gameObject.transform.position = ArenaManager.instance.playerSpawnPosition.position;
+        player.gameObject.SetActive(true);
         // Optionally: tắt các đối tượng trong scene cũ
         //int previousSceneIndex = SceneManager.GetActiveScene().buildIndex;
         //SceneManager.LoadScene("Scene_World_04_Arena2");

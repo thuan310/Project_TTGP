@@ -213,7 +213,7 @@ GameObject:
   - component: {fileID: 7705907650675938404}
   - component: {fileID: 8295685215161386313}
   - component: {fileID: 8833407353467079690}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Villagers_Dummy_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -528,7 +528,7 @@ MonoBehaviour:
   gravityForce: -5.55
   groundLayer:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 8192
   groundCheckSphereRaidus: 1
   yVelocity: {x: 0, y: 0, z: 0}
   groundedYVelocity: -20

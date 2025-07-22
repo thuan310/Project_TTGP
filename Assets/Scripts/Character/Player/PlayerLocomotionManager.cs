@@ -356,7 +356,7 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         if(player.action.Value != PLayerAction.Normal)
         {
             player.action.Value = PLayerAction.Normal;
-            player.enabled = false;
+            player.enabled = true;
             PlayerInputManager.instance.enabled = true;
             player.canMove = true;
         }

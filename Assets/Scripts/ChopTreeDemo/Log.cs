@@ -42,6 +42,8 @@ public class Log : MonoBehaviour, IInteractableObject, IDamageable
         healthSystem = new HealthSystem(healthAmount);
         healthSystem.OnDead += HealthSystem_OnDead;
 
+        print("Khoi tao Log voi mau" + healthAmount);
+
 
     }
 
@@ -130,12 +132,15 @@ public class Log : MonoBehaviour, IInteractableObject, IDamageable
         {
             return;
         }
+        this.gameObject.GetComponent<Collider>().enabled = false;
         this.gameObject.transform.position = carryArea.position;
         this.gameObject.transform.rotation = carryArea.rotation;
 
         if (!PlayerUIManager.instance.carryLogMinigame_UI.GetComponentInChildren<ProgressBar>().CheckIfValided())
         {
+            this.gameObject.GetComponent<Collider>().enabled = true;
             OnExitInteracted();
+
         }
         return;
     }
@@ -148,7 +153,8 @@ public class Log : MonoBehaviour, IInteractableObject, IDamageable
 
     public void OnExitInteracted()
     {
-        MinigameInputManager.instance.enabled = false;
+        player.playerDetectArea.interactableObjectsArray.Remove(this);
+        player.action.Value = PLayerAction.Normal;
     }
 
 }
