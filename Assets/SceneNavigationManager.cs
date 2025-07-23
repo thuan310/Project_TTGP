@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Security.Cryptography;
 using UnityEngine;
@@ -8,7 +8,13 @@ public class SceneNavigationManager : MonoBehaviour
 {
     public static SceneNavigationManager instance;
 
-    public int nextSceneIndexToLoad =1;
+    public PlayerManager player;
+
+    public int nextSceneIndex =1;
+
+    public int previousSceneIndex;
+
+    public Vector3 playerPreviousPosition;
 
     private void Awake()
     {
@@ -34,9 +40,62 @@ public class SceneNavigationManager : MonoBehaviour
 
     public void LoadNextScene()
     {
-        nextSceneIndexToLoad++;
-        StartCoroutine(LoadAsync(nextSceneIndexToLoad));
+        previousSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        nextSceneIndex= previousSceneIndex++;
+        StartCoroutine(LoadAsync(nextSceneIndex));
+        print("da CHuyen next Scene");
     }
+    public void BringBackToPreviousPlace()
+    {
+        //print("wth");
+        player.gameObject.SetActive(false);
+        player.gameObject.transform.position = playerPreviousPosition;
+        player.gameObject.SetActive(true);
+        // Scene cũ vẫn còn và không bị reset
+
+    }
+
+    public void GotoAreana1()
+    {
+        ArenaManager.instance.FightVillager();
+        playerPreviousPosition = player.gameObject.transform.position;
+        //print(ArenaManager.instance.playerSpawnPosition.position);
+        //print(player.gameObject.transform.position);
+        player.gameObject.SetActive(false);
+        player.gameObject.transform.position = ArenaManager.instance.playerSpawnPosition.position;
+        player.gameObject.SetActive(true);
+        //print(player.gameObject.transform.position);
+    }
+
+    public void GotoAreana2()
+    {
+        ArenaManager.instance.FightNgoQuyen();
+        playerPreviousPosition = player.gameObject.transform.position;
+        player.gameObject.SetActive(false);
+        player.gameObject.transform.position = ArenaManager.instance.playerSpawnPosition.position;
+        player.gameObject.SetActive(true);
+        // Optionally: tắt các đối tượng trong scene cũ
+        //int previousSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        //SceneManager.LoadScene("Scene_World_04_Arena2");
+    }
+
+    public void Update()
+    {
+        //print(player.gameObject.transform.position);
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            GotoAreana2();
+        }
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            GotoAreana1();
+        }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            BringBackToPreviousPlace();
+        }
+    }
+
     IEnumerator LoadAsync(int sceneIndex)
     {
         //loadingScreen.SetActive(true);
@@ -54,5 +113,14 @@ public class SceneNavigationManager : MonoBehaviour
         //    }
         yield return null;
         //}
+    }
+
+    private void SetSceneObjectsActive(int sceneIdx, bool isActive)
+    {
+        Scene scene = SceneManager.GetSceneAt(sceneIdx);
+        foreach (GameObject go in scene.GetRootGameObjects())
+        {
+            go.SetActive(isActive);
+        }
     }
 }

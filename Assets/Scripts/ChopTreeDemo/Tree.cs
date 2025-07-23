@@ -14,7 +14,7 @@ public class Tree : MonoBehaviour,IInteractableObject, IDamageable
     public string wordDisplayWhenInteract;
     public string WordDisplayWhenInteract { get => wordDisplayWhenInteract; set => wordDisplayWhenInteract = value; }
     public PlayerManager player { get; set; }
-
+    public string treeId;
 
     public UnityEvent onInteract;
     public UnityEvent OnInteract { get => onInteract; set => onInteract = value; }
@@ -31,6 +31,7 @@ public class Tree : MonoBehaviour,IInteractableObject, IDamageable
     [SerializeField] private Rigidbody topTreeRb;
     [SerializeField] private Rigidbody botTreeRb;
     [SerializeField] private Transform topTree;
+    [SerializeField] private Transform logTree;
     [SerializeField] private Transform botTree;
 
     private Quaternion logRotation;
@@ -99,12 +100,16 @@ public class Tree : MonoBehaviour,IInteractableObject, IDamageable
                 //topTreeRb.isKinematic = false;
                 //// Spawn FX
                 //Instantiate (fxTreeDestroyed, transform.position, transform.rotation);
-                OnExitInteracted();
                 //spawn log
-                Instantiate(log, transform.position , logRotation);
+                Instantiate(log, logTree.position, logRotation);
+
+
+                OnExitInteracted();
 
                 Destroy(topTree.gameObject);
 
+                EventManager.instance.chopWoodMinigameEvents.ChopWood();
+                EventManager.instance.chopWoodMinigameEvents.DisableIcon(treeId);
 
                 //// Spawn stump
                 //Instantiate(treeStump, transform.position, transform.rotation);
@@ -135,7 +140,7 @@ public class Tree : MonoBehaviour,IInteractableObject, IDamageable
         //Destroy(gameObject);
     }
 
-    public void Damage()
+    public void Damage(int damage)
     {
         if(player.action.Value != PLayerAction.ChopTree)
         {
@@ -144,7 +149,7 @@ public class Tree : MonoBehaviour,IInteractableObject, IDamageable
         Quaternion rotation = Quaternion.Euler(GetRelativeObjectDirection(this.transform.rotation.eulerAngles));
         //print(rotation.eulerAngles);
         // Damage Popup
-        int damageAmount = 10;
+        int damageAmount = damage;
 
         ////Shake Camera
         //treeShake.GenerateImpulse();
@@ -166,9 +171,36 @@ public class Tree : MonoBehaviour,IInteractableObject, IDamageable
 
     public void OnExitInteracted()
     {
+        player.playerDetectArea.interactableObjectsArray.Remove(this);
         //print("quangu");
-        MinigameInputManager.instance.enabled = false;
-        MinigameInputManager.instance.player.playerDetectArea.interactableObjectsArray.Remove(this);
+        player.action.Value = PLayerAction.Normal;
+        player = null;
     }
 
+    public void OnAttack()
+    {
+        Damage(10);
+    }
+
+    //DebugOnly
+    private void Update()
+    {
+        if (healthSystem.GetHealth() == 0)
+        {
+            return;
+        }
+        if (player == null)
+        {
+            return;
+        }
+        if (player.action.Value != PLayerAction.ChopTree)
+        {
+            return;
+        }
+
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            Damage(30);
+        }
+    }
 }

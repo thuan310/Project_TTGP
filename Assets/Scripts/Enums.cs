@@ -62,6 +62,7 @@ public enum PLayerAction
     CarrySomething,
     LogSharpening,
     PlayingDialogue,
-    ConvincingVillagers
+    ConvincingVillagers,
+    CarryCart
 
 }

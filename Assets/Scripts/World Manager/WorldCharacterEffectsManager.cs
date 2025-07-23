@@ -24,6 +24,7 @@ public class WorldCharacterEffectsManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        DontDestroyOnLoad(gameObject);
     }
 
     private void GenerateEffectIDs()

@@ -11,7 +11,7 @@ public class DialogueTriggerByStepIn : MonoBehaviour
     {
         if (collision.CompareTag("Player") && !isTriggered)
         {
-            Debug.Log("test");
+            //Debug.Log("test");
             EventManager.instance.dialogueEvents.EnterDialogue(dialogueKnotName);
             isTriggered = true;           
         }

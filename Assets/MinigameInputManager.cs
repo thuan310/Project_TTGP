@@ -152,20 +152,8 @@ public class MinigameInputManager : MonoBehaviour
                 if (PlayerUIManager.instance.logSharpeningMinigame_UI.GetComponentInChildren<ProgressBar>().CheckIfValided())
                 {
                     player.playerAnimatorManager.PlayTargetActionAnimation("SwingAxe", true, true, false, false);
-                    Vector3 colliderSize = Vector3.one * 0.3f;
-                    //Collider[] colliderArray = Physics.OverlapBox(hitArea.transform.position, colliderSize);
-                    ////print(colliderArray[0]);
-                    //foreach (Collider collider in colliderArray)
-                    //{
-                    //    //print(collider.name);
-                    //    if (collider.GetComponent<SharpingTable>() != null)
-                    //    {
-                    //        collider.GetComponent<SharpingTable>().SharpLog();
-                    //    }
-
-                    //    //sharpingTable.SharpLog();
-
-                    //}
+                    SharpingTable sharpingTable = player.playerDetectArea.interactableObject as SharpingTable;
+                    sharpingTable.SharpLog();
                 }
                 else
                 {
@@ -186,8 +174,8 @@ public class MinigameInputManager : MonoBehaviour
             {
                 yield break;
             }
-            print("hit");
-        //player.playerDetectArea.interactableObject.gameObject.GetComponent<Tree>().Damage();
+            //print("hit");
+        player.playerDetectArea.interactableObject.OnAttack();
         yield return new WaitForSeconds(0.5f);
     }
 }

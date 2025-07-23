@@ -8,6 +8,7 @@ public class EventManager : MonoBehaviour
     public InputEvents inputEvents;
     public DialogueEvents dialogueEvents;
     public TalkToNPCEvents talkToNPCEvents;
+    public ChopWoodMinigameEvents chopWoodMinigameEvents;
     private void Awake()
     {
         if (instance != null)
@@ -21,6 +22,7 @@ public class EventManager : MonoBehaviour
         inputEvents = new InputEvents();
         dialogueEvents = new DialogueEvents();
         talkToNPCEvents = new TalkToNPCEvents();
+        chopWoodMinigameEvents = new ChopWoodMinigameEvents();
     }
 
 }

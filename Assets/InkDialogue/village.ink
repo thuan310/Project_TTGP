@@ -78,7 +78,6 @@ You are really suspicuos i will fight you.
 If you’re serious about helping, head west. Ngô Quyền’s camp is near the bamboo grove.
 Thanks.
 That’s our lead. Let’s move — history won’t wait for us.
-~ FinishQuestStep(VillageId)
 -> END
 
 

@@ -12,7 +12,7 @@ public class Log : MonoBehaviour, IInteractableObject, IDamageable
 
     public UnityEvent onInteract;
     public UnityEvent OnInteract { get => onInteract; set => onInteract = value; }
-    private HealthSystem healthSystem;
+    public HealthSystem healthSystem;
 
     [SerializeField] private TreeType treeType;
     [SerializeField] private Transform coc;
@@ -42,18 +42,36 @@ public class Log : MonoBehaviour, IInteractableObject, IDamageable
         healthSystem = new HealthSystem(healthAmount);
         healthSystem.OnDead += HealthSystem_OnDead;
 
+        print("Khoi tao Log voi mau" + healthAmount);
+
 
     }
-
-    public void Damage()
+    private void Update()
     {
-        if (player.action.Value != PLayerAction.LogSharpening)
+        if (healthSystem.GetHealth() == 0)
         {
             return;
         }
+        if (player == null)
+        {
+            return;
+        }
+        if (player.action.Value != PLayerAction.LogSharpening)
+        {
+            return ;
+        }
+
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            Damage(30);
+        }
+    }
+
+    public void Damage(int damage)
+    {
         //print(rotation.eulerAngles);
         // Damage Popup
-        int damageAmount = 10;
+        int damageAmount = damage;
 
         ////Shake Camera
         //treeShake.GenerateImpulse();
@@ -77,11 +95,19 @@ public class Log : MonoBehaviour, IInteractableObject, IDamageable
                 //topTreeRb.isKinematic = false;
                 //// Spawn FX
                 //Instantiate (fxTreeDestroyed, transform.position, transform.rotation);
-                OnExitInteracted();
                 //spawn log
                 Instantiate(coc, transform.position, this.transform.rotation);
 
-                Destroy(this.gameObject);
+                EventManager.instance.chopWoodMinigameEvents.SharpenWood();
+
+
+                //print(player);
+                player.playerDetectArea.interactableObjectsArray.Clear();
+
+                player.action.Value = PLayerAction.Normal;
+                player = null;
+
+                Destroy(gameObject);
 
 
                 //// Spawn stump
@@ -113,15 +139,10 @@ public class Log : MonoBehaviour, IInteractableObject, IDamageable
         //Destroy(gameObject);
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        player = other.GetComponentInParent<PlayerManager>();
-        carryArea = player.gameObject.transform.Find("CarryArea");
-    }
-
     public void OnReset()
     {
         PlayerUIManager.instance.carryLogMinigame_UI.GetComponentInChildren<ProgressBar>().ResetValue();
+
     }
 
     void AttachToPlayer()
@@ -130,17 +151,21 @@ public class Log : MonoBehaviour, IInteractableObject, IDamageable
         {
             return;
         }
+        this.gameObject.GetComponent<Collider>().enabled = false;
         this.gameObject.transform.position = carryArea.position;
         this.gameObject.transform.rotation = carryArea.rotation;
 
         if (!PlayerUIManager.instance.carryLogMinigame_UI.GetComponentInChildren<ProgressBar>().CheckIfValided())
         {
+            this.gameObject.GetComponent<Collider>().enabled = true;
             OnExitInteracted();
+
         }
         return;
     }
     public void OnInteracted()
     {
+        carryArea = player.gameObject.transform.Find("CarryArea");
         player.action.Value = PLayerAction.CarrySomething;
         OnReset();
         InvokeRepeating("AttachToPlayer", 0f,0.01f);
@@ -148,7 +173,10 @@ public class Log : MonoBehaviour, IInteractableObject, IDamageable
 
     public void OnExitInteracted()
     {
-        MinigameInputManager.instance.enabled = false;
+        player.playerDetectArea.interactableObjectsArray.Remove(this);
+        player.action.Value = PLayerAction.Normal;
+        player = null;
+        CancelInvoke("AttachToPlayer");
     }
 
 }

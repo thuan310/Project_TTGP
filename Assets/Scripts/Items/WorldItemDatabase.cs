@@ -39,6 +39,11 @@ public class WorldItemDatabase : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
     public WeaponItem GetWeaponByID(int ID)
     {
         return weapons.FirstOrDefault(weapon => weapon.itemID == ID);

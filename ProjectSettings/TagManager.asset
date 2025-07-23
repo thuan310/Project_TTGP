@@ -15,10 +15,10 @@ TagManager:
   - Character
   - Damageable Character
   - InteractableObject
-  - 
+  - Wall
   - DamageCollider
   - Event Trigger
-  - 
+  - Ground
   - 
   - 
   - 

@@ -16,6 +16,11 @@ public interface IInteractableObject
         OnInteract.Invoke();
         player.playerDetectArea.interactableObjectsArray.Remove(this);
     }
+
+    public virtual void OnAttack()
+    {
+        
+    }
     public virtual void OnExitInteracted()
     {
         PlayerInputManager.instance.enabled = true;

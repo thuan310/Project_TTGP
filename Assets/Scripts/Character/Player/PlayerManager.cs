@@ -61,6 +61,7 @@ public class PlayerManager : CharacterManager
     }
     protected override void Start()
     {
+        DontDestroyOnLoad(gameObject);
         if (!PlayerInputManager.instance.isTesting)
         {
             WorldSaveGameManager.instance.player = this;
@@ -78,13 +79,15 @@ public class PlayerManager : CharacterManager
 
         base.Start();
         playerDetectArea.player = this;
+        SceneNavigationManager.instance.player = this;
 
         if (PlayerInputManager.instance.isTesting&&!isDummy)
         {
+            WorldSaveGameManager.instance.player = this;
             PlayerInputManager.instance.player = this;
 
             MinigameInputManager.instance.player = this;
-            MinigameInputManager.instance.enabled = false ;
+            MinigameInputManager.instance.enabled = false;
 
             PlayerCamera.instance.player = this;
             PlayerCamera.instance.SetCameraTo(this);
@@ -174,21 +177,14 @@ public class PlayerManager : CharacterManager
         //    return;
         //}
         //testing for some property cause my custom observer is suck
-        if (Input.GetKeyDown(KeyCode.Escape) && !isDummy)
-        {
-            //currentHealth.Value = 0;
-        }
 
         base.Update();
         ControlAction();
 
-        if(PlayerInputManager.instance.isActiveAndEnabled)
+        if (PlayerInputManager.instance.isActiveAndEnabled)
         {
-            if (!isDummy)
-            {
-                playerLocomotionManager.HandleAllMovement();
-            }
-            //handle movement
+            playerLocomotionManager.HandleAllMovement();
+        //handle movement
 
             // Regen Stamina
             playerStatsManager.RegenerateStamina();
@@ -350,34 +346,40 @@ public class PlayerManager : CharacterManager
             case PLayerAction.Normal:
                 PlayerInputManager.instance.gameObject.SetActive(true);
                 //DialogueInputManager.instance.gameObject.SetActive(false);
-                MinigameInputManager.instance.gameObject.SetActive(false);
+                MinigameInputManager.instance.enabled =false;
                 break;
             case PLayerAction.ChopTree:
                 PlayerInputManager.instance.gameObject.SetActive(false);
                 //DialogueInputManager.instance.gameObject.SetActive(false);
-                MinigameInputManager.instance.gameObject.SetActive(true);
+                MinigameInputManager.instance.enabled = true;
                 break;
             case PLayerAction.CarrySomething:
                 PlayerInputManager.instance.gameObject.SetActive(true);
                 //DialogueInputManager.instance.gameObject.SetActive(false);
-                MinigameInputManager.instance.gameObject.SetActive(true);
+                MinigameInputManager.instance.enabled = true;
                 break;
             case PLayerAction.LogSharpening:
                 PlayerInputManager.instance.gameObject.SetActive(false);
                 //DialogueInputManager.instance.gameObject.SetActive(false);
-                MinigameInputManager.instance.gameObject.SetActive(true);
+                MinigameInputManager.instance.enabled = true;
                 break;
             case PLayerAction.PlayingDialogue:
                 PlayerInputManager.instance.gameObject.SetActive(false);
                 //DialogueInputManager.instance.gameObject.SetActive(false);
-                MinigameInputManager.instance.gameObject.SetActive(false);
+                MinigameInputManager.instance.enabled = false;
                 break;
             case PLayerAction.ConvincingVillagers:
                 PlayerInputManager.instance.gameObject.SetActive(false);
                 //DialogueInputManager.instance.gameObject.SetActive(false);
-                MinigameInputManager.instance.gameObject.SetActive(false);
+                MinigameInputManager.instance.enabled = false;
                 break;
-                
+            case PLayerAction.CarryCart:
+                PlayerInputManager.instance.gameObject.SetActive(false);
+                //DialogueInputManager.instance.gameObject.SetActive(false);
+                MinigameInputManager.instance.enabled = false;
+                playerAnimatorManager.PlayTargetActionAnimation("Wheelbarrow Walk", false, false, true, true);
+                break;
+
         }
     }
 

@@ -15,6 +15,7 @@ public class InputManager : MonoBehaviour {
     private void Start()
     {
         playerInput.enabled = false;
+        DontDestroyOnLoad(gameObject);
     }
     private void OnEnable()
     {

@@ -18,7 +18,6 @@ public class Coc : MonoBehaviour,IInteractableObject
     private void OnTriggerEnter(Collider other)
     {
         player = other.GetComponentInParent<PlayerManager>();
-        carryArea = player.gameObject.transform.Find("CarryArea");
     }
 
     public void OnReset()
@@ -32,27 +31,33 @@ public class Coc : MonoBehaviour,IInteractableObject
         {
             return;
         }
+        this.gameObject.GetComponent<Collider>().enabled = false;
         this.gameObject.transform.position = carryArea.position;
         this.gameObject.transform.rotation = carryArea.rotation;
 
         if (!PlayerUIManager.instance.carryLogMinigame_UI.GetComponentInChildren<ProgressBar>().CheckIfValided())
         {
+            this.gameObject.GetComponent<Collider>().enabled = true;
             OnExitInteracted();
         }
         return;
     }
     public  void OnInteracted()
     {
-        MinigameInputManager.instance.enabled = true;
+        player.playerDetectArea.interactableObjectsArray.Remove(this);
         OnReset();
         this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
         player.action.Value = PLayerAction.CarrySomething;
+        carryArea = player.gameObject.transform.Find("CarryArea");
         InvokeRepeating("AttachToPlayer", 0f, 0.01f);
     }
 
     public void OnExitInteracted()
     {
-        MinigameInputManager.instance.enabled = false;
+        player.playerDetectArea.interactableObjectsArray.Remove(this);
+        player.action.Value = PLayerAction.Normal;
+        player = null;
+        CancelInvoke("AttachToPlayer");
     }
 
 }

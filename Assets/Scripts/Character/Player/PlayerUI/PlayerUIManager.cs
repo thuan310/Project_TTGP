@@ -120,7 +120,7 @@ public class PlayerUIManager : MonoBehaviour
                 return;
             case PLayerAction.CarrySomething:
                 playerUIDynamicHUDManager.ClearList();
-                playerUIDynamicHUDManager.AddCanvasToListAndTurnOn(treeChopMinigame_UI);
+                playerUIDynamicHUDManager.AddCanvasToListAndTurnOn(carryLogMinigame_UI);
                 return;
             case PLayerAction.LogSharpening:
                 playerUIDynamicHUDManager.ClearList();

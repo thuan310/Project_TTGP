@@ -42,11 +42,11 @@ public class SharpingTable : MonoBehaviour, IInteractableObject
                 continue;
             }
             //tree.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+            log.gameObject.transform.localPosition = new Vector3(0, 0, 0);
+            log.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
             log.transform.SetParent(dropPlace, false);
-            log.transform.localPosition = new Vector3(0, 0, 0);
-            log.transform.rotation = Quaternion.Euler(new Vector3(90, 0, 0));
             log.gameObject.GetComponent<Rigidbody>().isKinematic = true;
-            log.gameObject.GetComponent<CapsuleCollider>().enabled = false;
+            log.gameObject.GetComponent<Collider>().enabled = false;
 
         }
     }
@@ -55,14 +55,14 @@ public class SharpingTable : MonoBehaviour, IInteractableObject
 
     public void SharpLog()
     {
-        log.Damage();
+        log.Damage(10);
     }
     public  void OnInteracted()
     {
-        MinigameInputManager.instance.enabled = true;
         //print("A");
         if (dropPlace.GetComponentInChildren<Log>() != null)
         {
+            log.player = player;
             player.action.Value = PLayerAction.LogSharpening;
             OnReset();
         }
@@ -70,7 +70,8 @@ public class SharpingTable : MonoBehaviour, IInteractableObject
 
     public void OnExitInteracted()
     {
-        MinigameInputManager.instance.enabled = false;
+        player.playerDetectArea.interactableObjectsArray.Remove(this);
+        player.action.Value = PLayerAction.Normal;
     }
 
     private void OnDrawGizmos()

@@ -15,6 +15,15 @@ EditorBuildSettings:
     path: Assets/Scenes/Scene_World_02_Village.unity
     guid: b66438b2dee2090479206b6ba9c5e1d0
   - enabled: 1
+    path: Assets/Scenes/Scene_World_03_Camp.unity
+    guid: 1eef715d4cb75554cbb5e3ad3dadd2b1
+  - enabled: 1
+    path: Assets/Scenes/Scene_World_04_Arena1.unity
+    guid: 711242a57834f0c4f82e4954d5ad2183
+  - enabled: 1
+    path: Assets/Scenes/Scene_World_04_Arena2.unity
+    guid: 4b35c0f748c07134ba92c58c861f5d29
+  - enabled: 1
     path: Assets/Scenes/Scene_Test_DanhNhay.unity
     guid: f8ee5991ebebab84bad8d2e3662f7883
   - enabled: 1

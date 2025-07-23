@@ -30,7 +30,6 @@ public class VillageStartQuestStep : QuestStep
     {
         if (collision.CompareTag("Player"))
         {
-            Debug.Log("Dialogue");
             if (!dialogueKnotName.Equals(""))
             {
                 EventManager.instance.dialogueEvents.EnterDialogue(dialogueKnotName);

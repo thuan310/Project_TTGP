@@ -1,4 +1,4 @@
-using Unity.VisualScripting;
+﻿using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -55,6 +55,19 @@ public class AICharacterManager : CharacterManager
         combatStance = Instantiate(combatStance);
         attack = Instantiate(attack);
         talking = Instantiate(talking);
+
+
+        // Try to snap it onto the NavMesh
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(this.gameObject.transform.position, out hit, 2.0f, NavMesh.AllAreas))
+        {
+            navMeshAgent.Warp(hit.position);
+            Debug.Log("✅ Enemy agent warped to NavMesh.");
+        }
+        //else
+        //{
+        //    Debug.LogError("❌ Could not place agent on NavMesh at spawn position.");
+        //}
 
         if (currentState == null)
         {
