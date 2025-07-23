@@ -18,7 +18,6 @@ public class Coc : MonoBehaviour,IInteractableObject
     private void OnTriggerEnter(Collider other)
     {
         player = other.GetComponentInParent<PlayerManager>();
-        carryArea = player.gameObject.transform.Find("CarryArea");
     }
 
     public void OnReset()
@@ -49,6 +48,7 @@ public class Coc : MonoBehaviour,IInteractableObject
         OnReset();
         this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
         player.action.Value = PLayerAction.CarrySomething;
+        carryArea = player.gameObject.transform.Find("CarryArea");
         InvokeRepeating("AttachToPlayer", 0f, 0.01f);
     }
 
@@ -56,6 +56,8 @@ public class Coc : MonoBehaviour,IInteractableObject
     {
         player.playerDetectArea.interactableObjectsArray.Remove(this);
         player.action.Value = PLayerAction.Normal;
+        player = null;
+        CancelInvoke("AttachToPlayer");
     }
 
 }

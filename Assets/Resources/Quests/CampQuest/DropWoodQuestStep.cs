@@ -51,6 +51,7 @@ public class DropWoodQuestStep : QuestStep
         if (treesDropped >= treesToDrop)
         {
             FinishQuestStep();
+            EventManager.instance.dialogueEvents.EnterDialogue("woodMaking");
         }
 
     }

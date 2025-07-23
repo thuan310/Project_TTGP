@@ -7,9 +7,21 @@ public class WoodCart : MonoBehaviour, IInteractableObject
     public Vector3 colliderSize = new Vector3 (1,1,1) ;
     public Transform[] dropPlace;
     public int idx = 0;
+    public static WoodCart instance;
+
+    public bool isPickingCoc = false;
     private void Awake()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(instance);
+        }
     }
+
     private void Update()
     {
         Bo();
@@ -17,6 +29,10 @@ public class WoodCart : MonoBehaviour, IInteractableObject
 
     public void Bo()
     {
+        if (!isPickingCoc)
+        {
+            return;
+        }
         //Find objects in Hit area
         Collider[] colliderArray = Physics.OverlapBox(dropArea.transform.position, colliderSize);
         foreach (Collider collider in colliderArray)

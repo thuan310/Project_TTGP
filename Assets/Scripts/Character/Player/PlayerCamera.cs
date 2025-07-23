@@ -82,6 +82,11 @@ public class PlayerCamera : MonoBehaviour
 
             //print(viewAngle);
             cinemachineCamera.gameObject.GetComponent<CinemachineOrbitalFollow>().HorizontalAxis.Value = lockAngle;
+
+            if(currentLockOnTarget.isDead.Value)
+            {
+                SetCameraTo(player);
+            }
         }
         else
         {

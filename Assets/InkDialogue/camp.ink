@@ -79,6 +79,8 @@ Go away kid. We are talking
 -->END
 
 === woodMaking ===
+#continue
+...
 Not bad at all. You work fast.
 Just doing what I can.
 I’ve seen enough. I want your thoughts on the enemy’s next move.

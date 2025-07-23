@@ -174,7 +174,7 @@ public class MinigameInputManager : MonoBehaviour
             {
                 yield break;
             }
-            print("hit");
+            //print("hit");
         player.playerDetectArea.interactableObject.OnAttack();
         yield return new WaitForSeconds(0.5f);
     }

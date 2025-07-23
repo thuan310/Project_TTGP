@@ -42,8 +42,8 @@ public class SharpingTable : MonoBehaviour, IInteractableObject
                 continue;
             }
             //tree.gameObject.GetComponent<Rigidbody>().isKinematic = true;
-            log.transform.localPosition = new Vector3(0, 0, 0);
-            log.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+            log.gameObject.transform.localPosition = new Vector3(0, 0, 0);
+            log.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
             log.transform.SetParent(dropPlace, false);
             log.gameObject.GetComponent<Rigidbody>().isKinematic = true;
             log.gameObject.GetComponent<Collider>().enabled = false;
@@ -55,13 +55,14 @@ public class SharpingTable : MonoBehaviour, IInteractableObject
 
     public void SharpLog()
     {
-        log.Damage();
+        log.Damage(10);
     }
     public  void OnInteracted()
     {
         //print("A");
         if (dropPlace.GetComponentInChildren<Log>() != null)
         {
+            log.player = player;
             player.action.Value = PLayerAction.LogSharpening;
             OnReset();
         }

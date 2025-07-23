@@ -51,6 +51,7 @@ public class SharpenWoodQuestStep : QuestStep
         if (treesSharpened >= treesToSharpen)
         {
             FinishQuestStep();
+            WoodCart.instance.isPickingCoc = true;
         }
 
     }

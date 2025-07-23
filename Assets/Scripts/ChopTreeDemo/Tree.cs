@@ -92,7 +92,6 @@ public class Tree : MonoBehaviour,IInteractableObject, IDamageable
             default:
                 break ;
             case TreeType.Tree:
-                OnExitInteracted();
                 this.gameObject.GetComponent<BoxCollider>().enabled = false;
 
                 botTree.GetComponent<BoxCollider>().enabled = true;
@@ -103,6 +102,9 @@ public class Tree : MonoBehaviour,IInteractableObject, IDamageable
                 //Instantiate (fxTreeDestroyed, transform.position, transform.rotation);
                 //spawn log
                 Instantiate(log, logTree.position, logRotation);
+
+
+                OnExitInteracted();
 
                 Destroy(topTree.gameObject);
 
@@ -138,7 +140,7 @@ public class Tree : MonoBehaviour,IInteractableObject, IDamageable
         //Destroy(gameObject);
     }
 
-    public void Damage()
+    public void Damage(int damage)
     {
         if(player.action.Value != PLayerAction.ChopTree)
         {
@@ -147,7 +149,7 @@ public class Tree : MonoBehaviour,IInteractableObject, IDamageable
         Quaternion rotation = Quaternion.Euler(GetRelativeObjectDirection(this.transform.rotation.eulerAngles));
         //print(rotation.eulerAngles);
         // Damage Popup
-        int damageAmount = 10;
+        int damageAmount = damage;
 
         ////Shake Camera
         //treeShake.GenerateImpulse();
@@ -172,12 +174,33 @@ public class Tree : MonoBehaviour,IInteractableObject, IDamageable
         player.playerDetectArea.interactableObjectsArray.Remove(this);
         //print("quangu");
         player.action.Value = PLayerAction.Normal;
-        MinigameInputManager.instance.player.playerDetectArea.interactableObjectsArray.Remove(this);
+        player = null;
     }
 
     public void OnAttack()
     {
-        Damage();
+        Damage(10);
     }
 
+    //DebugOnly
+    private void Update()
+    {
+        if (healthSystem.GetHealth() == 0)
+        {
+            return;
+        }
+        if (player == null)
+        {
+            return;
+        }
+        if (player.action.Value != PLayerAction.ChopTree)
+        {
+            return;
+        }
+
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            Damage(30);
+        }
+    }
 }

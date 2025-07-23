@@ -73,6 +73,10 @@ public class AINgoQuyenCharacterManager : AIBossCharacterManager
     protected override void Update()
     {
         base.Update();
+        if (isDead.Value)
+        {
+            return;
+        }
         if (Input.GetKeyDown(KeyCode.U))
         {
             StartCoroutine(ProcessDeathEvent());
