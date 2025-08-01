@@ -77,11 +77,13 @@ public class PlayerManager : CharacterManager
             playerDetectArea.enabled = false;
         }
 
+
         base.Start();
         playerDetectArea.player = this;
         SceneNavigationManager.instance.player = this;
+        TutorialManager.instance.enabled = true;
 
-        if (PlayerInputManager.instance.isTesting&&!isDummy)
+        if (PlayerInputManager.instance.isTesting && !isDummy)
         {
             WorldSaveGameManager.instance.player = this;
             PlayerInputManager.instance.player = this;
@@ -94,17 +96,21 @@ public class PlayerManager : CharacterManager
             PlayerUIManager.instance.player = this;
             action.OnValueChanged += PlayerUIManager.instance.ControlUI;
 
+            //Test thu Tutorial 
+            SceneNavigationManager.instance.currentSceneIndex.Value = SceneManager.GetActiveScene().buildIndex;
+
             if (PlayerInputManager.instance.playerControls != null)
             {
                 PlayerInputManager.instance.playerControls.Enable();
             }
         }
 
-        SetUp();
+
+        PlayerSetUP();
 
     }
 
-    public void SetUp()
+    public void PlayerSetUP()
     {
         //print("Dang tinh lai Mana");
         //Update the total amount of health or stamina when the stat linked to either changes
@@ -218,12 +224,17 @@ public class PlayerManager : CharacterManager
     public void SaveGameDataFromCurrentCharacterData(ref CharacterSaveData currentCharacterData)
     {
         //print(playerName.Value);
-        currentCharacterData.sceneIndex = SceneManager.GetActiveScene().buildIndex;
+        currentCharacterData.sceneIndex = SceneNavigationManager.instance.currentSceneIndex.Value;
 
+        this.gameObject.SetActive(false);
+        playerLocomotionManager.enabled = false;
         currentCharacterData.characterName = playerName.Value;
         currentCharacterData.xPosition = transform.position.x;
-        currentCharacterData.yPosition = transform.position.y;
+        currentCharacterData.yPosition = transform.position.y+3;
         currentCharacterData.zPosition = transform.position.z;
+        playerLocomotionManager.enabled = true;
+        this.gameObject.SetActive(true);
+        print(transform.position);
 
         currentCharacterData.currentHealth = currentHealth.Value;
         currentCharacterData.currentStamina =currentHealth.Value;
@@ -347,31 +358,37 @@ public class PlayerManager : CharacterManager
                 PlayerInputManager.instance.gameObject.SetActive(true);
                 //DialogueInputManager.instance.gameObject.SetActive(false);
                 MinigameInputManager.instance.enabled =false;
+                PlayerCamera.instance.lockCamera = false;
                 break;
             case PLayerAction.ChopTree:
                 PlayerInputManager.instance.gameObject.SetActive(false);
                 //DialogueInputManager.instance.gameObject.SetActive(false);
                 MinigameInputManager.instance.enabled = true;
+                PlayerCamera.instance.lockCamera = true;
                 break;
             case PLayerAction.CarrySomething:
                 PlayerInputManager.instance.gameObject.SetActive(true);
                 //DialogueInputManager.instance.gameObject.SetActive(false);
                 MinigameInputManager.instance.enabled = true;
+                PlayerCamera.instance.lockCamera = false;
                 break;
             case PLayerAction.LogSharpening:
                 PlayerInputManager.instance.gameObject.SetActive(false);
                 //DialogueInputManager.instance.gameObject.SetActive(false);
                 MinigameInputManager.instance.enabled = true;
+                PlayerCamera.instance.lockCamera = true;
                 break;
             case PLayerAction.PlayingDialogue:
                 PlayerInputManager.instance.gameObject.SetActive(false);
                 //DialogueInputManager.instance.gameObject.SetActive(false);
                 MinigameInputManager.instance.enabled = false;
+                PlayerCamera.instance.lockCamera = true;
                 break;
             case PLayerAction.ConvincingVillagers:
                 PlayerInputManager.instance.gameObject.SetActive(false);
                 //DialogueInputManager.instance.gameObject.SetActive(false);
                 MinigameInputManager.instance.enabled = false;
+                PlayerCamera.instance.lockCamera = true;
                 break;
             case PLayerAction.CarryCart:
                 PlayerInputManager.instance.gameObject.SetActive(false);

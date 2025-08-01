@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1350f7c839ef2404480b4ff3088fe7d7, type: 3}
+  m_Name: TutorialOfTreeChopping
+  m_EditorClassIdentifier: 
+  tutorialName: 
+  tutorialStrings:
+  - To cut down the tree, you have to Press E repeatly to keep your force in the
+    red boundaries then press Left mouse to chop the tree down
+  - To carry log and Wood Stake you have to press E repeatly to keep the object beside
+    you
+  - 'To Sharpening the Log you have to press Left mouse when the cursor in red boundaries '
+  - Bring Wood Stake to cart to submit it
+  tutorialImages:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

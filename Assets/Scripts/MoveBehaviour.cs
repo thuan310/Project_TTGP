@@ -5,6 +5,10 @@ public class MoveBehaviour : PlayableBehaviour
 {
     public Vector3 startPosition;
     public Vector3 endPosition;
+    public Vector3 startRotation;
+    public Vector3 endRotation;
+
+    public bool isActive;
 
     private Transform target;
 
@@ -21,6 +25,12 @@ public class MoveBehaviour : PlayableBehaviour
         double duration = playable.GetDuration();
         float t = (float)(time / duration);
 
-        target.position = Vector3.Lerp(startPosition, endPosition, t);
+        target.gameObject.SetActive(isActive);
+
+        if (!isActive)
+        {
+            target.position = Vector3.Lerp(startPosition, endPosition, t);
+            target.rotation = Quaternion.Euler(endRotation);
+        }
     }
 }

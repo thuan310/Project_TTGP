@@ -271,8 +271,7 @@ public class WorldSaveGameManager : MonoBehaviour
     private void NewGame()
     {
         // save the newly created characters Stats, and items(when creation screen is added)
-        SaveGame();
-        StartCoroutine(LoadWorldScene());
+        SceneNavigationManager.instance.LoadNextScene();
     }
     public void LoadGame()
     {
@@ -358,13 +357,13 @@ public class WorldSaveGameManager : MonoBehaviour
     {
         //print("what the1");
         // if you just want 1 world scene use this
-        AsyncOperation loadOperation = SceneManager.LoadSceneAsync(worldSceneIndex);
+        //AsyncOperation loadOperation = SceneManager.LoadSceneAsync(worldSceneIndex);
         //print(worldSceneIndex);
         //print(currentCharacterData.characterName);
 
         // if you want to use different scenes for levels in your project use this
-        //AsyncOperation loadOperation = SceneManager.LoadSceneAsync(currentCharacterData.sceneIndex);
         player.LoadGameDataFromCurrentCharacterData(ref currentCharacterData);
+        SceneNavigationManager.instance.LoadSceneByIndex(currentCharacterData.sceneIndex);
 
         yield return null;
     }

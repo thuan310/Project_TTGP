@@ -63,6 +63,7 @@ Something simple. Local. Try to blend in. And maybe… try not to get caught?
 #continue
 Hey! What are you doing?!
 Wait, I can explain—
+#loadNextTutorial
 ~ FinishQuestStep(VillageId)
 -> END
 

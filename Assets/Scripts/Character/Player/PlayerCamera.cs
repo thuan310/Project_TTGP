@@ -11,6 +11,8 @@ public class PlayerCamera : MonoBehaviour
     public static PlayerCamera instance;
     public Camera cameraObject;
 
+    public bool lockCamera;
+
     [Header("Lock on")]
     [SerializeField] float lockOnRadius = 20;
     [SerializeField] float minimumViewablAngle = -50;
@@ -69,6 +71,8 @@ public class PlayerCamera : MonoBehaviour
 
     public void Update()
     {
+        cinemachineCamera.enabled = !lockCamera;
+
         HandleCameraTrackingObject();
     }
 

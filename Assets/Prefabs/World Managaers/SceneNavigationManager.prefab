@@ -45,7 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48a2b6972795d594587f0dfa38f296f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextSceneIndexToLoad: 1
+  player: {fileID: 0}
+  nextSceneIndex: 1
+  previousSceneIndex: 0
+  playerPreviousPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &4337978011315794607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,12 +64,27 @@ MonoBehaviour:
   m_Events:
     m_Signals:
     - {fileID: 11400000, guid: 33bf8b2b76d4e50478e5c97e629eb495, type: 2}
+    - {fileID: 11400000, guid: eb81f479460254145be030ab2872c5ac, type: 2}
     m_Events:
     - m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 2917585032068258803}
           m_TargetAssemblyTypeName: SceneNavigationManager, Assembly-CSharp
           m_MethodName: LoadNextScene
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2917585032068258803}
+          m_TargetAssemblyTypeName: SceneNavigationManager, Assembly-CSharp
+          m_MethodName: GotoAreana2
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

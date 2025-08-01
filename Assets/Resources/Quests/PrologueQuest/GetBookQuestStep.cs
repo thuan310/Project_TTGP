@@ -35,5 +35,10 @@ public class GetBookQuestStep : QuestStep, IInteractableObject
 
     }
 
-    
+    private void OnTriggerEnter(Collider other)
+    {
+        TutorialManager.instance.LoadNextTutorials();
+    }
+
+
 }

@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -5,6 +6,10 @@ public class MoveAsset : PlayableAsset
 {
     public Vector3 startPosition;
     public Vector3 endPosition;
+    public Vector3 startRotation;
+    public Vector3 endRotation;
+
+    public bool isActive;
 
     public ExposedReference<Transform> target;
 
@@ -13,10 +18,14 @@ public class MoveAsset : PlayableAsset
         var playable = ScriptPlayable<MoveBehaviour>.Create(graph);
         var behaviour = playable.GetBehaviour();
 
+        behaviour.SetTarget(SceneNavigationManager.instance.player.transform);
+
         behaviour.startPosition = startPosition;
         behaviour.endPosition = endPosition;
+        behaviour.startRotation = startRotation;
+        behaviour.endRotation = endRotation;
+        behaviour.isActive = isActive;
 
-        behaviour.SetTarget(target.Resolve(graph.GetResolver()));
 
         return playable;
     }

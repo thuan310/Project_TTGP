@@ -21,13 +21,13 @@ public class PythonServerManager : MonoBehaviour
 
     void Start()
     {
-        DontDestroyOnLoad(gameObject);
         StartPythonServer();
+        SceneNavigationManager.instance.currentSceneIndex.OnValueChanged += StopPythonServer;
     }
 
     void OnApplicationQuit()
     {
-        StopPythonServer();
+        StopPythonServer(0,0);
     }
 
     void StartPythonServer()
@@ -46,8 +46,14 @@ public class PythonServerManager : MonoBehaviour
         print("Đã chạy Python server.");
     }
 
-    void StopPythonServer()
+    private void StopPythonServer(int oldnum, int newnum)
     {
+        try
+        {
+            SceneNavigationManager.instance.currentSceneIndex.OnValueChanged -= StopPythonServer;
+        }
+        catch
+        { }
         if (pythonProcess != null && !pythonProcess.HasExited)
         {
             UnityEngine.Debug.Log("Killing Python server...");
