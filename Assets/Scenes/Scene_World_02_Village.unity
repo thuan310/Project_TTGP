@@ -39345,6 +39345,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7696473770544294674, guid: 1ec9d6ad7171b874ebf2d612d05177b8, type: 3}
+      propertyPath: typingSpeed
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 7696473770544294674, guid: 1ec9d6ad7171b874ebf2d612d05177b8, type: 3}
+      propertyPath: stopAudioSource
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7696473770544294674, guid: 1ec9d6ad7171b874ebf2d612d05177b8, type: 3}
+      propertyPath: dialogueTypingSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 52003cdf3fbefab409c0b564c5c2041b, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

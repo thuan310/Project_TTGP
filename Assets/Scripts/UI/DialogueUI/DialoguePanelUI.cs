@@ -10,10 +10,29 @@ public class DialoguePanelUI : MonoBehaviour {
     [SerializeField] private GameObject contentParent;
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private DialogueChoiceButton[] choiceButtons;
+
+    [SerializeField] private float typingSpeed = 0.05f;
+    private Coroutine typingCoroutine;
+
+    [SerializeField] private AudioClip dialogueTypingSound;
+    private AudioSource audioSource;
+    [SerializeField] private bool stopAudioSource;
+
+    [Range(1,5)]
+    [SerializeField] private int frequency = 2;
+
+    [Range(-3,3)]
+    [SerializeField] private float minPitch = 0.5f;
+    [Range(-3, 3)]
+    [SerializeField] private float maxPitch = 2f;
+
+
     private void Awake()
     {
         contentParent.SetActive(false);
         ResetPanel();
+
+        audioSource = this.gameObject.AddComponent<AudioSource>();
     }
 
     private void OnEnable()
@@ -45,7 +64,10 @@ public class DialoguePanelUI : MonoBehaviour {
 
     private void DisplayDialogue(string dialogue, List<Choice> dialogueChoices)
     {
-        dialogueText.text = dialogue;
+        if (typingCoroutine != null)
+            StopCoroutine(typingCoroutine);
+
+        typingCoroutine = StartCoroutine(TypeDialogue(dialogue));
 
         if (dialogueChoices.Count > choiceButtons.Length)
         {
@@ -79,6 +101,34 @@ public class DialoguePanelUI : MonoBehaviour {
         }
     }
 
+    private IEnumerator TypeDialogue(string dialogue)
+    {
+        dialogueText.text = "";
+        int currentCharacterCount = 0;
+
+        foreach (char letter in dialogue)
+        {
+            dialogueText.text += letter;
+            
+            PlayDialogueSound(currentCharacterCount);
+            currentCharacterCount++;
+
+            yield return new WaitForSeconds(typingSpeed);
+        }
+    }
+
+    private void PlayDialogueSound(int currentCharacterCount)
+    {
+        if (currentCharacterCount % frequency == 0)
+        {
+            if (stopAudioSource)
+            {
+                audioSource.Stop();
+            }
+            audioSource.pitch = Random.Range(minPitch, maxPitch);
+            audioSource.PlayOneShot(dialogueTypingSound);
+        }
+    }
     private void ResetPanel()
     {
         dialogueText.text = "";
