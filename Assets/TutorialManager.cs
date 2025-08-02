@@ -32,7 +32,7 @@ public class TutorialManager : MonoBehaviour
     }
     private void Start()
     {
-        this.enabled = false;
+        //this.enabled = false;
     }
 
     private void OnEnable()
