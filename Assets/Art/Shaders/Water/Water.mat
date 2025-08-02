@@ -65,7 +65,7 @@ Material:
     m_Colors:
     - _DeepColor: {r: 0.13501239, g: 0.19297561, b: 0.6981132, a: 0.7647059}
     - _FoamCOlor: {r: 1, g: 1, b: 1, a: 1}
-    - _RefractionScale: {r: 5, g: 5, b: 0, a: 0}
+    - _RefractionScale: {r: 60, g: 10, b: 0, a: 0}
     - _SurfaceColor: {r: 0.21176457, g: 0.6528304, b: 0.9254902, a: 0.6156863}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
