@@ -74,12 +74,13 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         GetMovementValues();
 
         moveDirection = PlayerCamera.instance.transform.forward * verticalMovement;
+        //print(PlayerCamera.instance.transform.forward);
         moveDirection = moveDirection + PlayerCamera.instance.transform.right * horizontalMovement;
 
-        //normalize de con nhan voi toc do
-        moveDirection.Normalize();
         //khong cho bay
         moveDirection.y = 0;
+
+        moveDirection.Normalize();
 
         if (player.isSprinting.Value)
         {
@@ -169,8 +170,8 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
             targetRotationDirection = Vector3.zero;
             targetRotationDirection = PlayerCamera.instance.cameraObject.transform.forward * verticalMovement;
             targetRotationDirection = targetRotationDirection + PlayerCamera.instance.cameraObject.transform.right * horizontalMovement;
-            targetRotationDirection.Normalize();
             targetRotationDirection.y = 0;
+            targetRotationDirection.Normalize();
             //print(PlayerCamera.instance.cameraObject.transform.forward);
 
             if (targetRotationDirection == Vector3.zero)

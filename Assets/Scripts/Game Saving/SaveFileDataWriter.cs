@@ -42,14 +42,14 @@ public class SaveFileDataWriter
             Debug.Log("Crating save file at save path:" + savePath);
 
             // Serialize the C# game data object into Json
-            string dataToScore = JsonUtility.ToJson(characterData, true);
+            string dataToStore = JsonUtility.ToJson(characterData, true);
 
             //write the file to our system
             using (FileStream stream = new FileStream(savePath, FileMode.Create))
             {
                 using (StreamWriter fileWriter = new StreamWriter(stream))
                 {
-                    fileWriter.Write(dataToScore);
+                    fileWriter.Write(dataToStore);
                 }
             }
         }

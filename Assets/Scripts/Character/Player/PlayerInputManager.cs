@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 using UnityEngine.TextCore.Text;
@@ -304,7 +305,7 @@ public class PlayerInputManager : MonoBehaviour
         vertical_Input = movement_Input.y;
         horizontal_Input = movement_Input.x;
 
-        moveAmount = Mathf.Clamp01(Mathf.Abs(vertical_Input) + Mathf.Abs(horizontal_Input));
+        moveAmount = Mathf.Clamp01(movement_Input.magnitude);
 
         if (moveAmount > 0f && moveAmount <= 0.5f)
         {
