@@ -49,4 +49,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f815b7fd9a570b843abe7c53f3496965, type: 2}
   tutorialVillage:
   - {fileID: 11400000, guid: 3574c6fe87a7f0b4d81ee0309e9bd57e, type: 2}
-  tutorialCamp: []
+  tutorialCamp:
+  - {fileID: 11400000, guid: 8552f2bcf72728640947bc1b7d090807, type: 2}
+  - {fileID: 11400000, guid: 2a0486a5f369ce94481cffaf5b9203e4, type: 2}
