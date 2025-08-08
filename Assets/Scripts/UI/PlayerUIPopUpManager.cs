@@ -16,8 +16,21 @@ public class PlayerUIPopUpManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI bossDefeatedPopUpText;
     [SerializeField] CanvasGroup bossDefeatedPopUpCanvasGroup; // allows us to set the alpha to fade over time
 
+    [SerializeField] bool trigger;
+
+    private void Update()
+    {
+        SendYouDiedPopUp();
+    }
+
     public void SendYouDiedPopUp()
     {
+        if (!trigger)
+        { 
+            return;
+        }
+
+        trigger = false;
         // active post processing effects
 
         youDiedPopUpGameObject.SetActive(true);
@@ -107,6 +120,11 @@ public class PlayerUIPopUpManager : MonoBehaviour
         }
         canvas.alpha = 0;
 
+        yield return null;
+    }
+
+    private IEnumerator DisplayGameOver(CanvasGroup canvas)
+    {
         yield return null;
     }
 }
