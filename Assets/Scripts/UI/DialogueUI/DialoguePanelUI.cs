@@ -110,7 +110,7 @@ public class DialoguePanelUI : MonoBehaviour {
         {
             dialogueText.text += letter;
             
-            PlayDialogueSound(currentCharacterCount);
+            //PlayDialogueSound(currentCharacterCount);
             currentCharacterCount++;
 
             yield return new WaitForSeconds(typingSpeed);
