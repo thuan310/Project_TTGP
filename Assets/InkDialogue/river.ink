@@ -21,11 +21,51 @@ That’s the nicest way I’ve ever been told I look tired.
 #continue
 --> END
 
+===rest===
+#continue
+You’ve done much already. Rest for now. When you’re ready, speak to me again.
+#continue
+Resting before the final act… just like heroes in stories.
+-->END
 
+===fight===
+#continue
+Sir, enemy ship have passed our stake trap. We await your further instructions.
+#continue
+Great, this is the right time to counterattack and then with the help of nature, we will tear them down.
+#continue
+You can go with me on my boat. i believe your skills will help us a lot.
+#continue
+That’s our cue. Let’s board the ship and guide them right into history.
+#continue
+Be brave. Fight not just for victory, but for the generations to come. CHARGEEEEEEE!.
+#continue
+CHARGEEEEEE!
+-->END
 
+===counterAttack===
+#continue
+Now! The river is ours! Soldiers — attack!
+--> END
 
+===boss===
+#continue
+The Villain… he's getting away!
+#continue
+Let him go. For now, his plans are broken.
+You helped preserve this turning point in history. Let’s savor that.
+-->END
 
-
+===celebration===
+#continue
+Ngô Quyền has won! We are free!
+#continue
+Look at them… singing, dancing… This is what you fought for.
+#continue
+And what we’ll keep fighting to protect.
+#continue
+For now? Let’s celebrate. You've earned it.
+-->END
 
 
 
