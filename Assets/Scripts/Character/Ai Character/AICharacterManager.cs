@@ -28,6 +28,7 @@ public class AICharacterManager : CharacterManager
     [Header("Animation Action")]
     public string idleAction;
     public string talkingAction;
+    public string searchingAction;
 
     [Header("Flags")]
     public bool isTalking;

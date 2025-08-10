@@ -14,6 +14,10 @@ public class SearchingTargetState : AIState
         {
             // return this state, to continueally search for a target (keep the state here, until a target is found)
             aiCharacter.aiCharacterCombatManager.FindATargetViaLineOfSight(aiCharacter);
+            if (!aiCharacter.isPerformingAction)
+            {
+                aiCharacter.characterAnimatorManager.PlayTargetActionAnimation(aiCharacter.searchingAction, true, true);
+            }
             return this;
         }
     }

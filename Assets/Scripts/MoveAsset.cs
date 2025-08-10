@@ -11,14 +11,15 @@ public class MoveAsset : PlayableAsset
 
     public bool isActive;
 
-    public ExposedReference<Transform> target;
+    //public ExposedReference<Transform> target;
 
     public override Playable CreatePlayable(PlayableGraph graph, GameObject owner)
     {
         var playable = ScriptPlayable<MoveBehaviour>.Create(graph);
         var behaviour = playable.GetBehaviour();
 
-        behaviour.SetTarget(SceneNavigationManager.instance.player.transform);
+        try { behaviour.SetTarget(SceneNavigationManager.instance.player.transform); } catch { return playable; }
+
 
         behaviour.startPosition = startPosition;
         behaviour.endPosition = endPosition;

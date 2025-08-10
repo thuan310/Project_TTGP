@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AICharacterSpawner : MonoBehaviour
 {
@@ -10,7 +10,7 @@ public class AICharacterSpawner : MonoBehaviour
     private void Awake()
     {
     }
-    private void OnEnable()
+    private void Start()
     {
         WorldAIManager.instance.SpawnCharacters(this);
         gameObject.SetActive(false);

@@ -20,10 +20,11 @@ public class DamageCollider : MonoBehaviour
 
     [Header("Character Damaged")]
     protected List<CharacterManager> charactersDamaged = new List<CharacterManager>();
+    protected CharacterManager character;
 
     protected virtual void Awake()
     {
-
+        character = GetComponentInParent<CharacterManager>();
     }
 
     protected virtual void OnTriggerEnter(Collider other)
@@ -36,13 +37,17 @@ public class DamageCollider : MonoBehaviour
             contactPoint = other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
 
             // check if we can damage this target based on frindly fire
+            if (!WorldUtilityManager.instance.CanIDamageThisTarget(character.characterGroup, damageTarget.characterGroup))
+            {
+                return;
+            }
 
-            // check if target is blocking
+                // check if target is blocking
 
-            //check if target is vulnerable
+                //check if target is vulnerable
 
-            // damage
-            DamageTarget(damageTarget);
+                // damage
+                DamageTarget(damageTarget);
         }
     }
 
