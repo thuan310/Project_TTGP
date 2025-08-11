@@ -92,6 +92,27 @@ I guess we are.
 Come, i got something to show you.
 -->END
 
+===backToCamp===
+#timeline: Camp2
+...
+#continue
+Ngô Quyền: You’ve done much already. Rest for now. Tomorrow is a big day, you need your energy for that.
+Spirit: Resting before the final act… just like heroes in stories.
+
+-->END
+
+===ngoQuyenPhatBieu===
+#timeline: Camp3
+"Warriors of mine!
+Ahead lies the storm, behind us — our homeland.
+The enemy waits to steal all we hold dear — our land, our families, our honor.
+But today… not one among us shall take a step back!
+Every spear thrust, every swing of the sword, will carve our names into the eternal pages of history!
+Forward! For glory, for freedom, and for our beloved homeland — forever!"
+#continue
+-->END
+
+
 
 
 

@@ -81,6 +81,15 @@ Thanks.
 That’s our lead. Let’s move — history won’t wait for us.
 -> END
 
+===village_cellebration===
+#timeline: Village2
+Villager: Ngô Quyền has won! We are free!
+#continue
+Spirit: Look at them… singing, dancing… This is what you fought for.
+MC: And we’ll keep fighting to protect.
+Spirit: Now let's go home
+#continue
+-> END
 
 
 
