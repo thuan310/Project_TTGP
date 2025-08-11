@@ -17,7 +17,8 @@ VAR PrologueState = "REQUIREMENTS_NOT_MET"
 ("Ugh... How long was I out?")
 #continue
 ("Still so much to study... Maybe just one more book.")
-
+#loadNextTutorial
+("Lets grab one at the shelves)
 ~ StartQuest(PrologueId)
 -> END
 
@@ -64,6 +65,7 @@ Before we jump in, touch the book again. It’ll open the quest menu — you'll 
 === openQuestMenu ===
 Alright. Here goes nothing—
     #continue
+~ FinishQuestStep(PrologueId)
 -->END
 
 

@@ -1,6 +1,8 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
+using UnityEngine.TextCore.Text;
 
 
 public class PlayerInputManager : MonoBehaviour
@@ -116,6 +118,8 @@ public class PlayerInputManager : MonoBehaviour
         {
             playerControls.Disable();
         }
+        player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, 0, false);
+        player.isMoving.Value = false;
     }
 
 
@@ -301,7 +305,7 @@ public class PlayerInputManager : MonoBehaviour
         vertical_Input = movement_Input.y;
         horizontal_Input = movement_Input.x;
 
-        moveAmount = Mathf.Clamp01(Mathf.Abs(vertical_Input) + Mathf.Abs(horizontal_Input));
+        moveAmount = Mathf.Clamp01(movement_Input.magnitude);
 
         if (moveAmount > 0f && moveAmount <= 0.5f)
         {
@@ -331,13 +335,13 @@ public class PlayerInputManager : MonoBehaviour
         // if we are not locked on, only use the move amount
 
         if (!player.isLockedOn.Value || player.isSprinting.Value)
-    {
-        player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount, player.isSprinting.Value);
-    }
-    else
-    {
-        player.playerAnimatorManager.UpdateAnimatorMovementParameters(horizontal_Input, vertical_Input, player.isSprinting.Value);
-    }
+        {
+            player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount, player.isSprinting.Value);
+        }
+        else
+        {
+            player.playerAnimatorManager.UpdateAnimatorMovementParameters(horizontal_Input, vertical_Input, player.isSprinting.Value);
+        }
 
         // if we are locked on pass the horizontal movement as well
 

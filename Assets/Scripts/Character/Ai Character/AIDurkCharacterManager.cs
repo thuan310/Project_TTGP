@@ -9,13 +9,13 @@ public class AIDurkCharacterManager : AIBossCharacterManager
     // since durk has his own SFX (Club, stomp) that are unique to his character only, we created a durk sfx manager
     // and to reference this new sfx manager, and to keep our design pattern the same, we need a durk character manager to reference it from
 
-     public AIDurkSoundFXManager durkSoundFXManager;
-    [HideInInspector] public AIDurkCombatManager durkCombatManager;
+     public AINgoQuyenSoundFXManager durkSoundFXManager;
+    [HideInInspector] public AINgoQuyenCombatManager durkCombatManager;
     protected override void Awake()
     {
         base.Awake();
 
-        durkSoundFXManager = GetComponent<AIDurkSoundFXManager>();
-        durkCombatManager = GetComponent<AIDurkCombatManager>();
+        durkSoundFXManager = GetComponent<AINgoQuyenSoundFXManager>();
+        durkCombatManager = GetComponent<AINgoQuyenCombatManager>();
     }
 }

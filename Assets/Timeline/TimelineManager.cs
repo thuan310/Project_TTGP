@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
@@ -6,7 +6,7 @@ using UnityEngine.Timeline;
 
 public class TimelineManager : MonoBehaviour {
     public static TimelineManager instance;
-    private bool isPausedBySignal = false;
+    public bool isPausedBySignal = false;
 
     [SerializeField] private PlayableDirector director;
     [SerializeField] private List<TimelineEntry> timelineAssets;
@@ -67,7 +67,8 @@ public class TimelineManager : MonoBehaviour {
 
         if (director.state == PlayState.Playing)
         {
-            director.Pause();
+            //director.Pause();
+            director.playableGraph.GetRootPlayable(0).SetSpeed(0); // Dừng
             isPausedBySignal = true;
             Debug.Log("Timeline paused by signal.");
         }
@@ -75,9 +76,10 @@ public class TimelineManager : MonoBehaviour {
 
     public void ResumeTimeline()
     {
-        if (isPausedBySignal && director.state != PlayState.Playing)
+        if (isPausedBySignal)
         {
-            director.Resume();
+            //director.Resume();
+            director.playableGraph.GetRootPlayable(0).SetSpeed(1);
             isPausedBySignal = false;
             Debug.Log("Timeline resumed.");
         }
@@ -85,7 +87,7 @@ public class TimelineManager : MonoBehaviour {
 
     public bool IsTimeLinePlaying()
     {
-        return director.state == PlayState.Playing;
+        return !isPausedBySignal;
     }
 
     public void SkipToNextPause()
@@ -131,6 +133,41 @@ public class TimelineManager : MonoBehaviour {
         {
 
             ResumeTimeline();
+        }
+    }
+
+    void Start()
+    {
+        // Step 1: Lấy Signal Receiver
+        var sceneNavigationReceiver = SceneNavigationManager.instance.gameObject.GetComponent<SignalReceiver>();
+        if (sceneNavigationReceiver == null)
+        {
+            Debug.LogError("no sceneNavigationReceiver reference");
+            return;
+        }
+
+        // Step 2: Gán vào Signal Emitter
+        // (Giả sử bạn đã tạo Signal Asset và Emitter sẵn trong Timeline)
+        TimelineAsset timeline = timelineAssets[0].asset;
+        if (timeline == null)
+        {
+            Debug.LogError("NO TimeLineAssest");
+            return;
+        }
+
+        foreach (var track in timeline.GetOutputTracks())
+        {
+            if (track is SignalTrack signalTrack)
+            {
+                if (track.name == "ChangeSceneTrack")
+                {
+                    director.SetGenericBinding(signalTrack, sceneNavigationReceiver);
+                }
+                //if (track.name == "TutorialTriggerTrack")
+                //{
+                //    director.SetGenericBinding(signalTrack, tutorialTriggerReceiver);
+                //}
+            }
         }
     }
 

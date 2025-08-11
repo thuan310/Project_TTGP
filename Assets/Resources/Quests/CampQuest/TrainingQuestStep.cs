@@ -38,6 +38,7 @@ public class TrainingQuestStep : QuestStep, IInteractableObject
         player.playerDetectArea.interactableObjectsArray.Remove(this);
         OnInteract.Invoke();
         FinishQuestStep();
+        TutorialManager.instance.LoadNextTutorials();
         SceneNavigationManager.instance.GotoAreana1();
     }
 }

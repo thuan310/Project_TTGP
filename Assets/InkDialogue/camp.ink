@@ -29,6 +29,7 @@ MC: S..Sorry, I am just...
 Soldier: What are you saying. Pick up a sword over there and go training.
 #continue
 Spirit: Maybe we should listen to him for now.
+#continue
 ~ FinishQuestStep(CampId)
 
 -> END
@@ -59,7 +60,7 @@ Possibly. Then we must be swift. We’re setting a trap — stakes beneath the t
 Classic move. And brilliant.
 But there’s still much to do. Help us prepare the stakes. The tide will soon be in our favor.
 Understood. Just point me where to start.
-
+#loadNextTutorial
 -->END
 
 === NPC1 ===
@@ -81,6 +82,7 @@ Go away kid. We are talking
 === woodMaking ===
 #continue
 ...
+#continue
 Not bad at all. You work fast.
 Just doing what I can.
 I’ve seen enough. I want your thoughts on the enemy’s next move.

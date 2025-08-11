@@ -10,7 +10,7 @@ public class SceneNavigationManager : MonoBehaviour
 
     public PlayerManager player;
 
-    public int nextSceneIndex =1;
+    public Observable<int> currentSceneIndex;
 
     public int previousSceneIndex;
 
@@ -33,6 +33,16 @@ public class SceneNavigationManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    public void PauseScene()
+    {
+        Time.timeScale = 0f;
+    }
+
+    public void ResumeScene()
+    {
+        Time.timeScale = 1.0f;
+    }
+
     public void LoadSceneByIndex(int index)
     {
         StartCoroutine(LoadAsync(index));
@@ -40,10 +50,13 @@ public class SceneNavigationManager : MonoBehaviour
 
     public void LoadNextScene()
     {
-        previousSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        nextSceneIndex= previousSceneIndex++;
-        StartCoroutine(LoadAsync(nextSceneIndex));
+        previousSceneIndex= SceneManager.GetActiveScene().buildIndex;
         print("da CHuyen next Scene");
+        player.gameObject.SetActive(false);
+        StartCoroutine(LoadAsync(currentSceneIndex.Value+1));
+        player.transform.position = new Vector3(0, 1.28f, 0);
+        player.transform.rotation = new Quaternion(0, 0, 0, 0);
+        player.gameObject.SetActive(true);
     }
     public void BringBackToPreviousPlace()
     {
@@ -52,7 +65,6 @@ public class SceneNavigationManager : MonoBehaviour
         player.gameObject.transform.position = playerPreviousPosition;
         player.gameObject.SetActive(true);
         // Scene cũ vẫn còn và không bị reset
-
     }
 
     public void GotoAreana1()
@@ -81,6 +93,7 @@ public class SceneNavigationManager : MonoBehaviour
 
     public void Update()
     {
+        //Debug
         //print(player.gameObject.transform.position);
         if (Input.GetKeyDown(KeyCode.O))
         {
@@ -100,6 +113,7 @@ public class SceneNavigationManager : MonoBehaviour
     {
         //loadingScreen.SetActive(true);
         AsyncOperation loadOperation = SceneManager.LoadSceneAsync(sceneIndex);
+        currentSceneIndex.Value = sceneIndex;
         //loadOperation.allowSceneActivation = false; // Optional: Manual control
 
         //while (!loadOperation.isDone)
@@ -111,6 +125,8 @@ public class SceneNavigationManager : MonoBehaviour
         //    {
         //        loadOperation.allowSceneActivation = true; // Finally switch
         //    }
+        WorldSaveGameManager.instance.SaveGame();
+        player.LoadGameDataFromCurrentCharacterData(ref WorldSaveGameManager.instance.currentCharacterData);
         yield return null;
         //}
     }

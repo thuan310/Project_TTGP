@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AICharacterSpawner : MonoBehaviour
 {
@@ -10,7 +10,7 @@ public class AICharacterSpawner : MonoBehaviour
     private void Awake()
     {
     }
-    private void OnEnable()
+    private void Start()
     {
         WorldAIManager.instance.SpawnCharacters(this);
         gameObject.SetActive(false);
@@ -20,9 +20,7 @@ public class AICharacterSpawner : MonoBehaviour
     {
         if (characterGameObject != null)
         {
-            instantiatedGameObject = Instantiate(characterGameObject);
-            instantiatedGameObject.transform.position = transform.position;
-            instantiatedGameObject.transform.rotation = transform.rotation;
+            instantiatedGameObject = Instantiate(characterGameObject,transform.position,transform.rotation);
             instantiatedGameObject.gameObject.GetComponent<AICharacterManager>().idleAction = idleAction;
             WorldAIManager.instance.AddCharacterToSpawnedCharactersList(instantiatedGameObject.GetComponent<AICharacterManager>()); 
         }

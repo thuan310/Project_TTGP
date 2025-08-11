@@ -212,7 +212,6 @@ GameObject:
   - component: {fileID: 367358630747862033}
   - component: {fileID: 7705907650675938404}
   - component: {fileID: 8295685215161386313}
-  - component: {fileID: 8833407353467079690}
   m_Layer: 0
   m_Name: Villagers_Dummy_01
   m_TagString: Untagged
@@ -653,24 +652,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bloodSplatterVFX: {fileID: 3548588485384254792, guid: 2f9e7dc163581394da1e00b561eed65d, type: 3}
---- !u!114 &8833407353467079690
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8970043480624220027}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6eb2da198e3cdc6419a793ec5bf7b9c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogueKnotName: villageNPC1
-  aiCharacterManager: {fileID: 0}
-  wordDisplayWhenInteract: Talk
-  onInteract:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &9011600611625763525
 GameObject:
   m_ObjectHideFlags: 0

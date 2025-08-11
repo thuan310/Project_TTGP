@@ -47,5 +47,4 @@ MonoBehaviour:
   unarmedWeapon: {fileID: 11400000, guid: d93462da2b577f14099a5b557a181b0d, type: 2}
   weapons:
   - {fileID: 11400000, guid: d93462da2b577f14099a5b557a181b0d, type: 2}
-  - {fileID: 11400000, guid: d34ee928e85311f4ba48d448ef19d220, type: 2}
-  - {fileID: 11400000, guid: db5da13b14d039147b9c3f37970d41c7, type: 2}
+  - {fileID: 11400000, guid: 059a55f23669b10409a6363bddc438a3, type: 2}

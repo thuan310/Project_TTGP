@@ -7013,7 +7013,7 @@ MonoBehaviour:
   gravityForce: -40
   groundLayer:
     serializedVersion: 2
-    m_Bits: 8192
+    m_Bits: 8704
   groundCheckSphereRaidus: 1
   yVelocity: {x: 0, y: 0, z: 0}
   groundedYVelocity: -20
@@ -7156,7 +7156,7 @@ MonoBehaviour:
   lastAttackAnimationPerformed: 
   currentTarget: {fileID: 0}
   currentAttackType: 0
-  lockOnTransform: {fileID: 0}
+  lockOnTransform: {fileID: 5016638169583738350}
   currentWeaponBeingUsed: {fileID: 0}
   canComboWithMainHandWeapon: 0
 --- !u!143 &5603242508840220076

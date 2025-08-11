@@ -9,6 +9,7 @@ public class PlayerDetectAreaManager : MonoBehaviour
     public List<IInteractableObject> interactableObjectsArray = new List<IInteractableObject>();
     public IInteractableObject interactableObject;
     public Observable<bool> isInteracted;
+    public Outline objectOutliner;
 
     public void Start()
     {
@@ -29,12 +30,19 @@ public class PlayerDetectAreaManager : MonoBehaviour
 
         interactableObjectsArray.Add(randomthi);
         other.GetComponent<IInteractableObject>().player = player;
+        objectOutliner = other.GetComponent<Outline>();
+        objectOutliner.enabled = true;
 
     }
 
     private void OnTriggerExit(Collider other)
     {
         interactableObjectsArray.Remove(other.GetComponent<IInteractableObject>());
+        if(objectOutliner != null)
+        {
+            objectOutliner.enabled = false;
+        }
+        objectOutliner = null;
     }
     private void Update()
     {

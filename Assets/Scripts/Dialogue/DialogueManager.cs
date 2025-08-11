@@ -1,4 +1,4 @@
-
+﻿
 using Ink.Runtime;
 using System.Collections;
 using System.Collections.Generic;
@@ -182,14 +182,20 @@ public class DialogueManager : MonoBehaviour {
         {
             if (TimelineManager.instance.IsTimeLinePlaying())
             {
+                //print("chạy dòng 1");
                 TimelineManager.instance.SkipToNextPause();
                 TimelineManager.instance.ResumeTimeline();
             }
             else
             {
+                //print("chạy dòng 2");
                 TimelineManager.instance.ResumeTimeline();
 
             }
+        }
+        else if (tag == "loadNextTutorial")
+        {
+            TutorialManager.instance.LoadNextTutorials();
         }
     }
 
