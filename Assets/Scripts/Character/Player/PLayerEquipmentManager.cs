@@ -53,6 +53,19 @@ public class PLayerEquipmentManager : CharacterEquipmentManager
         LoadLeftWeapon();
     }
 
+    public void UnloadAllWeaponsOnRightHand()
+    {
+        for (int i = 0; i < player.playerInventoryManager.weaponInRightHandSLots.Length; i++)
+        {
+            player.playerInventoryManager.weaponInRightHandSLots[i] = WorldItemDatabase.instance.unarmedWeapon;
+        }
+    }
+
+    public void AddWeaponToNextRightSlot(WeaponItem weapon)
+    {
+        player.playerInventoryManager.weaponInRightHandSLots[player.playerInventoryManager.rightHandWeaponIndex+1] = weapon;
+    }
+
     // right weapon
     public void SwitchRightWeapon()
     {

@@ -8,6 +8,9 @@ public class WorldItemDatabase : MonoBehaviour
     public static WorldItemDatabase instance;
 
     public WeaponItem unarmedWeapon;
+    public WeaponItem woodSword;
+    public WeaponItem straightSword;
+
 
     [Header("Weapons")]
     [SerializeField] List<WeaponItem> weapons = new List<WeaponItem>();

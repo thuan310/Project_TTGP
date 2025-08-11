@@ -15,7 +15,7 @@ MonoBehaviour:
   itemName: Wood Sword
   itemIcon: {fileID: 21300000, guid: 19982da131d88ca45a1e6f2567d160b8, type: 3}
   itemDescription: A straight sword.
-  itemID: 1
+  itemID: 2
   weaponModel: {fileID: 6770426562345438063, guid: 87d4749777d871849b04ff3c5d16d32e, type: 3}
   strengthREQ: 10
   dexREQ: 10

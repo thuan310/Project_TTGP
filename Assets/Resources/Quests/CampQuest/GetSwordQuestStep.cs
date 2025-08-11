@@ -15,6 +15,8 @@ public class GetSwordQuestStep : QuestStep, IInteractableObject
     {
         player.playerDetectArea.interactableObjectsArray.Remove(this);
         OnInteract.Invoke();
+        player.playerEquipmentManager.UnloadAllWeaponsOnRightHand();
+        player.playerEquipmentManager.AddWeaponToNextRightSlot(WorldItemDatabase.instance.woodSword);
         player.playerEquipmentManager.SwitchRightWeapon();
         FinishQuestStep();
     }

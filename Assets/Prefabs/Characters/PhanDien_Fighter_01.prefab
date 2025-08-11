@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 9208811285777098447}
   - component: {fileID: 8773743589772590533}
   - component: {fileID: 4375085981447903362}
-  - component: {fileID: 2950289271211102208}
   - component: {fileID: 8967671423424457953}
   - component: {fileID: 3689693017663915318}
   - component: {fileID: 5766441685869641516}
@@ -21,7 +20,8 @@ GameObject:
   - component: {fileID: 5909072863150100933}
   - component: {fileID: 8351891410468711760}
   - component: {fileID: 591884543139765089}
-  - component: {fileID: 7588353309309987445}
+  - component: {fileID: -6374272929447466774}
+  - component: {fileID: 5221310273819893401}
   m_Layer: 7
   m_Name: PhanDien_Fighter_01
   m_TagString: Untagged
@@ -197,8 +197,8 @@ MonoBehaviour:
   phaseShiftAniamtion: Change_Phase_01
   phase02CombatStanceState: {fileID: 11400000, guid: 64c9d9981be33ef47bebbda6b430aa68, type: 2}
   sleepState: {fileID: 11400000, guid: e783a89ad9b1bd741bb2ad0f6f40c761, type: 2}
-  durkSoundFXManager: {fileID: 0}
-  durkCombatManager: {fileID: 0}
+  phanDienSoundFXManager: {fileID: 0}
+  phanDienCombatManager: {fileID: 0}
 --- !u!114 &4375085981447903362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,41 +221,6 @@ MonoBehaviour:
   fallStartYVelocity: -5
   isRolling: 0
   sphereOffset: 2
---- !u!114 &2950289271211102208
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 274398443698443449}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36bbd39d76a46b548aa546161ae1355f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lastAttackAnimationPerformed: 
-  currentTarget: {fileID: 0}
-  currentAttackType: 0
-  lockOnTransform: {fileID: 0}
-  actionRecoveryTimer: 0
-  enablePivot: 1
-  distanceFromTarget: 0
-  viewableAngle: 0
-  targetsDirection: {x: 0, y: 0, z: 0}
-  detectionRadius: 100
-  minimumFOV: -35
-  maximumFOV: 35
-  attackRotationSpeed: 25
-  vikingSwordDamageCollider: {fileID: 6019266809803486632}
-  stompCollider: {fileID: 6856031240286627170}
-  durkStompingFoot: {fileID: 123431395354129811}
-  stompAttackAOERadius: 25
-  baseDamage: 25
-  attack01DamageModifier: 1
-  attack02DamageModifier: 1.4
-  attack03DamageModifier: 1.6
-  stompDamage: 25
-  durkImpactVFX: {fileID: 102740420894675861, guid: 140c99a10058bfa41a4017f172317fae, type: 3}
 --- !u!114 &8967671423424457953
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -455,7 +420,7 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 2.43, z: 0}
---- !u!114 &7588353309309987445
+--- !u!114 &-6374272929447466774
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -464,20 +429,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 274398443698443449}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cba63aa4dc8d8d458d524ecec1d537c, type: 3}
+  m_Script: {fileID: 11500000, guid: 2b81003b72db95040b1b96e706106a2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   damageGrunts:
   - {fileID: 8300000, guid: 5583e9c9a0afdf0408f9d0946666f85a, type: 3}
   - {fileID: 8300000, guid: 572fe06c861000149bc4b51cc1fdb09d, type: 3}
   - {fileID: 8300000, guid: 88b91714a2e2cbb428f61e18ca4d39d8, type: 3}
+  - {fileID: 8300000, guid: 80cc6816623c9a04580970e36613d8c4, type: 3}
   - {fileID: 8300000, guid: cad57fcf83264a4489ae5c41b55e7a8b, type: 3}
   - {fileID: 8300000, guid: 132005c60d8148440b6f375a773d8f8e, type: 3}
   - {fileID: 8300000, guid: 50b441f111083504d90ad648f16723e0, type: 3}
   - {fileID: 8300000, guid: 36104c8b981b4a349a1948b61c9e8a20, type: 3}
   - {fileID: 8300000, guid: 14a883f5f8241cc4ca1f35fe54fef1d2, type: 3}
   - {fileID: 8300000, guid: 62c41c4c89235bd42bf85b0e4c855d1a, type: 3}
-  - {fileID: 8300000, guid: c39ba448713aff147bdc2b9b4126b1d8, type: 3}
   attackGrunts:
   - {fileID: 8300000, guid: 0aadd833bb2d5c6459071cec3b57b6fc, type: 3}
   - {fileID: 8300000, guid: bab2beee4e54b6b4884ba37eee560014, type: 3}
@@ -510,6 +475,41 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 64c619355255448478331b1cc666ef7e, type: 3}
   stompImpacts:
   - {fileID: 8300000, guid: 68f40680e38468e45a89f408f70af782, type: 3}
+--- !u!114 &5221310273819893401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 274398443698443449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86d80ccccba6cf349a5164af178a035e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lastAttackAnimationPerformed: 
+  currentTarget: {fileID: 0}
+  currentAttackType: 0
+  lockOnTransform: {fileID: 0}
+  actionRecoveryTimer: 0
+  enablePivot: 1
+  distanceFromTarget: 0
+  viewableAngle: 0
+  targetsDirection: {x: 0, y: 0, z: 0}
+  detectionRadius: 100
+  minimumFOV: -35
+  maximumFOV: 35
+  attackRotationSpeed: 25
+  vikingSwordDamageCollider: {fileID: 6019266809803486632}
+  stompCollider: {fileID: 8861489668962591721}
+  durkStompingFoot: {fileID: 123431395354129811}
+  stompAttackAOERadius: 25
+  baseDamage: 25
+  attack01DamageModifier: 1
+  attack02DamageModifier: 1.4
+  attack03DamageModifier: 1.6
+  stompDamage: 25
+  durkImpactVFX: {fileID: 102740420894675861, guid: 140c99a10058bfa41a4017f172317fae, type: 3}
 --- !u!1 &1514482859568344479
 GameObject:
   m_ObjectHideFlags: 0
@@ -1669,13 +1669,13 @@ PrefabInstance:
       addedObject: {fileID: 5937983514539490288}
     - targetCorrespondingSourceObject: {fileID: 1339101018200438765, guid: df449446988deb843bf9ab270388c66b, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6856031240286627170}
-    - targetCorrespondingSourceObject: {fileID: 1339101018200438765, guid: df449446988deb843bf9ab270388c66b, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 8929961368757724155}
     - targetCorrespondingSourceObject: {fileID: 1339101018200438765, guid: df449446988deb843bf9ab270388c66b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4122442381844042032}
+    - targetCorrespondingSourceObject: {fileID: 1339101018200438765, guid: df449446988deb843bf9ab270388c66b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8861489668962591721}
     - targetCorrespondingSourceObject: {fileID: -4332706925441422008, guid: df449446988deb843bf9ab270388c66b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2840239023398813050}
@@ -1950,26 +1950,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1339101018200438765, guid: df449446988deb843bf9ab270388c66b, type: 3}
   m_PrefabInstance: {fileID: 3012689950715257659}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6856031240286627170
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4276810835658462422}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fabb189c941a41745b13cf95078d94e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageCollider: {fileID: 0}
-  physicalDamage: 0
-  magicDamage: 0
-  fireDamage: 0
-  lightningDamage: 0
-  holyDamage: 0
-  contactPoint: {x: 0, y: 0, z: 0}
-  durkCharacterManager: {fileID: 0}
 --- !u!114 &8929961368757724155
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2080,6 +2060,26 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8861489668962591721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4276810835658462422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa768d1b35ef84d4ab6ebaad3d9ea383, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageCollider: {fileID: 0}
+  physicalDamage: 0
+  magicDamage: 0
+  fireDamage: 0
+  lightningDamage: 0
+  holyDamage: 0
+  contactPoint: {x: 0, y: 0, z: 0}
+  phanDienCharacterManager: {fileID: 0}
 --- !u!1 &6021385121540429496 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8817898888258712963, guid: df449446988deb843bf9ab270388c66b, type: 3}

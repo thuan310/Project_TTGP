@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class UI_StatBar : MonoBehaviour
 {
-    private Slider slider;
+    public Slider slider;
     private RectTransform rectTransform;
     // variable to scale bar size depending on stat (higher stat = longer bar across screen)
     [Header("bar options")]

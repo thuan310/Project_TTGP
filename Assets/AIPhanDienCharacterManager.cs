@@ -10,14 +10,14 @@ public class AIPhanDienCharacterManager : AIBossCharacterManager
     // since durk has his own SFX (Club, stomp) that are unique to his character only, we created a durk sfx manager
     // and to reference this new sfx manager, and to keep our design pattern the same, we need a durk character manager to reference it from
 
-    public AIDurkSoundFXManager durkSoundFXManager;
-    [HideInInspector] public AIDurkCombatManager durkCombatManager;
+    public AIPhanDienSoundFXManager phanDienSoundFXManager;
+    [HideInInspector] public AIPhanDienCombatManager phanDienCombatManager;
     protected override void Awake()
     {
         base.Awake();
 
-        durkSoundFXManager = GetComponent<AIDurkSoundFXManager>();
-        durkCombatManager = GetComponent<AIDurkCombatManager>();
+        phanDienSoundFXManager = GetComponent<AIPhanDienSoundFXManager>();
+        phanDienCombatManager = GetComponent<AIPhanDienCombatManager>();
     }
 
     public override IEnumerator ProcessDeathEvent(bool manuallySelectDeathAnimation = false)
@@ -58,7 +58,7 @@ public class AIPhanDienCharacterManager : AIBossCharacterManager
         }
         WorldSaveGameManager.instance.SaveGame();
 
-        EventManager.instance.dialogueEvents.EnterDialogue(""); //đang đợi timeline để làm tiếp
+        EventManager.instance.dialogueEvents.EnterDialogue("hungDefeated"); //đang đợi timeline để làm tiếp
 
 
         //play some death SFX

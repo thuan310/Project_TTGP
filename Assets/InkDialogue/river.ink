@@ -28,7 +28,9 @@ You’ve done much already. Rest for now. When you’re ready, speak to me again
 Resting before the final act… just like heroes in stories.
 -->END
 
-===fight===
+===enemyShipInfiltrate===
+#timeline: River2
+...
 #continue
 Sir, enemy ship have passed our stake trap. We await your further instructions.
 #continue
@@ -38,22 +40,42 @@ You can go with me on my boat. i believe your skills will help us a lot.
 #continue
 That’s our cue. Let’s board the ship and guide them right into history.
 #continue
-Be brave. Fight not just for victory, but for the generations to come. CHARGEEEEEEE!.
+...
 #continue
+Be brave. Fight not just for victory, but for the generations to come. CHARGEEEEEEE!.
 CHARGEEEEEE!
--->END
-
-===counterAttack===
+#continue
+...
 #continue
 Now! The river is ours! Soldiers — attack!
---> END
+-->END
 
-===boss===
+===infiltrateEnemyShip===
+#timeline: Ship
+...
 #continue
-The Villain… he's getting away!
+Here we are! The moment of legendary.
 #continue
+Over there! The villain, he seems like waiting for us.
+#continue
+There are some enemies on this ship
+#continue
+Guess we have to defeat these enemies before fighting him
+-->END
+
+===hungDefeated===
+#continue
+You have a talent in swinging sword
+Stop talking nonsense. Who you are, what your name, why you doing all of this.
+#continue
+That all you want to know? My name is Hung, and soon you will know why i doing all of this.
+#continue
+We will meet again. Goodbye!
+#continue
+Stop!
 Let him go. For now, his plans are broken.
 You helped preserve this turning point in history. Let’s savor that.
+#continue
 -->END
 
 ===celebration===
